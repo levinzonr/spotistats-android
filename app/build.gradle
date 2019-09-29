@@ -5,6 +5,7 @@ apply plugin: 'com.github.gfx.ribbonizer'
 apply plugin: 'dk.nodes.ci.bitrise'
 apply plugin: 'kotlin-kapt'
 
+
 android {
     compileSdkVersion sdks.compileSdkVersion
     buildToolsVersion sdks.buildToolsVersion
@@ -76,6 +77,7 @@ android {
                     APP_NAME        : "KotlinTemplateStaging"
             ]
             buildConfigField "String", "API_URL", "\"https://jsonplaceholder.typicode.com\""
+            buildConfigField "String", "CLIENT_ID", "\"4ddb1e80676040c3add00717cca24e2f\""
         }
         production {
             dimension "default"
@@ -87,6 +89,7 @@ android {
                     HOCKEYAPP_APP_ID: hockeyAppId,
                     APP_NAME        : "KotlinTemplate"
             ]
+            buildConfigField "String", "CLIENT_ID", "\"4ddb1e80676040c3add00717cca24e2f\""
             buildConfigField "String", "API_URL", "\"https://jsonplaceholder.typicode.com\""
         }
     }

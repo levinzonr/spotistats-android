@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 
 android {
@@ -37,6 +37,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-livedata:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle}"
     implementation "androidx.core:core-ktx:${versions.ktx}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
@@ -60,6 +62,7 @@ dependencies {
     implementation "net.hockeyapp.android:HockeySDK:${versions.hockey_sdk}"
     implementation "com.jakewharton.timber:timber:${versions.timber}"
 
+    implementation 'com.spotify.android:auth:1.1.0'
     implementation "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
 }

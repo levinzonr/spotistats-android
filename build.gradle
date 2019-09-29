@@ -25,7 +25,7 @@ buildscript {
             rx_lint            : '1.7.0',
             material           : '1.1.0-alpha09',
             archCore           : '2.0.1',
-            navigation         : '2.0.0',
+            navigation         : '2.1.0',
             koin               : '2.0.1'
 
     ]
@@ -54,6 +54,8 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
         classpath "com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0"
         classpath "dk.nodes.ci:bitrise:1.0"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.navigation}"
+
     }
 }
 

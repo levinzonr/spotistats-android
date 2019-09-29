@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.base
+package cz.levinzonr.spotistats.presentation.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

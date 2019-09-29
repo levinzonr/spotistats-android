@@ -1,11 +1,12 @@
 package cz.levinzonr.spotistats.presentation.injection
 
-import cz.levinzonr.spotistats.presentation.ui.splash.SplashViewModel
+import cz.levinzonr.spotistats.presentation.ui.onboarding.login.LoginViewModel
+import cz.levinzonr.spotistats.presentation.ui.onboarding.splash.SplashViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModels = module {
 
-    viewModel { SplashViewModel() }
-
+    viewModel { SplashViewModel(get()) }
+    viewModel { LoginViewModel(get()) }
 }

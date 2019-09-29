@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/splash_nav_graph.xml"
+            app:startDestination="@id/splashFragment">
+
+    <fragment android:id="@+id/splashFragment"
+              android:name="cz.levinzonr.spotistats.presentation.ui.onboarding.splash.SplashFragment"
+              tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@+id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="cz.levinzonr.spotistats.presentation.ui.onboarding.login.LoginFragment"
+        android:label="LoginFragment" />
+
+
+</navigation>

@@ -1,2 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cz.levinzonr.spotistats.presentation" />
+    package="cz.levinzonr.spotistats.presentation">
+
+    <application>
+        <activity android:name=".ui.onboarding.login.LoginActivity"></activity>
+    </application>
+
+</manifest>

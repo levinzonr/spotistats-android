@@ -1,11 +1,11 @@
-package cz.levinzonr.spotistats.presentation.ui.splash
+package cz.levinzonr.spotistats.presentation.ui.onboarding.splash
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cz.levinzonr.spotistats.presentation.R
-import cz.levinzonr.spotistats.presentation.ui.base.BaseFragment
+import cz.levinzonr.spotistats.presentation.base.BaseFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SplashFragment : BaseFragment<State>() {
@@ -18,6 +18,7 @@ class SplashFragment : BaseFragment<State>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.dispatch(Action.Init)
     }
 
     override fun renderState(state: State) {

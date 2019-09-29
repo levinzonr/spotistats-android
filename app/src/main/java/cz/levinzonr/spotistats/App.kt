@@ -3,6 +3,7 @@ package cz.levinzonr.spotistats
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.ww.roxie.Roxie
 import cz.levinzonr.spotistats.inititializers.AppInitializer
 import cz.levinzonr.spotistats.injection.modules.appModule
 import org.koin.android.ext.android.inject
@@ -20,6 +21,7 @@ class App : Application() {
             modules(appModule)
 
         }
+        Roxie.enableLogging()
         initializer.init(this)
     }
 

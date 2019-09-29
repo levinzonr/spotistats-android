@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':spotify-auth-release'
 include ':domain'
 include ':presentation'
 include ':data'
