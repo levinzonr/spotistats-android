@@ -36,6 +36,9 @@
             android:name="cz.levinzonr.spotistats.presentation.ui.main.MainActivity"
             android:exported="false"></activity>
 
+        <activity
+            android:name="com.spotify.sdk.android.authentication.LoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
 
     </application>

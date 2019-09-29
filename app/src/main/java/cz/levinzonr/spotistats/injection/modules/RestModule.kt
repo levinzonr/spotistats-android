@@ -7,7 +7,9 @@ import cz.levinzonr.spotistats.network.Api
 import cz.levinzonr.spotistats.network.util.DateDeserializer
 import cz.levinzonr.spotistats.network.util.ItemTypeAdapterFactory
 import okhttp3.OkHttpClient
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import org.koin.experimental.builder.single
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
@@ -15,6 +17,8 @@ import java.util.concurrent.TimeUnit
 
 
 val restModule = module {
+
+    single(named("SPOTIFY_CLIENT_ID")) { BuildConfig.CLIENT_ID }
 
     single { ItemTypeAdapterFactory() }
 

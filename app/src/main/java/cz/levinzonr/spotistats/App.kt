@@ -9,6 +9,7 @@ import cz.levinzonr.spotistats.injection.modules.appModule
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import timber.log.Timber
 
 class App : Application() {
 
@@ -21,7 +22,11 @@ class App : Application() {
             modules(appModule)
 
         }
-        Roxie.enableLogging()
+        Roxie.enableLogging(object : Roxie.Logger {
+            override fun log(msg: String) {
+                Timber.d(msg)
+            }
+        })
         initializer.init(this)
     }
 

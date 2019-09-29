@@ -53,7 +53,7 @@ dependencies {
     // Koin Android Experimental features
     implementation "org.koin:koin-android-ext:${versions.koin}"
 
-    implementation 'cz.levinzonr.roxie:sdk:1.1-LOCAL'
+    implementation 'cz.levinzonr.roxie:sdk:1.2-LOCAL'
     testImplementation 'junit:junit:4.12'
     implementation "io.reactivex.rxjava2:rxandroid:${versions.rx_android}"
     implementation "io.reactivex.rxjava2:rxjava:${versions.rx_java}"

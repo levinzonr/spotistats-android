@@ -45,4 +45,6 @@ abstract class BaseFragment<S: BaseState> : Fragment() {
             }
         }
     }
+
+
 }
