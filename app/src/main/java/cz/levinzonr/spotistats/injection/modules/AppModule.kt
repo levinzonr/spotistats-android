@@ -1,23 +1,12 @@
 package cz.levinzonr.spotistats.injection.modules
 
-import android.content.Context
-import dagger.Binds
-import dagger.Module
-import dagger.Provides
-import cz.levinzonr.spotistats.App
-import cz.levinzonr.spotistats.inititializers.AppInitializer
-import cz.levinzonr.spotistats.inititializers.AppInitializerImpl
+import cz.levinzonr.spotistats.presentation.injection.viewModels
 
-@Module
-abstract class AppModule {
-
-    @Binds
-    abstract fun bindAppInitalizer(initializer: AppInitializerImpl): AppInitializer
-
-    @Module
-    companion object {
-        @JvmStatic
-        @Provides
-        fun provideContext(application: App): Context = application.applicationContext
-    }
-}
+val appModule = listOf(
+        executorModule,
+        interactorModule,
+        restModule,
+        repositoryModule,
+        storageModule,
+        viewModels
+)

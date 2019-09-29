@@ -1,6 +1,8 @@
 package cz.levinzonr.spotistats.injection.modules
 
-import dagger.Module
+import cz.levinzonr.spotistats.domain.interactors.PostsInteractor
+import org.koin.dsl.module
 
-@Module
-class InteractorModule
+val interactorModule = module {
+    single { PostsInteractor(get()) }
+}

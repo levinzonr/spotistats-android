@@ -2,7 +2,13 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation project(':data')
+
+
+    // Koin for Kotlin
+    implementation "org.koin:koin-core:${versions.koin}"
+    // Koin extended & experimental features
+    implementation "org.koin:koin-core-ext:${versions.koin}"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
-    implementation "com.google.dagger:dagger-android:${versions.dagger}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
 }

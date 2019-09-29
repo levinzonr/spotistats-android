@@ -1,14 +1,12 @@
 package cz.levinzonr.spotistats.injection.modules
 
-import dagger.Binds
-import dagger.Module
 import cz.levinzonr.spotistats.domain.managers.PrefManager
 import cz.levinzonr.spotistats.storage.PrefManagerImpl
-import javax.inject.Singleton
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 
-@Module
-abstract class StorageBindingModule {
-    @Binds
-    @Singleton
-    abstract fun bindPrefManager(manager: PrefManagerImpl): PrefManager
+
+
+val storageModule = module {
+    single<PrefManager> { PrefManagerImpl(androidContext()) }
 }

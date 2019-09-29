@@ -39,12 +39,18 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
     kapt "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle}"
     implementation "androidx.core:core-ktx:${versions.ktx}"
-    implementation "com.google.dagger:dagger-android:${versions.dagger}"
-    implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
-    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
-    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+
+    // Koin for Android
+    implementation "org.koin:koin-android:${versions.koin}"
+    // Koin Android Scope features
+    implementation "org.koin:koin-android-scope:${versions.koin}"
+    // Koin Android ViewModel features
+    implementation "org.koin:koin-android-viewmodel:${versions.koin}"
+    // Koin Android Experimental features
+    implementation "org.koin:koin-android-ext:${versions.koin}"
+
     implementation 'cz.levinzonr.roxie:sdk:1.1-LOCAL'
     testImplementation 'junit:junit:4.12'
     implementation "io.reactivex.rxjava2:rxandroid:${versions.rx_android}"

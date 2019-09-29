@@ -5,9 +5,8 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import cz.levinzonr.spotistats.repositories.RepositoryException
-import javax.inject.Inject
 
-class ViewErrorController @Inject constructor(val context: Context) {
+class ViewErrorController(val context: Context) {
 
 
 

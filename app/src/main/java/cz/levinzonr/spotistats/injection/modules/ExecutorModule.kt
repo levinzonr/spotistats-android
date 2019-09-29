@@ -1,16 +1,12 @@
 package cz.levinzonr.spotistats.injection.modules
 
-import dagger.Module
-import dagger.Provides
+import cz.levinzonr.spotistats.inititializers.AppInitializer
+import cz.levinzonr.spotistats.inititializers.AppInitializerImpl
 import dk.nodes.arch.domain.executor.Executor
 import dk.nodes.arch.domain.executor.ThreadExecutor
-import javax.inject.Singleton
+import org.koin.dsl.module
 
-@Module
-class ExecutorModule {
-    @Provides
-    @Singleton
-    fun provideExecutor(): Executor {
-        return ThreadExecutor()
-    }
+val executorModule = module {
+    single<Executor> { ThreadExecutor() }
+    single<AppInitializer> { AppInitializerImpl() }
 }

@@ -7,7 +7,7 @@ import androidx.core.content.edit
 import cz.levinzonr.spotistats.domain.managers.PrefManager
 import javax.inject.Inject
 
-class PrefManagerImpl @Inject constructor(context: Context) : PrefManager {
+class PrefManagerImpl(context: Context) : PrefManager {
     private var sharedPrefs: SharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(context)
 

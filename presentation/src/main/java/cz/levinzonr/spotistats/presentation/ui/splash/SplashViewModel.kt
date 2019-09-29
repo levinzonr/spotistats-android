@@ -3,9 +3,8 @@ package cz.levinzonr.spotistats.presentation.ui.splash
 import cz.levinzonr.spotistats.presentation.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import javax.inject.Inject
 
-class SplashViewModel@Inject constructor() : BaseViewModel<Action, Change, State>() {
+class SplashViewModel : BaseViewModel<Action, Change, State>() {
 
     override val initialState: State = State(false)
 

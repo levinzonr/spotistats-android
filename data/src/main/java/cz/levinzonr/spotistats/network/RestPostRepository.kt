@@ -3,9 +3,8 @@ package cz.levinzonr.spotistats.network
 import cz.levinzonr.spotistats.models.Post
 import cz.levinzonr.spotistats.repositories.PostRepository
 import cz.levinzonr.spotistats.repositories.RepositoryException
-import javax.inject.Inject
 
-class RestPostRepository @Inject constructor(private val api: Api) : PostRepository {
+class RestPostRepository(private val api: Api) : PostRepository {
     @Throws(RepositoryException::class)
     override suspend fun getPosts(cached: Boolean): List<Post> {
         val response = api.getPosts()
