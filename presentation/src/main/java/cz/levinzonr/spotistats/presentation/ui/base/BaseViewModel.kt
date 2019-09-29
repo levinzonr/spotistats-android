@@ -1,23 +1,25 @@
 package cz.levinzonr.spotistats.presentation.ui.base
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.ww.roxie.BaseAction
+import com.ww.roxie.BaseChange
+import com.ww.roxie.BaseState
+import com.ww.roxie.BaseViewModel
+import cz.levinzonr.spotistats.presentation.navigation.Route
+import cz.levinzonr.spotistats.presentation.util.SingleEvent
 
-abstract class BaseViewModel<T> : ViewModel() {
+abstract class BaseViewModel<A: BaseAction,C: BaseChange,S: BaseState> : BaseViewModel<A, S, C>() {
 
-    protected abstract val initState: T
-    protected var _viewState = MediatorLiveData<T>()
-    val viewState: LiveData<T> = _viewState
 
-    protected var state
-        get() = _viewState.value
-                ?: initState // We want the state to always be non null. Initialize the state in initState our ViewModel
-        set(value) = _viewState.setValue(value)
+    protected val _navigationLiveData: MutableLiveData<SingleEvent<Route>> = MutableLiveData()
 
-    protected var stateAsync
-        get() = _viewState.value ?: initState
-        set(value) = _viewState.postValue(value) // Sets the value asynchronously
+    val navigationLiveData: LiveData<SingleEvent<Route>>
+        get() = _navigationLiveData
 
-    protected fun <T> addStateSource(source: LiveData<T>, onChanged: (T) -> Unit) {
-        _viewState.addSource(source, onChanged)
+    fun navigateTo(route: Route) {
+        _navigationLiveData.postValue(SingleEvent(route))
     }
+
+
 }

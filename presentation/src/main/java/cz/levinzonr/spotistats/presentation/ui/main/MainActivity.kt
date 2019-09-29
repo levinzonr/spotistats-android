@@ -10,14 +10,10 @@ import net.hockeyapp.android.UpdateManager
 
 class MainActivity : BaseActivity() {
 
-    private val viewModel by viewModel<MainActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel.viewState.observeNonNull(this) { state ->
-        }
-        viewModel.checkNStack()
     }
 
 
