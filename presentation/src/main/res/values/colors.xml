@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!-- Switches to light/dark depending on light/night theme -->
-    <color name="textColorPrimary">?android:attr/textColorPrimary</color>
-
-</resources>
