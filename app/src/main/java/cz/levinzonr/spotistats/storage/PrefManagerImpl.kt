@@ -4,8 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.core.content.edit
-import cz.levinzonr.spotistats.domain.managers.PrefManager
-import javax.inject.Inject
+import cz.levinzonr.spotistats.repositories.PrefManager
 
 class PrefManagerImpl(context: Context) : PrefManager {
     private var sharedPrefs: SharedPreferences =

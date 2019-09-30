@@ -23,6 +23,11 @@ class SplashViewModel(private val userManager: UserManager) : BaseViewModel<Acti
         }
     }
 
+    init {
+        startActionsObserver()
+    }
+
+
     override fun emitAction(action: Action): Flow<Change> {
        return when(action) {
            is Action.Init -> bindInitAction()

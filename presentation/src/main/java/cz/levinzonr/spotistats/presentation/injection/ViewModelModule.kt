@@ -9,5 +9,5 @@ import org.koin.dsl.module
 val viewModels = module {
 
     viewModel { SplashViewModel(get()) }
-    viewModel { LoginViewModel(get(), get(named("SPOTIFY_CLIENT_ID"))) }
+    viewModel { LoginViewModel( get(named("SPOTIFY_CLIENT_ID")), get()) }
 }

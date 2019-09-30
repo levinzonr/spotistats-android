@@ -1,8 +1,14 @@
 package cz.levinzonr.spotistats.domain.managers
 
-class UserManagerImpl : UserManager {
+import cz.levinzonr.spotistats.repositories.AuthTokenRepository
+
+class UserManagerImpl(private val authTokenRepository: AuthTokenRepository) : UserManager {
 
     override fun isLoggedIn(): Boolean {
-        return false
+        return authTokenRepository.get() != null
+    }
+
+    override fun logout() {
+        authTokenRepository.clear()
     }
 }
