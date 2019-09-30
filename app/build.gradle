@@ -59,7 +59,6 @@ android {
             //signingConfig null
         }
         release {
-            buildConfigField "String", "API_URL", "\"https://jsonplaceholder.typicode.com\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -76,7 +75,7 @@ android {
                     HOCKEYAPP_APP_ID: hockeyAppId,
                     APP_NAME        : "KotlinTemplateStaging"
             ]
-            buildConfigField "String", "API_URL", "\"https://jsonplaceholder.typicode.com\""
+            buildConfigField "String", "API_URL", "\"https://api.spotify.com/\""
             buildConfigField "String", "CLIENT_ID", "\"4ddb1e80676040c3add00717cca24e2f\""
         }
         production {
@@ -90,7 +89,7 @@ android {
                     APP_NAME        : "KotlinTemplate"
             ]
             buildConfigField "String", "CLIENT_ID", "\"4ddb1e80676040c3add00717cca24e2f\""
-            buildConfigField "String", "API_URL", "\"https://jsonplaceholder.typicode.com\""
+            buildConfigField "String", "API_URL", "\"https://api.spotify.com/\""
         }
     }
 }

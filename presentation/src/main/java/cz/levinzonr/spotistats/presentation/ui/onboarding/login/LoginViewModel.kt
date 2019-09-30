@@ -46,7 +46,7 @@ class LoginViewModel(
     private fun bindLoginAction(fragment: Fragment) : Flow<Change> = flow {
         emit(Change.LoginStarted)
         val builder = AuthenticationRequest.Builder(clientId, AuthenticationResponse.Type.TOKEN, "yourcustomprotocol://callback")
-        builder.setScopes(arrayOf("streaming"))
+        builder.setScopes(arrayOf("streaming, user-top-read"))
         val request = builder.build()
         val intent = AuthenticationClient.createLoginActivityIntent(fragment.requireActivity(), request)
         fragment.startActivityForResult(intent, REQUEST_CODE)
