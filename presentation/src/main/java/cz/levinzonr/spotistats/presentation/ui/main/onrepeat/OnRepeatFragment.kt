@@ -8,18 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 
 import cz.levinzonr.spotistats.presentation.R
-import cz.levinzonr.spotistats.repositories.UserTopRepository
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import cz.levinzonr.spotistats.presentation.base.BaseFragment
+import org.koin.android.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
  */
-class OnRepeatFragment : Fragment() {
+class OnRepeatFragment : BaseFragment<State>() {
 
 
-    private val repo: UserTopRepository by inject()
+    override val viewModel: OnRepeatViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -30,10 +29,11 @@ class OnRepeatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        GlobalScope.launch {
-            repo.getUserTopTracks()
-        }
     }
 
+
+    override fun renderState(state: State) {
+
+    }
 
 }

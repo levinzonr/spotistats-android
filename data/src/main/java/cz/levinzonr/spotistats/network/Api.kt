@@ -15,6 +15,6 @@ interface Api {
     @GET("photos")
     suspend fun getPhotos(): Response<List<Photo>>
 
-    @GET("v1/me/top/track")
-    suspend fun getTopUserTracks() : Deferred<PaginatedResponse<TrackResponse>>
+    @GET("v1/me/top/tracks")
+    suspend fun getTopUserTracksAsync() : Deferred<PaginatedResponse<TrackResponse>>
 }

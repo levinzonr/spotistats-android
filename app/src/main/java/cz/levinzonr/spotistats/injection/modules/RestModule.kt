@@ -11,6 +11,7 @@ import cz.levinzonr.spotistats.network.util.DateDeserializer
 import cz.levinzonr.spotistats.network.util.ItemTypeAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import org.koin.experimental.builder.single
@@ -46,8 +47,10 @@ val restModule = module {
                 .connectTimeout(45, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
-                .addInterceptor(get())
+                .addInterceptor(AuthTokenInterceptor(get()))
         if (BuildConfig.DEBUG) {
+            val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+            clientBuilder.addInterceptor(logger)
         }
 
         clientBuilder.build()

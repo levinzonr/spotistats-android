@@ -13,7 +13,7 @@ class AuthTokenInterceptor(private val tokenRepository: AuthTokenRepository) : I
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
                 .newBuilder()
-        tokenRepository.get()?.let { request.header("Authorization", it) }
+        tokenRepository.get()?.let { request.header("Authorization", "Bearer $it") }
         return chain.proceed(request.build())
     }
 }
