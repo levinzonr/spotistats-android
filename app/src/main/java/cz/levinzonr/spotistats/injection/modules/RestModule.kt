@@ -31,7 +31,7 @@ val restModule = module {
 
     single {
         GsonBuilder()
-                .registerTypeAdapterFactory(get())
+                .registerTypeAdapterFactory(ItemTypeAdapterFactory())
                 .registerTypeAdapter(Date::class.java, DateDeserializer())
                 .setDateFormat(DateDeserializer.DATE_FORMATS[0])
                 .create()

@@ -3,8 +3,11 @@ package cz.levinzonr.spotistats.presentation.extensions
 import android.app.Activity
 import android.content.Context
 import android.util.DisplayMetrics
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.ww.roxie.BaseAction
@@ -24,6 +27,10 @@ fun Activity.hideKeyboard() {
 
 fun View.dpToPx(dp: Int): Int {
     return context.dpToPx(dp)
+}
+
+fun ViewGroup.inflate(@LayoutRes id: Int) : View {
+    return LayoutInflater.from(context).inflate(id, this, false)
 }
 
 fun Fragment.dpToPx(dp: Int): Int {

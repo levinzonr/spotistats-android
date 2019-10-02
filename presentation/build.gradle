@@ -21,6 +21,10 @@ android {
         }
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 }
 
 dependencies {
@@ -52,6 +56,8 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:${versions.koin}"
     // Koin Android Experimental features
     implementation "org.koin:koin-android-ext:${versions.koin}"
+
+    implementation("io.coil-kt:coil:0.7.0")
 
     implementation 'cz.levinzonr.roxie:sdk:1.3-LOCAL'
     testImplementation 'junit:junit:4.12'

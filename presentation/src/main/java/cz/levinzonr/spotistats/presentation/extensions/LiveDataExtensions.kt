@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import timber.log.Timber
 
 inline fun <T> LiveData<T>.observe(
     lifecycleOwner: LifecycleOwner,
@@ -42,8 +43,9 @@ inline fun <E, T : SingleEvent<E>> LiveData<T>.observeEvent(
 }
 
 
-fun Throwable.toErrorEvent() : SingleEvent<ViewError> = SingleEvent(ViewErrorController.mapThrowable(this))
-
+fun Throwable.toErrorEvent() : SingleEvent<ViewError> = SingleEvent(ViewErrorController.mapThrowable(this)).also {
+    Timber.e(this)
+}
 
 fun<T> ViewModel.flowOnIO(block: suspend FlowCollector<T>.() -> Unit) : Flow<T> {
     return flow(block).flowOn(Dispatchers.IO)

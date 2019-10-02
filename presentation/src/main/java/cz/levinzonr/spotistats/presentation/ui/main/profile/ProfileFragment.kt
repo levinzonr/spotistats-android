@@ -8,11 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 
 import cz.levinzonr.spotistats.presentation.R
+import cz.levinzonr.spotistats.presentation.base.BaseFragment
+import cz.levinzonr.spotistats.presentation.base.BaseViewModel
+import kotlinx.android.synthetic.main.fragment_profile.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
  */
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment<State>() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -21,4 +25,14 @@ class ProfileFragment : Fragment() {
     }
 
 
+    override val viewModel: ProfileViewModel by viewModel()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        logoutBtn.setOnClickListener { viewModel.dispatch(Action.LogoutPressed) }
+    }
+
+    override fun renderState(state: State) {
+        logoutBtn.isEnabled = !state.isLoading
+    }
 }

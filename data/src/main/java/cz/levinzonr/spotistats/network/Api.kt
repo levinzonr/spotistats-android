@@ -1,8 +1,10 @@
 package cz.levinzonr.spotistats.network
 
+import cz.levinzonr.spotistats.models.Item
 import cz.levinzonr.spotistats.models.PaginatedResponse
 import cz.levinzonr.spotistats.models.Photo
 import cz.levinzonr.spotistats.models.Post
+import cz.levinzonr.spotistats.models.TrackDataResponse
 import cz.levinzonr.spotistats.models.TrackResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -16,5 +18,5 @@ interface Api {
     suspend fun getPhotos(): Response<List<Photo>>
 
     @GET("v1/me/top/tracks")
-    suspend fun getTopUserTracksAsync() : Deferred<PaginatedResponse<TrackResponse>>
+    suspend fun getTopUserTracksAsync() : PaginatedResponse<Item>
 }
