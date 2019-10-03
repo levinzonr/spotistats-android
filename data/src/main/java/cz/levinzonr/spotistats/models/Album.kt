@@ -7,7 +7,7 @@ data class Album(
     val external_urls: Map<String, String>,
     val href: String,
     val id: String,
-    val images: List<ImageX>,
+    val images: List<Image>,
     val name: String,
     val release_date: String,
     val release_date_precision: String,

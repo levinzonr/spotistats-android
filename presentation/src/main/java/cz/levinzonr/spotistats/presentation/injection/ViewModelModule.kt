@@ -13,5 +13,5 @@ val viewModels = module {
     viewModel { SplashViewModel(get()) }
     viewModel { LoginViewModel(get(named("SPOTIFY_CLIENT_ID")), get()) }
     viewModel { OnRepeatViewModel(get()) }
-    viewModel { ProfileViewModel(get()) }
+    viewModel { ProfileViewModel(get(), get()) }
 }

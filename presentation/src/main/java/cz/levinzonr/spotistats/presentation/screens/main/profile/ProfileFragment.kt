@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import coil.api.load
+import coil.transform.CircleCropTransformation
+import cz.levinzonr.spotistats.models.UserResponse
 
 import cz.levinzonr.spotistats.presentation.R
 import cz.levinzonr.spotistats.presentation.base.BaseFragment
@@ -30,15 +33,23 @@ class ProfileFragment : BaseFragment<State>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        logoutBtn.setOnClickListener { viewModel.dispatch(Action.LogoutPressed) }
-        switchCompat.isChecked = (activity as AppCompatActivity).delegate?.localNightMode == AppCompatDelegate.MODE_NIGHT_YES
+        userLogoutBtn.setOnClickListener { viewModel.dispatch(Action.LogoutPressed) }
+        /*switchCompat.isChecked = (activity as AppCompatActivity).delegate?.localNightMode == AppCompatDelegate.MODE_NIGHT_YES
         switchCompat.setOnCheckedChangeListener { compoundButton, b ->
             val newMode = if (b) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
             (activity as AppCompatActivity).delegate.localNightMode = newMode
-        }
+        }*/
     }
 
     override fun renderState(state: State) {
-        logoutBtn.isEnabled = !state.isLoading
+        userLogoutBtn.isEnabled = !state.isLoading
+        state.user?.let(this::renderProfile)
+    }
+
+    private fun renderProfile(user: UserResponse) {
+        userDisplayNameTv.text = user.display_name
+        userAvaterIv.load(user.images.firstOrNull()?.url) {
+            transformations(CircleCropTransformation())
+        }
     }
 }

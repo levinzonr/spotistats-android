@@ -7,36 +7,50 @@
     android:layout_height="match_parent"
     tools:context=".screens.main.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Profile" />
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+
+        android:id="@+id/userAvaterIv"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Switch
-        android:padding="20dp"
-        android:layout_marginTop="32dp"
-        android:id="@+id/switchCompat"
-        android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/textView"
-        android:layout_height="wrap_content"
-        android:text="_ Dark Mode" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/logoutBtn"
+        android:id="@+id/userDisplayNameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:text="_Logout"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userAvaterIv" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/userLogoutBtn"
+        android:layout_width="0dp"
+        android:text="Logout"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

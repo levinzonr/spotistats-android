@@ -1,9 +1,9 @@
 package cz.levinzonr.spotistats.domain
 
-import cz.levinzonr.spotistats.models.Item
+import cz.levinzonr.spotistats.models.TrackResponse
 
 data class Tracks(
-        val tracksShort: List<Item> = listOf(),
-        val tracksLong: List<Item> = listOf(),
-        val tracksMid: List<Item> = listOf()
+        val tracksShort: List<TrackResponse> = listOf(),
+        val tracksLong: List<TrackResponse> = listOf(),
+        val tracksMid: List<TrackResponse> = listOf()
 )
