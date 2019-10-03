@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.main
+package cz.levinzonr.spotistats.presentation.screens.main
 
 import android.content.Context
 import android.content.Intent

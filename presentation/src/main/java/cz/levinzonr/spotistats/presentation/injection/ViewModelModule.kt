@@ -1,9 +1,9 @@
 package cz.levinzonr.spotistats.presentation.injection
 
-import cz.levinzonr.spotistats.presentation.ui.main.onrepeat.OnRepeatViewModel
-import cz.levinzonr.spotistats.presentation.ui.main.profile.ProfileViewModel
-import cz.levinzonr.spotistats.presentation.ui.onboarding.login.LoginViewModel
-import cz.levinzonr.spotistats.presentation.ui.onboarding.splash.SplashViewModel
+import cz.levinzonr.spotistats.presentation.screens.main.onrepeat.OnRepeatViewModel
+import cz.levinzonr.spotistats.presentation.screens.main.profile.ProfileViewModel
+import cz.levinzonr.spotistats.presentation.screens.onboarding.login.LoginViewModel
+import cz.levinzonr.spotistats.presentation.screens.onboarding.splash.SplashViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module

@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.onboarding
+package cz.levinzonr.spotistats.presentation.screens.onboarding
 
 import android.os.Bundle
 import cz.levinzonr.spotistats.presentation.R

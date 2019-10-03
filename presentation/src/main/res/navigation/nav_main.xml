@@ -6,11 +6,11 @@
             app:startDestination="@id/onRepeatFragment">
 
     <fragment android:id="@+id/onRepeatFragment"
-              android:name="cz.levinzonr.spotistats.presentation.ui.main.onrepeat.OnRepeatFragment"
+              android:name="cz.levinzonr.spotistats.presentation.screens.main.onrepeat.OnRepeatFragment"
               tools:layout="@layout/fragment_on_repeat"/>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="cz.levinzonr.spotistats.presentation.ui.main.profile.ProfileFragment"
+        android:name="cz.levinzonr.spotistats.presentation.screens.main.profile.ProfileFragment"
         android:label="ProfileFragment" />
 
 

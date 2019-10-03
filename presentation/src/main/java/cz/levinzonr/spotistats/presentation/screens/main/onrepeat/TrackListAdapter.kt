@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.main.onrepeat
+package cz.levinzonr.spotistats.presentation.screens.main.onrepeat
 
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import cz.levinzonr.spotistats.models.Item
-import cz.levinzonr.spotistats.models.TrackDataResponse
 import cz.levinzonr.spotistats.presentation.R
 import cz.levinzonr.spotistats.presentation.extensions.inflate
 import kotlinx.android.synthetic.main.item_track.view.*

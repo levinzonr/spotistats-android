@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.onboarding.splash
+package cz.levinzonr.spotistats.presentation.screens.onboarding.splash
 
 import com.ww.roxie.BaseAction
 import com.ww.roxie.BaseChange

@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.onboarding.splash
+package cz.levinzonr.spotistats.presentation.screens.onboarding.splash
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.main.onrepeat
+package cz.levinzonr.spotistats.presentation.screens.main.onrepeat
 
 
 import android.os.Bundle
@@ -11,7 +11,6 @@ import cz.levinzonr.spotistats.presentation.R
 import cz.levinzonr.spotistats.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_on_repeat.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -21,7 +20,9 @@ class OnRepeatFragment : BaseFragment<State>() {
 
     override val viewModel: OnRepeatViewModel by viewModel()
 
-    private lateinit var adapter: TrackListAdapter
+    private lateinit var shortAdapter: TrackListAdapter
+    private lateinit var midAdapter: TrackListAdapter
+    private lateinit var longAdapter: TrackListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -37,12 +38,20 @@ class OnRepeatFragment : BaseFragment<State>() {
 
 
     override fun renderState(state: State) {
-        adapter.submitList(state.items)
+        state.tracks?.let { tracks ->
+            shortAdapter.submitList(tracks.tracksShort)
+            longAdapter.submitList(tracks.tracksLong)
+            midAdapter.submitList(tracks.tracksMid)
+        }
     }
 
     private fun setupRecyclerView() {
-        adapter = TrackListAdapter()
-        tracksRv.adapter  = adapter
+        shortAdapter = TrackListAdapter()
+        longAdapter = TrackListAdapter()
+        midAdapter = TrackListAdapter()
+        tracksShortRv.adapter  = shortAdapter
+        tracksLongRv.adapter = longAdapter
+        tracksMidRv.adapter = midAdapter
     }
 
 }

@@ -7,8 +7,8 @@ import androidx.navigation.fragment.findNavController
 import com.ww.roxie.BaseState
 import cz.levinzonr.spotistats.presentation.extensions.observeNonNull
 import cz.levinzonr.spotistats.presentation.navigation.Route
-import cz.levinzonr.spotistats.presentation.ui.main.MainActivity
-import cz.levinzonr.spotistats.presentation.ui.onboarding.OnboardingActivity
+import cz.levinzonr.spotistats.presentation.screens.main.MainActivity
+import cz.levinzonr.spotistats.presentation.screens.onboarding.OnboardingActivity
 import timber.log.Timber
 
 abstract class BaseFragment<S: BaseState> : Fragment() {

@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.onboarding.login
+package cz.levinzonr.spotistats.presentation.screens.onboarding.login
 
 
 import android.content.Intent

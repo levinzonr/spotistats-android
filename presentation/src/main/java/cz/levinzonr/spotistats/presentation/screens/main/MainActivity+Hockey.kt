@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.main
+package cz.levinzonr.spotistats.presentation.screens.main
 
 import cz.levinzonr.spotistats.presentation.BuildConfig
 import net.hockeyapp.android.CrashManager

@@ -23,7 +23,7 @@
             android:name="net.hockeyapp.android.appIdentifier"
             android:value="${HOCKEYAPP_APP_ID}" />
 
-        <activity android:name="cz.levinzonr.spotistats.presentation.ui.onboarding.OnboardingActivity">
+        <activity android:name="cz.levinzonr.spotistats.presentation.screens.onboarding.OnboardingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-            android:name="cz.levinzonr.spotistats.presentation.ui.main.MainActivity"
+            android:name="cz.levinzonr.spotistats.presentation.screens.main.MainActivity"
             android:exported="false"></activity>
 
         <activity

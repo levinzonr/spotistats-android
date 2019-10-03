@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.main.onrepeat
+package cz.levinzonr.spotistats.presentation.screens.main.onrepeat
 
 import cz.levinzonr.spotistats.domain.interactors.GetUserTopTracksInteractor
 import cz.levinzonr.spotistats.presentation.base.BaseViewModel
@@ -18,7 +18,7 @@ class OnRepeatViewModel(
     override val reducer: suspend (state: State, change: Change) -> State = { state, change ->
         when (change) {
             is Change.LoadingStarted -> state.copy(isLoading = true)
-            is Change.TracksLoaded -> state.copy(items = change.items)
+            is Change.TracksLoaded -> state.copy(tracks = change.items)
             is Change.TracksLoadingError -> state.copy(error = change.throwable.toErrorEvent())
         }
     }

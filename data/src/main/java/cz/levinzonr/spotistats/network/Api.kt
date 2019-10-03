@@ -9,6 +9,7 @@ import cz.levinzonr.spotistats.models.TrackResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface Api {
     @GET("posts")
@@ -18,5 +19,5 @@ interface Api {
     suspend fun getPhotos(): Response<List<Photo>>
 
     @GET("v1/me/top/tracks")
-    suspend fun getTopUserTracksAsync() : PaginatedResponse<Item>
+    suspend fun getTopUserTracksAsync(@Query("time_range") timeRange: String) : PaginatedResponse<Item>
 }

@@ -3,7 +3,7 @@
     package="cz.levinzonr.spotistats.presentation">
 
     <application>
-        <activity android:name=".ui.onboarding.login.LoginActivity"></activity>
+        <activity android:name=".screens.onboarding.login.LoginActivity"></activity>
     </application>
 
 </manifest>

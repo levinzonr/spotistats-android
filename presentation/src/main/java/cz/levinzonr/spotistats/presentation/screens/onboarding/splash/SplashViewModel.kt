@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.onboarding.splash
+package cz.levinzonr.spotistats.presentation.screens.onboarding.splash
 
 import cz.levinzonr.spotistats.domain.managers.UserManager
 import cz.levinzonr.spotistats.presentation.base.BaseViewModel

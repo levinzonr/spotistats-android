@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.main.profile
+package cz.levinzonr.spotistats.presentation.screens.main.profile
 
 
 import android.os.Bundle
@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatDelegate
 
 import cz.levinzonr.spotistats.presentation.R
 import cz.levinzonr.spotistats.presentation.base.BaseFragment
-import cz.levinzonr.spotistats.presentation.base.BaseViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

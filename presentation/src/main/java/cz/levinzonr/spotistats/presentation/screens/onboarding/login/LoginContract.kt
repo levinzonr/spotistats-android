@@ -1,9 +1,7 @@
-package cz.levinzonr.spotistats.presentation.ui.onboarding.login
+package cz.levinzonr.spotistats.presentation.screens.onboarding.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.ww.roxie.BaseAction
 import com.ww.roxie.BaseChange
 import com.ww.roxie.BaseState

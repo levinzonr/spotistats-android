@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.presentation.ui.main.profile
+package cz.levinzonr.spotistats.presentation.screens.main.profile
 
 import cz.levinzonr.spotistats.domain.managers.UserManager
 import cz.levinzonr.spotistats.presentation.base.BaseViewModel
