@@ -2,6 +2,7 @@ package cz.levinzonr.spotistats.presentation.injection
 
 import cz.levinzonr.spotistats.presentation.screens.main.onrepeat.OnRepeatViewModel
 import cz.levinzonr.spotistats.presentation.screens.main.profile.ProfileViewModel
+import cz.levinzonr.spotistats.presentation.screens.main.trackdetails.TrackDetailsViewModel
 import cz.levinzonr.spotistats.presentation.screens.onboarding.login.LoginViewModel
 import cz.levinzonr.spotistats.presentation.screens.onboarding.splash.SplashViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -14,4 +15,5 @@ val viewModels = module {
     viewModel { LoginViewModel(get(named("SPOTIFY_CLIENT_ID")), get()) }
     viewModel { OnRepeatViewModel(get()) }
     viewModel { ProfileViewModel(get(), get()) }
+    viewModel { (id: String) -> TrackDetailsViewModel(id, get(), get(), get()) }
 }

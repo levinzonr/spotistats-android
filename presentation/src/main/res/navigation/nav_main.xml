@@ -7,11 +7,23 @@
 
     <fragment android:id="@+id/onRepeatFragment"
               android:name="cz.levinzonr.spotistats.presentation.screens.main.onrepeat.OnRepeatFragment"
-              tools:layout="@layout/fragment_on_repeat"/>
+              tools:layout="@layout/fragment_on_repeat">
+        <action
+            android:id="@+id/action_onRepeatFragment_to_trackDetailsFragment"
+            app:destination="@id/trackDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="cz.levinzonr.spotistats.presentation.screens.main.profile.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/trackDetailsFragment"
+        android:name="cz.levinzonr.spotistats.presentation.screens.main.trackdetails.TrackDetailsFragment"
+        android:label="TrackDetailsFragment" >
+        <argument
+            android:name="trackId"
+            app:argType="string" />
+    </fragment>
 
 
 </navigation>

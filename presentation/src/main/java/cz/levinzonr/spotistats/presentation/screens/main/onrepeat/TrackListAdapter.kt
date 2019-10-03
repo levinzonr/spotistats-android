@@ -11,7 +11,8 @@ import cz.levinzonr.spotistats.presentation.R
 import cz.levinzonr.spotistats.presentation.extensions.inflate
 import kotlinx.android.synthetic.main.item_track.view.*
 
-class TrackListAdapter : ListAdapter<TrackResponse, TrackListAdapter.ViewHolder>(DiffCallback()) {
+class TrackListAdapter(private val listener: TrackItemListener) : ListAdapter<TrackResponse, TrackListAdapter.ViewHolder>(DiffCallback()) {
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,6 +28,7 @@ class TrackListAdapter : ListAdapter<TrackResponse, TrackListAdapter.ViewHolder>
             view.trackArtistTv.text = track.artists.first().name
             view.trackNameTv.text = track.name
             view.trackAlbumIv.load(track.album.images.firstOrNull()?.url)
+            view.setOnClickListener { listener.onTrackClicked(track) }
         }
     }
 
@@ -39,4 +41,10 @@ class TrackListAdapter : ListAdapter<TrackResponse, TrackListAdapter.ViewHolder>
             return oldItem == newItem
         }
     }
+
+
+    interface TrackItemListener {
+        fun onTrackClicked(track: TrackResponse)
+    }
+
 }

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import cz.levinzonr.spotistats.models.TrackResponse
 
 import cz.levinzonr.spotistats.presentation.R
 import cz.levinzonr.spotistats.presentation.base.BaseFragment
@@ -15,7 +16,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 /**
  * A simple [Fragment] subclass.
  */
-class OnRepeatFragment : BaseFragment<State>() {
+class OnRepeatFragment : BaseFragment<State>(), TrackListAdapter.TrackItemListener {
 
 
     override val viewModel: OnRepeatViewModel by viewModel()
@@ -46,12 +47,15 @@ class OnRepeatFragment : BaseFragment<State>() {
     }
 
     private fun setupRecyclerView() {
-        shortAdapter = TrackListAdapter()
-        longAdapter = TrackListAdapter()
-        midAdapter = TrackListAdapter()
+        shortAdapter = TrackListAdapter(this)
+        longAdapter = TrackListAdapter(this)
+        midAdapter = TrackListAdapter(this)
         tracksShortRv.adapter  = shortAdapter
         tracksLongRv.adapter = longAdapter
         tracksMidRv.adapter = midAdapter
     }
 
+    override fun onTrackClicked(track: TrackResponse) {
+        viewModel.dispatch(Action.TrackClicked(track))
+    }
 }
