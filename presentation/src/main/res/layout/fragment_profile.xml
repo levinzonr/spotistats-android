@@ -44,6 +44,13 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/settingsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/userLogoutBtn" />
+
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/userLogoutBtn"
         android:layout_width="0dp"
         android:text="Logout"

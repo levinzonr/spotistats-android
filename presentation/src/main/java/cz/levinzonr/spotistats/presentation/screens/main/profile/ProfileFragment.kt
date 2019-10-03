@@ -34,6 +34,7 @@ class ProfileFragment : BaseFragment<State>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userLogoutBtn.setOnClickListener { viewModel.dispatch(Action.LogoutPressed) }
+        settingsBtn.setOnClickListener { viewModel.dispatch(Action.SettingsPressed) }
         /*switchCompat.isChecked = (activity as AppCompatActivity).delegate?.localNightMode == AppCompatDelegate.MODE_NIGHT_YES
         switchCompat.setOnCheckedChangeListener { compoundButton, b ->
             val newMode = if (b) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
