@@ -1,10 +1,9 @@
 package cz.levinzonr.spotistats.presentation.screens.main.onrepeat
 
-import androidx.navigation.NavDirections
 import com.ww.roxie.BaseAction
 import com.ww.roxie.BaseChange
 import com.ww.roxie.BaseState
-import cz.levinzonr.spotistats.domain.Tracks
+import cz.levinzonr.spotistats.domain.models.Tracks
 import cz.levinzonr.spotistats.models.TrackResponse
 import cz.levinzonr.spotistats.presentation.navigation.Route
 import cz.levinzonr.spotistats.presentation.util.SingleEvent

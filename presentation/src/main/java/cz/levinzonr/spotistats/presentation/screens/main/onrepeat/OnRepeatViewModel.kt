@@ -21,8 +21,8 @@ class OnRepeatViewModel(
     override val reducer: suspend (state: State, change: Change) -> State = { state, change ->
         when (change) {
             is Change.LoadingStarted -> state.copy(isLoading = true)
-            is Change.TracksLoaded -> state.copy(tracks = change.items)
-            is Change.TracksLoadingError -> state.copy(error = change.throwable.toErrorEvent())
+            is Change.TracksLoaded -> state.copy(tracks = change.items, isLoading = false)
+            is Change.TracksLoadingError -> state.copy(error = change.throwable.toErrorEvent(), isLoading = false)
             is Change.Navigation -> state.also { navigateTo(change.route) }
         }
     }

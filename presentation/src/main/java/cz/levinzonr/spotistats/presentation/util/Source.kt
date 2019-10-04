@@ -17,6 +17,11 @@ data class Source<T>(
     }
 }
 
+sealed class DataState<out T>  {
+    object LoadingStarted : DataState<Nothing>()
+    data class LoadingFinished<T>(val data: T) : DataState<T>()
+    data class LoadingError(val throwable: Throwable) : DataState<Throwable>()
+}
 
 fun <T> Source<T>.loaded(data: T): Source<T> = copy(
         data = data,

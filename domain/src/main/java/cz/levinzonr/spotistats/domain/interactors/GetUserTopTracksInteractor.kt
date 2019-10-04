@@ -1,6 +1,6 @@
 package cz.levinzonr.spotistats.domain.interactors
 
-import cz.levinzonr.spotistats.domain.Tracks
+import cz.levinzonr.spotistats.domain.models.Tracks
 import cz.levinzonr.spotistats.domain.extensions.safeInteractorCall
 import cz.levinzonr.spotistats.models.TimeRange
 import cz.levinzonr.spotistats.repositories.UserTopRepository

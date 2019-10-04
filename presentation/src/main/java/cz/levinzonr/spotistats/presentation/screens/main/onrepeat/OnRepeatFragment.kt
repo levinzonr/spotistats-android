@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import cz.levinzonr.spotistats.models.TrackResponse
 
 import cz.levinzonr.spotistats.presentation.R
@@ -40,6 +41,7 @@ class OnRepeatFragment : BaseFragment<State>(), TrackListAdapter.TrackItemListen
 
     override fun renderState(state: State) {
         state.tracks?.let { tracks ->
+            listOf(longProgressBar, shortProgressBar, midProgressBar).forEach {it.isVisible = state.isLoading}
             shortAdapter.submitList(tracks.tracksShort)
             longAdapter.submitList(tracks.tracksLong)
             midAdapter.submitList(tracks.tracksMid)

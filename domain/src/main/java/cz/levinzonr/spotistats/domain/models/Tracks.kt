@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.domain
+package cz.levinzonr.spotistats.domain.models
 
 import cz.levinzonr.spotistats.models.TrackResponse
 

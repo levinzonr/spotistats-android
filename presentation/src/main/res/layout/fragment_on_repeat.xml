@@ -13,16 +13,30 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Your top tracks"
+            android:textAppearance="?textAppearanceHeadline5" />
+
 
         <com.google.android.material.card.MaterialCardView
-            app:cardCornerRadius="0dp"
-            app:cardElevation="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:minHeight="200dp"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="4dp">
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
+            <ProgressBar
+                android:id="@+id/shortProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="_Your top tracks"
+                    android:text="Over last weeks"
                     android:textAppearance="?textAppearanceHeadline4" />
 
                 <!-- TODO: Update blank fragment layout -->
@@ -52,12 +66,20 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            app:cardCornerRadius="0dp"
-            app:cardElevation="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:minHeight="200dp"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="4dp">
+
+
+            <ProgressBar
+                android:layout_gravity="bottom|center"
+                android:id="@+id/midProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
 
             <LinearLayout
@@ -71,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="_Your top tracks"
+                    android:text="Over 6 month"
                     android:textAppearance="?textAppearanceHeadline4" />
 
                 <!-- TODO: Update blank fragment layout -->
@@ -88,13 +110,22 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="0dp"
-            app:cardElevation="4dp"
-            android:layout_marginBottom="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:minHeight="200dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="4dp">
 
+
+
+
+            <ProgressBar
+                android:id="@+id/longProgressBar"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -107,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="_Your top tracks"
+                    android:text="Over years"
                     android:textAppearance="?textAppearanceHeadline4" />
 
                 <!-- TODO: Update blank fragment layout -->
