@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+
+    <TextView
+        android:textAppearance="?textAppearanceCaption"
+        tools:text="Energy"
+        android:gravity="center"
+        android:id="@+id/scoreTitleTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:textSize="19sp"
+        android:textStyle="bold"
+        tools:text="98%"
+        android:id="@+id/scoreValueTv"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+   </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

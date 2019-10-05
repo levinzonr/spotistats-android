@@ -15,6 +15,7 @@ import cz.levinzonr.spotistats.presentation.R
 import cz.levinzonr.spotistats.presentation.base.BaseFragment
 import cz.levinzonr.spotistats.presentation.base.BaseViewModel
 import cz.levinzonr.spotistats.presentation.util.Source
+import kotlinx.android.synthetic.main.fragment_track_details.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
@@ -44,7 +45,12 @@ class TrackDetailsFragment : BaseFragment<State>() {
 
 
     private fun renderTrackFeatures(features: Source<TrackFeaturesResponse>) {
-        Timber.d("Features state: $features")
+        features.data?.let { feats ->
+            scoreEnergyView.setScore("Energy", feats.energy.toString())
+            scoreLoudnessView.setScore("Loudness", feats.loudness.toString())
+            scoreRythmView.setScore("Rhythm", feats.tempo.toString())
+
+        }
     }
 
     private fun renderTrackDetails(detail: Source<TrackResponse>) {
