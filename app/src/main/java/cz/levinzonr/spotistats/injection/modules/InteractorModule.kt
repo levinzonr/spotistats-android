@@ -11,7 +11,7 @@ import org.koin.dsl.module
 
 val interactorModule = module {
     single { PostsInteractor(get()) }
-    single { LoginInteractor(get())}
+    single { LoginInteractor(get(), get())}
     single { GetUserTopTracksInteractor(get())}
     single { GetUserProfileInteractor(get()) }
     single { GetTrackFeatures(get()) }

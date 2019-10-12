@@ -7,9 +7,12 @@ import com.spotify.sdk.android.authentication.AuthenticationRequest
 import com.spotify.sdk.android.authentication.AuthenticationResponse
 import cz.levinzonr.spotistats.domain.interactors.LoginInteractor
 import cz.levinzonr.spotistats.presentation.base.BaseViewModel
+import cz.levinzonr.spotistats.presentation.extensions.isError
+import cz.levinzonr.spotistats.presentation.extensions.isSuccess
 import cz.levinzonr.spotistats.presentation.navigation.Route
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 class LoginViewModel(
         private val clientId: String,
@@ -45,7 +48,7 @@ class LoginViewModel(
 
     private fun bindLoginAction(fragment: Fragment) : Flow<Change> = flow {
         emit(Change.LoginStarted)
-        val builder = AuthenticationRequest.Builder(clientId, AuthenticationResponse.Type.TOKEN, "yourcustomprotocol://callback")
+        val builder = AuthenticationRequest.Builder(clientId, AuthenticationResponse.Type.CODE, "yourcustomprotocol://callback")
         builder.setScopes(arrayOf("streaming, user-top-read"))
         val request = builder.build()
         val intent = AuthenticationClient.createLoginActivityIntent(fragment.requireActivity(), request)
@@ -56,10 +59,11 @@ class LoginViewModel(
         if (requectCode == REQUEST_CODE) {
             val response = AuthenticationClient.getResponse(resultCode, data)
             when(response.type) {
-                AuthenticationResponse.Type.TOKEN -> {
-                    loginInteractor.input = LoginInteractor.Input(response.accessToken)
+                AuthenticationResponse.Type.CODE -> {
+                    loginInteractor.input = LoginInteractor.Input(response.code)
                     loginInteractor.invoke()
-                    emit(Change.LoginSuccess)
+                            .isSuccess { emit(Change.LoginSuccess) }
+                            .isError { Timber.d("Failed $it"); emit(Change.LoginFailed) }
                 }
                else -> {
                    emit(Change.LoginFailed)

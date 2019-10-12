@@ -14,5 +14,5 @@ import org.koin.dsl.module
 val storageModule = module {
     single<PrefManager> { PrefManagerImpl(androidContext()) }
     single<UserManager> { UserManagerImpl(get()) }
-    single<AuthTokenRepository> { AuthTokenRepositoryImpl(get())}
+    single<AuthTokenRepository> { AuthTokenRepositoryImpl(get(), get())}
 }

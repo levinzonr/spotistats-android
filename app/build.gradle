@@ -6,6 +6,10 @@ apply plugin: 'dk.nodes.ci.bitrise'
 apply plugin: 'kotlin-kapt'
 
 
+def propFile = rootProject.file("spotify.properties")
+def spotifyProps = new Properties()
+spotifyProps.load(new FileInputStream(propFile))
+
 android {
     compileSdkVersion sdks.compileSdkVersion
     buildToolsVersion sdks.buildToolsVersion
@@ -76,7 +80,10 @@ android {
                     APP_NAME        : "KotlinTemplateStaging"
             ]
             buildConfigField "String", "API_URL", "\"https://api.spotify.com/\""
-            buildConfigField "String", "CLIENT_ID", "\"4ddb1e80676040c3add00717cca24e2f\""
+            buildConfigField "String", "CLIENT_ID", "\"${spotifyProps['client_id']}\""
+            buildConfigField "String", "CLIENT_SECRET", "\"${spotifyProps['client_secret']}\""
+            buildConfigField "String", "API_AUTH_URL", "\"https://accounts.spotify.com/\""
+
         }
         production {
             dimension "default"
@@ -88,8 +95,10 @@ android {
                     HOCKEYAPP_APP_ID: hockeyAppId,
                     APP_NAME        : "KotlinTemplate"
             ]
-            buildConfigField "String", "CLIENT_ID", "\"4ddb1e80676040c3add00717cca24e2f\""
+            buildConfigField "String", "CLIENT_ID", "\"${spotifyProps['client_id']}\""
+            buildConfigField "String", "CLIENT_SECRET", "\"${spotifyProps['client_secret']}\""
             buildConfigField "String", "API_URL", "\"https://api.spotify.com/\""
+            buildConfigField "String", "API_AUTH_URL", "\"https://accounts.spotify.com/\""
         }
     }
 }

@@ -1,12 +1,12 @@
 package cz.levinzonr.spotistats.injection.modules
 
 import com.google.gson.GsonBuilder
-import com.google.gson.TypeAdapter
 import com.google.gson.TypeAdapterFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import cz.levinzonr.spotistats.BuildConfig
 import cz.levinzonr.spotistats.network.Api
-import cz.levinzonr.spotistats.network.util.AuthTokenInterceptor
+import cz.levinzonr.spotistats.network.AuthApi
+import cz.levinzonr.spotistats.network.token.AuthTokenInterceptor
 import cz.levinzonr.spotistats.network.util.DateDeserializer
 import cz.levinzonr.spotistats.network.util.ItemTypeAdapterFactory
 import okhttp3.Interceptor
@@ -14,8 +14,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import org.koin.experimental.builder.single
-import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
@@ -24,7 +22,10 @@ import java.util.concurrent.TimeUnit
 
 val restModule = module {
 
-    single(named("SPOTIFY_CLIENT_ID")) { BuildConfig.CLIENT_ID }
+    single(named(Constants.CLIENT_ID)) { BuildConfig.CLIENT_ID }
+    single(named(Constants.URL_API_AUTH)) { BuildConfig.API_AUTH_URL}
+    single(named(Constants.URL_API)) { BuildConfig.API_URL}
+    single(named(Constants.CLIENT_SECRET)) { BuildConfig.CLIENT_SECRET }
 
     single<TypeAdapterFactory> { ItemTypeAdapterFactory() }
 
@@ -58,15 +59,30 @@ val restModule = module {
 
 
 
-    single {
-        get<Retrofit>().create<Api>(Api::class.java)
+
+    single(named(Constants.CLIENT_API)) {
+        get<Retrofit>(named(Constants.RETROFIT_API)).create<Api>(Api::class.java)
+    }
+
+    single(named(Constants.AUTH_API)) {
+        get<Retrofit>(named(Constants.RETROFIT_AUTH_API)).create<AuthApi>(AuthApi::class.java)
     }
 
     // Retrofit
-    single<Retrofit> {
+    single(named(Constants.RETROFIT_API)) {
         Retrofit.Builder()
                 .client(get())
-                .baseUrl(BuildConfig.API_URL)
+                .baseUrl(get<String>(named(Constants.URL_API)))
+                .addConverterFactory(GsonConverterFactory.create(get()))
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .build()
+    }
+
+
+    single(named(Constants.RETROFIT_AUTH_API)) {
+        Retrofit.Builder()
+                .client(get())
+                .baseUrl(get<String>(named(Constants.URL_API_AUTH)))
                 .addConverterFactory(GsonConverterFactory.create(get()))
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()

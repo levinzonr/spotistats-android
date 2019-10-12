@@ -1,4 +1,4 @@
-package cz.levinzonr.spotistats.network.util
+package cz.levinzonr.spotistats.network.token
 
 import cz.levinzonr.spotistats.repositories.AuthTokenRepository
 import okhttp3.Interceptor
@@ -13,7 +13,7 @@ class AuthTokenInterceptor(private val tokenRepository: AuthTokenRepository) : I
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
                 .newBuilder()
-        tokenRepository.get()?.let { request.header("Authorization", "Bearer $it") }
+        tokenRepository.get()?.let { request.header("Authorization", "Bearer ${it.access_token}") }
         return chain.proceed(request.build())
     }
 }
