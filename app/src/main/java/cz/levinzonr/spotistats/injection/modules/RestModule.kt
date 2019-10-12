@@ -6,9 +6,11 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import cz.levinzonr.spotistats.BuildConfig
 import cz.levinzonr.spotistats.network.Api
 import cz.levinzonr.spotistats.network.AuthApi
+import cz.levinzonr.spotistats.network.token.AppAuthenticator
 import cz.levinzonr.spotistats.network.token.AuthTokenInterceptor
 import cz.levinzonr.spotistats.network.util.DateDeserializer
 import cz.levinzonr.spotistats.network.util.ItemTypeAdapterFactory
+import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,8 +25,8 @@ import java.util.concurrent.TimeUnit
 val restModule = module {
 
     single(named(Constants.CLIENT_ID)) { BuildConfig.CLIENT_ID }
-    single(named(Constants.URL_API_AUTH)) { BuildConfig.API_AUTH_URL}
-    single(named(Constants.URL_API)) { BuildConfig.API_URL}
+    single(named(Constants.URL_API_AUTH)) { BuildConfig.API_AUTH_URL }
+    single(named(Constants.URL_API)) { BuildConfig.API_URL }
     single(named(Constants.CLIENT_SECRET)) { BuildConfig.CLIENT_SECRET }
 
     single<TypeAdapterFactory> { ItemTypeAdapterFactory() }
@@ -38,17 +40,37 @@ val restModule = module {
                 .create()
     }
 
-    single<Interceptor>  { AuthTokenInterceptor(get()) }
+    single<Interceptor> { AuthTokenInterceptor(get()) }
 
+    single<Authenticator> {
+        AppAuthenticator(get(), get(named(Constants.AUTH_API)),
+                get(named(Constants.CLIENT_ID)),
+                get(named(Constants.CLIENT_SECRET)))
+    }
 
     // Okhttp
-    single<OkHttpClient> {
+    single(named("OKHTTP_AUTH")) {
+
+        val clientBuilder = OkHttpClient.Builder()
+                .connectTimeout(45, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+        if (BuildConfig.DEBUG) {
+            val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+            clientBuilder.addInterceptor(logger)
+        }
+
+        clientBuilder.build()
+    }
+
+    single(named("OKHTTP_API")) {
 
         val clientBuilder = OkHttpClient.Builder()
                 .connectTimeout(45, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .addInterceptor(AuthTokenInterceptor(get()))
+                .authenticator(get())
         if (BuildConfig.DEBUG) {
             val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
             clientBuilder.addInterceptor(logger)
@@ -71,7 +93,7 @@ val restModule = module {
     // Retrofit
     single(named(Constants.RETROFIT_API)) {
         Retrofit.Builder()
-                .client(get())
+                .client(get(named("OKHTTP_API")))
                 .baseUrl(get<String>(named(Constants.URL_API)))
                 .addConverterFactory(GsonConverterFactory.create(get()))
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
@@ -81,7 +103,7 @@ val restModule = module {
 
     single(named(Constants.RETROFIT_AUTH_API)) {
         Retrofit.Builder()
-                .client(get())
+                .client(get(named("OKHTTP_AUTH")))
                 .baseUrl(get<String>(named(Constants.URL_API_AUTH)))
                 .addConverterFactory(GsonConverterFactory.create(get()))
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())

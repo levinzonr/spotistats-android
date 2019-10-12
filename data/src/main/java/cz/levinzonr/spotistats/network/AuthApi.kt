@@ -3,6 +3,7 @@ package cz.levinzonr.spotistats.network
 import cz.levinzonr.spotistats.models.AccessToken
 import cz.levinzonr.spotistats.models.AuthBody
 import kotlinx.coroutines.Deferred
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -22,5 +23,16 @@ interface AuthApi {
             @Field("grant_type") grant: String = "authorization_code",
             @Field("redirect_uri") uri: String = "yourcustomprotocol://callback"
     ) : Deferred<AccessToken>
+
+
+    @FormUrlEncoded
+    @POST("api/token")
+    fun refreshAccessToken(
+            @Field("refresh_token") refreshToken: String,
+            @Field("client_id") clientId: String,
+            @Field("client_secret") clientSecret: String,
+            @Field("grant_type") grant: String = "refresh_token"
+    ) : Call<AccessToken>
+
 
 }
