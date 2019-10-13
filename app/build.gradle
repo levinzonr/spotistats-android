@@ -77,7 +77,7 @@ android {
             hockeyAppId = ""
             manifestPlaceholders = [
                     HOCKEYAPP_APP_ID: hockeyAppId,
-                    APP_NAME        : "KotlinTemplateStaging"
+                    APP_NAME        : "SpotON"
             ]
             buildConfigField "String", "API_URL", "\"https://api.spotify.com/\""
             buildConfigField "String", "CLIENT_ID", "\"${spotifyProps['client_id']}\""
@@ -94,7 +94,7 @@ android {
             hockeyAppId = ""
             manifestPlaceholders = [
                     HOCKEYAPP_APP_ID: hockeyAppId,
-                    APP_NAME        : "KotlinTemplate"
+                    APP_NAME        : "SpotON"
             ]
             buildConfigField "String", "CLIENT_ID", "\"${spotifyProps['client_id']}\""
             buildConfigField "String", "CLIENT_SECRET", "\"${spotifyProps['client_secret']}\""
