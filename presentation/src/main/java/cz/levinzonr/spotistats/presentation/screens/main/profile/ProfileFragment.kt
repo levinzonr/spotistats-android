@@ -10,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import coil.api.load
 import coil.transform.CircleCropTransformation
+import com.spotify.protocol.types.PlayerState
 import cz.levinzonr.spotistats.models.UserResponse
 
 import cz.levinzonr.spotistats.presentation.R
 import cz.levinzonr.spotistats.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -35,16 +37,12 @@ class ProfileFragment : BaseFragment<State>() {
         super.onViewCreated(view, savedInstanceState)
         userLogoutBtn.setOnClickListener { viewModel.dispatch(Action.LogoutPressed) }
         settingsBtn.setOnClickListener { viewModel.dispatch(Action.SettingsPressed) }
-        /*switchCompat.isChecked = (activity as AppCompatActivity).delegate?.localNightMode == AppCompatDelegate.MODE_NIGHT_YES
-        switchCompat.setOnCheckedChangeListener { compoundButton, b ->
-            val newMode = if (b) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-            (activity as AppCompatActivity).delegate.localNightMode = newMode
-        }*/
     }
 
     override fun renderState(state: State) {
         userLogoutBtn.isEnabled = !state.isLoading
         state.user?.let(this::renderProfile)
+        state.playerState?.let(this::renderPlayerState)
     }
 
     private fun renderProfile(user: UserResponse) {
@@ -52,5 +50,12 @@ class ProfileFragment : BaseFragment<State>() {
         userAvaterIv.load(user.images.firstOrNull()?.url) {
             transformations(CircleCropTransformation())
         }
+    }
+
+    private fun renderPlayerState(playerState: PlayerState) {
+        Timber.d("URI : ${playerState.track.imageUri.raw}")
+        trackImageIv.load(playerState.track.imageUri.raw)
+        trackArtistTv.text = playerState.track.name
+        trackNameTv.text = playerState.track.artist.name
     }
 }

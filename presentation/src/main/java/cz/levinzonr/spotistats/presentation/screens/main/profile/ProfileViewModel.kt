@@ -1,7 +1,9 @@
 package cz.levinzonr.spotistats.presentation.screens.main.profile
 
 import cz.levinzonr.spotistats.domain.interactors.GetUserProfileInteractor
+import cz.levinzonr.spotistats.domain.managers.SpotifyRemoteManager
 import cz.levinzonr.spotistats.domain.managers.UserManager
+import cz.levinzonr.spotistats.domain.models.RemotePlayerState
 import cz.levinzonr.spotistats.presentation.base.BaseViewModel
 import cz.levinzonr.spotistats.presentation.extensions.flowOnIO
 import cz.levinzonr.spotistats.presentation.extensions.isError
@@ -11,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class ProfileViewModel(
+        private val spotifyRemoteManager: SpotifyRemoteManager,
         private val getUserProfileInteractor: GetUserProfileInteractor,
         private val userManager: UserManager) : BaseViewModel<Action, Change, State> (){
 
@@ -25,11 +28,18 @@ class ProfileViewModel(
             is Change.ProfileLoadingError -> state.copy(isLoading = false)
 
             is Change.Navigation -> state.also { navigateTo(change.route) }
+
+            is Change.RemotePlayerReading -> state.copy(playerState = null)
+            is Change.RemotePlayerError -> state.copy(playerState = null)
+            is Change.RemotePlayerReady -> state.copy(playerState = change.state)
         }
     }
 
     init {
         startActionsObserver()
+        addStateSource(spotifyRemoteManager.stateLiveData) {
+            dispatch(Action.RemotePlayerStateUpdated(it))
+        }
         dispatch(Action.Init)
     }
 
@@ -38,6 +48,7 @@ class ProfileViewModel(
             is Action.LogoutPressed -> bindLogoutAction()
             is Action.Init -> bindInitAction()
             is Action.SettingsPressed -> bindSettingsClickActions()
+            is Action.RemotePlayerStateUpdated -> bindRemoteStateUpdate(action.remotePlayerState)
         }
     }
 
@@ -59,5 +70,13 @@ class ProfileViewModel(
     private fun bindSettingsClickActions() : Flow<Change> = flow {
         val route = Route.Destination(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
         emit(Change.Navigation(route))
+    }
+
+   private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState) : Flow<Change> = flow {
+        when(remotePlayerState) {
+            is RemotePlayerState.Ready -> emit(Change.RemotePlayerReady(remotePlayerState.state))
+            is RemotePlayerState.Error -> emit(Change.RemotePlayerError)
+            is RemotePlayerState.Initilizing -> emit(Change.RemotePlayerReading)
+        }
     }
 }

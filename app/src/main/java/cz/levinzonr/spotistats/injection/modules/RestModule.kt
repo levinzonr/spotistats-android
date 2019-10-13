@@ -45,7 +45,7 @@ val restModule = module {
         val creds = get<SpotifyCredentials>()
         ConnectionParams.Builder(creds.clientId)
                 .setRedirectUri(creds.redirectUri)
-                .showAuthView(true)
+                .showAuthView(false)
                 .build()
     }
 
