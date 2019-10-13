@@ -13,9 +13,9 @@ import org.koin.dsl.module
 val viewModels = module {
 
     viewModel { SplashViewModel(get()) }
-    viewModel { LoginViewModel(get(named("SpotifyClientId")), get()) }
+    viewModel { LoginViewModel(get(), get()) }
     viewModel { OnRepeatViewModel(get()) }
     viewModel { ProfileViewModel(get(), get()) }
-    viewModel { (id: String) -> TrackDetailsViewModel(id, get(), get(), get()) }
+    viewModel { (id: String) -> TrackDetailsViewModel(id, get(), get(), get(), get()) }
     viewModel { SettingsViewModel(get()) }
 }

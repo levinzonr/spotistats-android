@@ -51,6 +51,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/remotePlayerLayout"
                 android:padding="16dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
@@ -60,7 +61,7 @@
 
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/floatingActionButton"
+                    android:id="@+id/remotePlayerPlayBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_chevron_right"
@@ -71,19 +72,21 @@
 
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/remotePlayerQueueBtn"
                     android:layout_width="0dp"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_height="wrap_content"
-                    android:text="_Add to Playlist"
+                    android:text="_Add to Queue"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
+                    app:layout_constraintEnd_toStartOf="@+id/remotePlayerPlayBtn"
                     app:layout_constraintStart_toStartOf="parent" />
 
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/remotePlayerPlaylistBtn"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -93,7 +96,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/floatingActionButton" />
+                    app:layout_constraintStart_toEndOf="@+id/remotePlayerPlayBtn" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

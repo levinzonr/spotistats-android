@@ -14,6 +14,7 @@ object Constants {
 
 
     const val CLIENT_ID = "SpotifyClientId"
+    const val CLIENT_REDIRECT_URI = "SpotifyRedirectUri"
     const val CLIENT_SECRET = "ClientSecret"
 
 }

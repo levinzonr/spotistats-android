@@ -40,7 +40,6 @@ class OnRepeatViewModel(
         }
     }
 
-
     private fun bindLoadTracksAction(): Flow<Change> = flowOnIO {
         emit(Change.LoadingStarted)
         getUserTopTracksInteractor()

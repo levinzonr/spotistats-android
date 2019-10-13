@@ -30,6 +30,8 @@ dependencies {
     implementation "org.koin:koin-core:${versions.koin}"
     // Koin extended & experimental features
     implementation "org.koin:koin-core-ext:${versions.koin}"
+    implementation project(':spotify-app-remote-release-0.6.3')
+    implementation 'com.spotify.android:auth:1.1.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"

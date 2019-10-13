@@ -3,6 +3,7 @@ package cz.levinzonr.spotistats.presentation.screens.main.trackdetails
 import com.ww.roxie.BaseAction
 import com.ww.roxie.BaseChange
 import com.ww.roxie.BaseState
+import cz.levinzonr.spotistats.domain.models.RemotePlayerState
 import cz.levinzonr.spotistats.models.RecommendedTracks
 import cz.levinzonr.spotistats.models.TrackFeaturesResponse
 import cz.levinzonr.spotistats.models.TrackResponse
@@ -18,6 +19,12 @@ sealed class Change : BaseChange {
     data class FeaturesLoadingError(val throwable: Throwable) : Change()
     data class RecommendedLoadingError(val throwable: Throwable) : Change()
 
+
+    data class RemoteStateLoading(val remotePlayerState: RemotePlayerState) : Change()
+    data class RemoteStateReady(val remotePlayerState: RemotePlayerState) : Change()
+    data class RemoteStateError(val remotePlayerState: RemotePlayerState) : Change()
+
+
     object TrackLoading : Change()
     object FeaturesLoading : Change()
     object RecommendedLoading : Change()
@@ -25,6 +32,10 @@ sealed class Change : BaseChange {
 }
 
 sealed class Action : BaseAction {
+    data class RemoteStateUpdated(val remotePlayerState: RemotePlayerState) : Action()
+    data class PlayTrackClicked(val trackId: String) : Action()
+    data class QueueTrackClicked(val trackId: String) : Action()
+
     data class LoadTrack(val trackId: String) : Action()
     data class LoadFeatures(val trackId: String) : Action()
     data class LoadRecommended(val track: TrackResponse, val genres: List<String>) : Action()
@@ -32,8 +43,9 @@ sealed class Action : BaseAction {
 }
 
 data class State(
-      val featuresSource: Source<TrackFeaturesResponse> = Source(),
-      val trackSource: Source<TrackResponse> = Source(),
-      val recommendedSource: Source<RecommendedTracks> = Source()
+        val remotePlayerReady: Boolean = false,
+        val featuresSource: Source<TrackFeaturesResponse> = Source(),
+        val trackSource: Source<TrackResponse> = Source(),
+        val recommendedSource: Source<RecommendedTracks> = Source()
 ) : BaseState
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import coil.api.load
 import cz.levinzonr.spotistats.models.RecommendedTracks
@@ -42,6 +43,8 @@ class TrackDetailsFragment : BaseFragment<State>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        remotePlayerPlayBtn.setOnClickListener { viewModel.dispatch(Action.PlayTrackClicked(args.trackId)) }
+        remotePlayerQueueBtn.setOnClickListener { viewModel.dispatch(Action.QueueTrackClicked(args.trackId)) }
     }
 
 
@@ -49,6 +52,7 @@ class TrackDetailsFragment : BaseFragment<State>() {
         renderTrackDetails(state.trackSource)
         renderTrackFeatures(state.featuresSource)
         renderTrackRecommended(state.recommendedSource)
+        remotePlayerLayout.isVisible = state.remotePlayerReady
     }
 
 

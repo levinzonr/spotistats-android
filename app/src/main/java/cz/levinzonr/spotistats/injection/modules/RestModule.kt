@@ -20,6 +20,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 import java.util.concurrent.TimeUnit
+import com.spotify.android.appremote.api.ConnectionParams
+import cz.levinzonr.spotistats.models.SpotifyCredentials
 
 
 val restModule = module {
@@ -28,6 +30,24 @@ val restModule = module {
     single(named(Constants.URL_API_AUTH)) { BuildConfig.API_AUTH_URL }
     single(named(Constants.URL_API)) { BuildConfig.API_URL }
     single(named(Constants.CLIENT_SECRET)) { BuildConfig.CLIENT_SECRET }
+    single(named(Constants.CLIENT_REDIRECT_URI)) { BuildConfig.REDIRECT_URI }
+
+
+    factory {
+        SpotifyCredentials(
+                get(named(Constants.CLIENT_ID)),
+                get(named(Constants.CLIENT_SECRET)),
+                get(named(Constants.CLIENT_REDIRECT_URI))
+        )
+    }
+
+    factory {
+        val creds = get<SpotifyCredentials>()
+        ConnectionParams.Builder(creds.clientId)
+                .setRedirectUri(creds.redirectUri)
+                .showAuthView(true)
+                .build()
+    }
 
     single<TypeAdapterFactory> { ItemTypeAdapterFactory() }
 

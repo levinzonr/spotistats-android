@@ -82,6 +82,7 @@ android {
             buildConfigField "String", "API_URL", "\"https://api.spotify.com/\""
             buildConfigField "String", "CLIENT_ID", "\"${spotifyProps['client_id']}\""
             buildConfigField "String", "CLIENT_SECRET", "\"${spotifyProps['client_secret']}\""
+            buildConfigField "String", "REDIRECT_URI", "\"${spotifyProps['redirect_uri']}\""
             buildConfigField "String", "API_AUTH_URL", "\"https://accounts.spotify.com/\""
 
         }
@@ -97,6 +98,7 @@ android {
             ]
             buildConfigField "String", "CLIENT_ID", "\"${spotifyProps['client_id']}\""
             buildConfigField "String", "CLIENT_SECRET", "\"${spotifyProps['client_secret']}\""
+            buildConfigField "String", "REDIRECT_URI", "\"${spotifyProps['redirect_uri']}\""
             buildConfigField "String", "API_URL", "\"https://api.spotify.com/\""
             buildConfigField "String", "API_AUTH_URL", "\"https://accounts.spotify.com/\""
         }
@@ -183,4 +185,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata:${versions.lifecycle}"
     kapt "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle}"
     implementation "androidx.core:core-ktx:${versions.ktx}"
+
+    implementation project(':spotify-app-remote-release-0.6.3')
+
 }
