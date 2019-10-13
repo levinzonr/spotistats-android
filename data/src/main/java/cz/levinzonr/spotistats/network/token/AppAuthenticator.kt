@@ -1,5 +1,6 @@
 package cz.levinzonr.spotistats.network.token
 
+import android.util.Base64
 import cz.levinzonr.spotistats.network.AuthApi
 import cz.levinzonr.spotistats.repositories.AuthTokenRepository
 import kotlinx.coroutines.GlobalScope
@@ -21,12 +22,16 @@ class AppAuthenticator(
 
     override fun authenticate(route: Route?, response: Response): Request? {
         val token = authTokenRepository.get() ?: return null
-        val refreshed = authApi.refreshAccessToken(token.refresh_token, clientId, clientSecret).execute()
+        val encoded = Base64.encode("$clientId:$clientSecret".toByteArray(), Base64.NO_WRAP)
+        val header = "Basic ${String(encoded)}"
+        println("Token: ${authTokenRepository.get()}")
+        val refreshed = authApi.refreshAccessToken(token.refresh_token, header).execute()
         if (refreshed.isSuccessful) {
             val newToken = refreshed.body() ?: return null
+            println("Body: $newToken")
             authTokenRepository.set(newToken)
             return response.request().newBuilder()
-                    .header("Authorization", "Bearer: ${newToken.access_token}")
+                    .header("Authorization", "Bearer ${newToken.access_token}")
                     .build()
 
         } else {

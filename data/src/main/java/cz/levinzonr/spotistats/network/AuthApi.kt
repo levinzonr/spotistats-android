@@ -29,8 +29,7 @@ interface AuthApi {
     @POST("api/token")
     fun refreshAccessToken(
             @Field("refresh_token") refreshToken: String,
-            @Field("client_id") clientId: String,
-            @Field("client_secret") clientSecret: String,
+            @Header("Authorization") authHeader: String,
             @Field("grant_type") grant: String = "refresh_token"
     ) : Call<AccessToken>
 

@@ -40,12 +40,8 @@ class SplashViewModel(private val userManager: UserManager) : BaseViewModel<Acti
     }
 
     private fun bindInitAction() : Flow<Change> = flow {
-        Timber.d("State")
         emit(Change.InitStarted)
-        Timber.d("Emited")
-        delay(1000)
-        Timber.d("Delayed")
+        delay(2000)
         emit(Change.InitFinished(userManager.isLoggedIn()))
-        Timber.d("Emited 2")
     }
 }

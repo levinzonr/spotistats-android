@@ -18,6 +18,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--Components-->
+    <style name="TextStyle">
+        <item name="android:textColor">@color/color_on_background</item>
+    </style>
+
+    <style name="TextStyle.Preference">
+        <item name="android:padding">16dp</item>
+        <item name="android:drawableEnd">@drawable/ic_chevron_right</item>
+        <item name="android:background">?selectableItemBackground</item>
+    </style>
 
     <!--Bottom Sheets-->
     <style name="ThemeOverlay.MyTheme.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
