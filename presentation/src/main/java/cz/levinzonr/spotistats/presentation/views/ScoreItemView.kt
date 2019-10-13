@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
+import android.widget.FrameLayout
 import com.google.android.material.card.MaterialCardView
 import cz.levinzonr.spotistats.presentation.R
 import kotlinx.android.synthetic.main.view_score_item.view.*
@@ -19,7 +20,7 @@ class ScoreItemView @JvmOverloads constructor(
         context: Context,
         attributeSet: AttributeSet? = null,
         defStyle: Int = 0
-) : MaterialCardView(context, attributeSet, defStyle) {
+) : FrameLayout(context, attributeSet, defStyle) {
 
 
     init {

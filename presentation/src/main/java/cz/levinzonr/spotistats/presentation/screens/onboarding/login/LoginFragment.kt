@@ -20,10 +20,7 @@ import org.koin.core.qualifier.named
  */
 class LoginFragment : BaseFragment<State>() {
 
-
     override val viewModel: LoginViewModel by viewModel()
-
-    private val clientId: String by inject(named("SPOTIFY_CLIENT_ID"))
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="100dp"
     android:layout_height="100dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
 
-   <LinearLayout
-       android:orientation="vertical"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
-
-
-    <TextView
-        android:textAppearance="?textAppearanceCaption"
-        tools:text="Energy"
-        android:gravity="center"
-        android:id="@+id/scoreTitleTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-
-    <TextView
-        android:textSize="19sp"
-        android:textStyle="bold"
-        tools:text="98%"
-        android:id="@+id/scoreValueTv"
+    <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-   </LinearLayout>
+        <TextView
+            android:id="@+id/scoreValueTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            tools:text="98%" />
+
+        <TextView
+            android:id="@+id/scoreTitleTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="?textAppearanceCaption"
+            tools:text="Energy" />
 
 
-</com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+
+</FrameLayout>
