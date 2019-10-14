@@ -67,7 +67,8 @@ class SpotifyRemoteManagerImpl(
                 if (result.isSuccessful) {
                     _stateLiveData.postValue(RemotePlayerState.Ready(result.data))
                     playerApi.subscribeToPlayerState().setEventCallback {
-                        _stateLiveData.postValue(RemotePlayerState.Ready(it))
+                        if (it.track != null)
+                            _stateLiveData.postValue(RemotePlayerState.Ready(it))
                     }
                 }
             }

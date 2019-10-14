@@ -14,6 +14,10 @@ abstract class BaseViewModel<A: BaseAction,C: BaseChange,S: BaseState> : BaseVie
 
     protected val _navigationLiveData: MutableLiveData<SingleEvent<Route>> = MutableLiveData()
 
+
+    protected val currentState: S
+        get() = viewState.value ?: initialState
+
     val navigationLiveData: LiveData<SingleEvent<Route>>
         get() = _navigationLiveData
 

@@ -1,5 +1,6 @@
 package cz.levinzonr.spotistats.presentation.screens.main.profile
 
+import cz.levinzonr.spotistats.domain.interactors.GetTrackDetailsInteractor
 import cz.levinzonr.spotistats.domain.interactors.GetUserProfileInteractor
 import cz.levinzonr.spotistats.domain.managers.SpotifyRemoteManager
 import cz.levinzonr.spotistats.domain.managers.UserManager
@@ -11,16 +12,18 @@ import cz.levinzonr.spotistats.presentation.extensions.isSuccess
 import cz.levinzonr.spotistats.presentation.navigation.Route
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 class ProfileViewModel(
         private val spotifyRemoteManager: SpotifyRemoteManager,
         private val getUserProfileInteractor: GetUserProfileInteractor,
-        private val userManager: UserManager) : BaseViewModel<Action, Change, State> (){
+        private val getTrackDetailsInteractor: GetTrackDetailsInteractor,
+        private val userManager: UserManager) : BaseViewModel<Action, Change, State>() {
 
     override val initialState: State = State()
 
-    override val reducer: suspend (state: State, change: Change) -> State = {state, change ->
-        when(change) {
+    override val reducer: suspend (state: State, change: Change) -> State = { state, change ->
+        when (change) {
             is Change.LogoutStarted -> state.copy(isLoading = true)
             is Change.LogoutFinished -> state.copy(isLoading = false)
             is Change.ProfileLoading -> state.copy(isLoading = true)
@@ -32,6 +35,7 @@ class ProfileViewModel(
             is Change.RemotePlayerReading -> state.copy(playerState = null)
             is Change.RemotePlayerError -> state.copy(playerState = null)
             is Change.RemotePlayerReady -> state.copy(playerState = change.state)
+            is Change.TrackDetailsLoaded -> state.copy(currentTrack = change.trackResponse)
         }
     }
 
@@ -44,7 +48,7 @@ class ProfileViewModel(
     }
 
     override fun emitAction(action: Action): Flow<Change> {
-        return when(action) {
+        return when (action) {
             is Action.LogoutPressed -> bindLogoutAction()
             is Action.Init -> bindInitAction()
             is Action.SettingsPressed -> bindSettingsClickActions()
@@ -52,14 +56,14 @@ class ProfileViewModel(
         }
     }
 
-    private fun bindLogoutAction() : Flow<Change> = flowOnIO {
+    private fun bindLogoutAction(): Flow<Change> = flowOnIO {
         emit(Change.LogoutStarted)
         userManager.logout()
         emit(Change.LogoutFinished)
         emit(Change.Navigation(Route.Onboarding))
     }
 
-    private fun bindInitAction() : Flow<Change> = flowOnIO {
+    private fun bindInitAction(): Flow<Change> = flowOnIO {
         emit(Change.ProfileLoading)
         getUserProfileInteractor()
                 .isError { emit(Change.ProfileLoadingError(it)) }
@@ -67,14 +71,23 @@ class ProfileViewModel(
 
     }
 
-    private fun bindSettingsClickActions() : Flow<Change> = flow {
+    private fun bindSettingsClickActions(): Flow<Change> = flow {
         val route = Route.Destination(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
         emit(Change.Navigation(route))
     }
 
-   private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState) : Flow<Change> = flow {
-        when(remotePlayerState) {
-            is RemotePlayerState.Ready -> emit(Change.RemotePlayerReady(remotePlayerState.state))
+    private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState): Flow<Change> = flowOnIO {
+        when (remotePlayerState) {
+            is RemotePlayerState.Ready -> {
+                emit(Change.RemotePlayerReady(remotePlayerState.state))
+                val id = remotePlayerState.state.track.uri.split(":").last()
+                if (currentState.currentTrack?.id !=  id) {
+                    getTrackDetailsInteractor.input = GetTrackDetailsInteractor.Input(id)
+                    getTrackDetailsInteractor()
+                            .isSuccess { emit(Change.TrackDetailsLoaded(it)) }
+                            .isError { Timber.e(it) }
+                }
+            }
             is RemotePlayerState.Error -> emit(Change.RemotePlayerError)
             is RemotePlayerState.Initilizing -> emit(Change.RemotePlayerReading)
         }

@@ -2,17 +2,15 @@ package cz.levinzonr.spotistats.presentation.screens.main.profile
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import com.spotify.protocol.types.PlayerState
+import cz.levinzonr.spotistats.models.TrackResponse
 import cz.levinzonr.spotistats.models.UserResponse
-
 import cz.levinzonr.spotistats.presentation.R
 import cz.levinzonr.spotistats.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -43,6 +41,7 @@ class ProfileFragment : BaseFragment<State>() {
         userLogoutBtn.isEnabled = !state.isLoading
         state.user?.let(this::renderProfile)
         state.playerState?.let(this::renderPlayerState)
+        state.currentTrack?.let(this::renderTrackDetails)
     }
 
     private fun renderProfile(user: UserResponse) {
@@ -53,9 +52,15 @@ class ProfileFragment : BaseFragment<State>() {
     }
 
     private fun renderPlayerState(playerState: PlayerState) {
-        Timber.d("URI : ${playerState.track.imageUri.raw}")
-        trackImageIv.load(playerState.track.imageUri.raw)
         trackArtistTv.text = playerState.track.name
         trackNameTv.text = playerState.track.artist.name
+
+    }
+
+    private fun renderTrackDetails(trackResponse: TrackResponse) {
+        Timber.d("Render Tracl: $trackResponse")
+        trackArtistTv.text = trackResponse.artists.first().name
+        trackNameTv.text = trackResponse.name
+        trackImageIv.load(trackResponse.album.images.firstOrNull()?.url)
     }
 }

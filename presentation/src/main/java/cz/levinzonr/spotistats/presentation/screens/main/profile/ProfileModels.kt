@@ -5,6 +5,7 @@ import com.ww.roxie.BaseAction
 import com.ww.roxie.BaseChange
 import com.ww.roxie.BaseState
 import cz.levinzonr.spotistats.domain.models.RemotePlayerState
+import cz.levinzonr.spotistats.models.TrackResponse
 import cz.levinzonr.spotistats.models.UserResponse
 import cz.levinzonr.spotistats.presentation.navigation.Route
 
@@ -26,6 +27,7 @@ sealed class Change : BaseChange {
     data class ProfileLoaded(val user: UserResponse) : Change()
     data class ProfileLoadingError(val throwable: Throwable) : Change()
 
+    data class TrackDetailsLoaded(val trackResponse: TrackResponse) : Change()
     data class RemotePlayerReady(val state: PlayerState) : Change()
     object RemotePlayerReading : Change()
     object RemotePlayerError:  Change()
@@ -37,5 +39,6 @@ sealed class Change : BaseChange {
 data class State(
         val playerState: PlayerState? = null,
         val isLoading: Boolean = false,
+        val currentTrack: TrackResponse? = null,
         val user: UserResponse? = null
 ) : BaseState
