@@ -43,47 +43,108 @@
         app:layout_constraintTop_toBottomOf="@+id/userAvaterIv" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_margin="24dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/settingsBtn"
         app:layout_constraintTop_toBottomOf="@+id/userDisplayNameTv">
 
 
-        <ImageView
-            android:src="@color/color_on_background"
-            android:id="@+id/trackImageIv"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="22dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintBottom_toTopOf="@+id/settingsBtn"
+            app:layout_constraintTop_toBottomOf="@+id/userDisplayNameTv">
 
-        <TextView
-            android:id="@+id/trackNameTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/guideline2"
-            app:layout_constraintStart_toEndOf="@+id/trackImageIv" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
 
-        <TextView
-            android:id="@+id/trackArtistTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/trackNameTv"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <ImageView
+                    android:id="@+id/trackImageIv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:src="@drawable/ic_play_arrow"
+                    android:layout_gravity="center"
+                    android:id="@+id/trackPlayBtn"
+                    app:fabSize="mini"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </FrameLayout>
+
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:id="@+id/trackNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+
+            <TextView
+                android:id="@+id/trackArtistTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trackNameTv" />
+
+            <ImageButton
+                android:tint="?colorOnSurface"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="16dp"
+                android:id="@+id/trackPreviousBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_skip_previous"
+                app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+                app:layout_constraintEnd_toStartOf="@+id/frameLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/frameLayout" />
+
+            <ImageButton
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="16dp"
+                android:tint="?colorOnSurface"
+                android:id="@+id/trackNextBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_skip_next"
+                app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/frameLayout"
+                app:layout_constraintTop_toTopOf="@+id/frameLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
 
     <com.google.android.material.button.MaterialButton

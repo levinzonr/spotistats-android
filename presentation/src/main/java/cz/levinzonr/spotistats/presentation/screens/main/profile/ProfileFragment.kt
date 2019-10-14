@@ -35,6 +35,9 @@ class ProfileFragment : BaseFragment<State>() {
         super.onViewCreated(view, savedInstanceState)
         userLogoutBtn.setOnClickListener { viewModel.dispatch(Action.LogoutPressed) }
         settingsBtn.setOnClickListener { viewModel.dispatch(Action.SettingsPressed) }
+        trackPlayBtn.setOnClickListener { viewModel.dispatch(Action.PlayTrackPressed) }
+        trackNextBtn.setOnClickListener { viewModel.dispatch(Action.NextTrackPressed) }
+        trackPreviousBtn.setOnClickListener { viewModel.dispatch(Action.PreviousTrackPressed) }
     }
 
     override fun renderState(state: State) {
@@ -52,6 +55,8 @@ class ProfileFragment : BaseFragment<State>() {
     }
 
     private fun renderPlayerState(playerState: PlayerState) {
+        val imageRes = if (playerState.isPaused) R.drawable.ic_play_arrow else R.drawable.ic_pause_black
+        trackPlayBtn.setImageResource(imageRes)
         trackArtistTv.text = playerState.track.name
         trackNameTv.text = playerState.track.artist.name
 
@@ -61,6 +66,8 @@ class ProfileFragment : BaseFragment<State>() {
         Timber.d("Render Tracl: $trackResponse")
         trackArtistTv.text = trackResponse.artists.first().name
         trackNameTv.text = trackResponse.name
-        trackImageIv.load(trackResponse.album.images.firstOrNull()?.url)
+        trackImageIv.load(trackResponse.album.images.firstOrNull()?.url) {
+            transformations(CircleCropTransformation())
+        }
     }
 }

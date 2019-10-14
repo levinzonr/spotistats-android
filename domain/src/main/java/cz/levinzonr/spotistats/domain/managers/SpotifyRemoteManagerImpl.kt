@@ -20,6 +20,16 @@ class SpotifyRemoteManagerImpl(
 ) : SpotifyRemoteManager, Connector.ConnectionListener {
 
 
+    private fun launchOnIO(block: () -> Unit) = GlobalScope.launch {
+        withContext(Dispatchers.IO) {
+            block.invoke()
+        }
+    }
+
+    private fun withPlayerApi(block: (playerApi: PlayerApi) -> Unit) {
+        this.appRemote?.playerApi?.let(block)
+    }
+
     private val _stateLiveData = MutableLiveData<RemotePlayerState>()
 
     override val stateLiveData: LiveData<RemotePlayerState>
@@ -47,31 +57,58 @@ class SpotifyRemoteManagerImpl(
         }
     }
 
-    override fun play(trackId: String) {
-        appRemote?.playerApi?.let { playerApi ->
-            playerApi.play(trackId)
+
+    private fun init(playerApi: PlayerApi) = launchOnIO {
+
+        val result = playerApi.playerState.await()
+        if (result.isSuccessful) {
+            _stateLiveData.postValue(RemotePlayerState.Ready(result.data))
+            playerApi.subscribeToPlayerState().setEventCallback {
+                if (it.track != null)
+                    _stateLiveData.postValue(RemotePlayerState.Ready(it))
+            }
         }
     }
 
 
-    override fun addToQueue(trackId: String) {
-        appRemote?.playerApi?.let { playerApi ->
-            playerApi.queue(trackId)
-        }
+    override fun next() = withPlayerApi { playerApi ->
+        launchOnIO { playerApi.skipNext().await() }
     }
 
-    private fun init(playerApi: PlayerApi) {
-        GlobalScope.launch {
-            withContext(Dispatchers.IO) {
-                val result = playerApi.playerState.await()
-                if (result.isSuccessful) {
-                    _stateLiveData.postValue(RemotePlayerState.Ready(result.data))
-                    playerApi.subscribeToPlayerState().setEventCallback {
-                        if (it.track != null)
-                            _stateLiveData.postValue(RemotePlayerState.Ready(it))
-                    }
+
+    override fun pause() = withPlayerApi { playerApi ->
+        launchOnIO { playerApi.pause().await() }
+    }
+
+    override fun play(trackId: String) = withPlayerApi { playerApi ->
+        playerApi.play(trackId)
+
+    }
+
+    override fun addToQueue(trackId: String) = withPlayerApi { playerApi ->
+        playerApi.queue(trackId)
+
+    }
+
+
+    override fun previous() = withPlayerApi { playerApi ->
+        launchOnIO { playerApi.skipPrevious() }
+    }
+
+    override fun toggle() = withPlayerApi { playerApi ->
+        launchOnIO {
+            val state = playerApi.playerState.await()
+            if (state.isSuccessful) {
+                if (state.data.isPaused) {
+                    playerApi.resume().await()
+                } else {
+                    playerApi.pause().await()
                 }
             }
         }
     }
+
+
+
+
 }

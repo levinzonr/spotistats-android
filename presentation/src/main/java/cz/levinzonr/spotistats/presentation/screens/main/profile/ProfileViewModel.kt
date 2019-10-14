@@ -53,6 +53,9 @@ class ProfileViewModel(
             is Action.Init -> bindInitAction()
             is Action.SettingsPressed -> bindSettingsClickActions()
             is Action.RemotePlayerStateUpdated -> bindRemoteStateUpdate(action.remotePlayerState)
+            is Action.NextTrackPressed -> flow { spotifyRemoteManager.next() }
+            is Action.PreviousTrackPressed -> flow { spotifyRemoteManager.previous() }
+            is Action.PlayTrackPressed -> flow { spotifyRemoteManager.toggle() }
         }
     }
 

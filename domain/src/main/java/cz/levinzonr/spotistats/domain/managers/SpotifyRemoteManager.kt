@@ -8,6 +8,10 @@ interface SpotifyRemoteManager {
     val stateLiveData: LiveData<RemotePlayerState>
 
     fun play(trackId: String)
+    fun next()
+    fun pause()
+    fun toggle()
+    fun previous()
     fun addToQueue(trackId: String)
 
 }

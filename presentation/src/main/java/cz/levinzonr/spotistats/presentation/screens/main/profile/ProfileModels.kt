@@ -15,6 +15,9 @@ sealed class Action : BaseAction {
     object LogoutPressed : Action()
     object SettingsPressed: Action()
     data class RemotePlayerStateUpdated(val remotePlayerState: RemotePlayerState) : Action()
+    object PlayTrackPressed: Action()
+    object NextTrackPressed: Action()
+    object PreviousTrackPressed: Action()
 }
 
 
