@@ -16,3 +16,6 @@ inline fun <T> BaseAsyncInteractor<CompleteResult<T>>.safeInteractorCall(block: 
         Fail(t)
     }
 }
+
+val String.spotifyTrackUri
+    get() = "spotify:track:$this"

@@ -79,6 +79,7 @@ class ProfileViewModel(
         emit(Change.Navigation(route))
     }
 
+
     private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState): Flow<Change> = flowOnIO {
         when (remotePlayerState) {
             is RemotePlayerState.Ready -> {

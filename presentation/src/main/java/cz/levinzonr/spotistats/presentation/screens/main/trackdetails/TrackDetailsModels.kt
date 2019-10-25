@@ -7,6 +7,7 @@ import cz.levinzonr.spotistats.domain.models.RemotePlayerState
 import cz.levinzonr.spotistats.models.RecommendedTracks
 import cz.levinzonr.spotistats.models.TrackFeaturesResponse
 import cz.levinzonr.spotistats.models.TrackResponse
+import cz.levinzonr.spotistats.presentation.navigation.Route
 import cz.levinzonr.spotistats.presentation.util.Source
 
 
@@ -25,6 +26,8 @@ sealed class Change : BaseChange {
     data class RemoteStateError(val remotePlayerState: RemotePlayerState) : Change()
 
 
+    data class Navigation(val route: Route) : Change()
+
     object TrackLoading : Change()
     object FeaturesLoading : Change()
     object RecommendedLoading : Change()
@@ -35,6 +38,7 @@ sealed class Action : BaseAction {
     data class RemoteStateUpdated(val remotePlayerState: RemotePlayerState) : Action()
     data class PlayTrackClicked(val trackId: String) : Action()
     data class QueueTrackClicked(val trackId: String) : Action()
+    data class AddToPlaylistClicked(val trackId: String) : Action()
 
     data class LoadTrack(val trackId: String) : Action()
     data class LoadFeatures(val trackId: String) : Action()

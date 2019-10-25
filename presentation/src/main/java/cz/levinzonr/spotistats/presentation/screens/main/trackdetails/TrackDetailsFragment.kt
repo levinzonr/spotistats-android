@@ -45,6 +45,7 @@ class TrackDetailsFragment : BaseFragment<State>() {
         super.onViewCreated(view, savedInstanceState)
         remotePlayerPlayBtn.setOnClickListener { viewModel.dispatch(Action.PlayTrackClicked(args.trackId)) }
         remotePlayerQueueBtn.setOnClickListener { viewModel.dispatch(Action.QueueTrackClicked(args.trackId)) }
+        remotePlayerPlaylistBtn.setOnClickListener { viewModel.dispatch(Action.AddToPlaylistClicked(args.trackId)) }
     }
 
 
@@ -52,7 +53,8 @@ class TrackDetailsFragment : BaseFragment<State>() {
         renderTrackDetails(state.trackSource)
         renderTrackFeatures(state.featuresSource)
         renderTrackRecommended(state.recommendedSource)
-        remotePlayerLayout.isVisible = state.remotePlayerReady
+        // remotePlayerLayout.isVisible = state.remotePlayerReady
+
     }
 
 

@@ -9,6 +9,7 @@ import cz.levinzonr.spotistats.presentation.base.BaseViewModel
 import cz.levinzonr.spotistats.presentation.extensions.flowOnIO
 import cz.levinzonr.spotistats.presentation.extensions.isError
 import cz.levinzonr.spotistats.presentation.extensions.isSuccess
+import cz.levinzonr.spotistats.presentation.navigation.Route
 import cz.levinzonr.spotistats.presentation.util.error
 import cz.levinzonr.spotistats.presentation.util.loaded
 import cz.levinzonr.spotistats.presentation.util.loading
@@ -43,6 +44,8 @@ class TrackDetailsViewModel(
             is Change.RemoteStateReady -> state.copy(remotePlayerReady = true)
             is Change.RemoteStateLoading -> state.copy(remotePlayerReady = false)
             is Change.RemoteStateError -> state.copy(remotePlayerReady = false)
+
+            is Change.Navigation -> state.copy().also { navigateTo(change.route) }
         }
     }
 
@@ -63,7 +66,7 @@ class TrackDetailsViewModel(
             is Action.RemoteStateUpdated -> bindRemoteStateUpdate(action.remotePlayerState)
             is Action.PlayTrackClicked -> bindPlayTrackAction(action.trackId)
             is Action.QueueTrackClicked -> bindQueueTrackAction(action.trackId)
-
+            is Action.AddToPlaylistClicked -> bindAddToPlaylistAction(action.trackId)
         }
     }
 
@@ -95,6 +98,11 @@ class TrackDetailsViewModel(
 
     private fun bindLoadRecommendedAction(): Flow<Change> = flowOnIO {
 
+    }
+
+    private fun bindAddToPlaylistAction(trackId: String) : Flow<Change> = flow {
+        val route = Route.Destination(TrackDetailsFragmentDirections.actionTrackDetailsFragmentToPlaylistsDialogFragment(trackId))
+        emit(Change.Navigation(route))
     }
 
 
