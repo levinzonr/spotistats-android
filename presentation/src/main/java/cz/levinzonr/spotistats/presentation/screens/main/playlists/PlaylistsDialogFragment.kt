@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,6 +46,7 @@ class PlaylistsDialogFragment : BottomSheetDialogFragment(), PlaylistsAdapter.Pl
 
     private fun renderState(state: State) {
         adapter.submitList(state.playlists)
+        progressBar.isVisible = state.isLoading
         state.duplicateDialog?.consume()?.let(this::renderConfirmationDialog)
         state.successEvent?.consume()?.let {
             Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()

@@ -23,6 +23,7 @@ class PlaylistsAdapter : ListAdapter<PlaylistResponse, PlaylistsAdapter.ViewHold
         holder.bindView(getItem(position))
     }
 
+
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bindView(playlistResponse: PlaylistResponse) {
             view.playlistNameTv.text = playlistResponse.name
@@ -44,4 +45,5 @@ class PlaylistsAdapter : ListAdapter<PlaylistResponse, PlaylistsAdapter.ViewHold
     interface PlaylistItemListener {
         fun onPlaylistClicked(playlistResponse: PlaylistResponse)
     }
+
 }

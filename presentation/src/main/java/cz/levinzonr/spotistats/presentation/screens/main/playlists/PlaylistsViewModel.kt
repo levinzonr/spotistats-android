@@ -9,6 +9,7 @@ import cz.levinzonr.spotistats.presentation.extensions.isError
 import cz.levinzonr.spotistats.presentation.extensions.isSuccess
 import cz.levinzonr.spotistats.presentation.extensions.toErrorEvent
 import cz.levinzonr.spotistats.presentation.util.SingleEvent
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 
 class PlaylistsViewModel(
