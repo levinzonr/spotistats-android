@@ -33,6 +33,21 @@
         <item name="android:drawablePadding">8dp</item>
     </style>
 
+    <style name="ImageButton">
+        <item name="android:tint">?colorOnSurface</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="ProfileTextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:padding">16dp</item>
+        <item name="iconPadding">12dp</item>
+        <item name="iconGravity">start</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+
     <!--Navigation Drawer-->
     <style name="Widget.MyTheme.ButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="android:padding">12dp</item>

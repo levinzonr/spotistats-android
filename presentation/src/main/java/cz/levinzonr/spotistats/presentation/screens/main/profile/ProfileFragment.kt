@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import com.spotify.protocol.types.PlayerState
+import cz.levinzonr.spotistats.domain.models.UserProfile
 import cz.levinzonr.spotistats.models.TrackResponse
 import cz.levinzonr.spotistats.models.UserResponse
 import cz.levinzonr.spotistats.presentation.R
@@ -33,7 +34,6 @@ class ProfileFragment : BaseFragment<State>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userLogoutBtn.setOnClickListener { viewModel.dispatch(Action.LogoutPressed) }
         settingsBtn.setOnClickListener { viewModel.dispatch(Action.SettingsPressed) }
         trackPlayBtn.setOnClickListener { viewModel.dispatch(Action.PlayTrackPressed) }
         trackNextBtn.setOnClickListener { viewModel.dispatch(Action.NextTrackPressed) }
@@ -41,15 +41,16 @@ class ProfileFragment : BaseFragment<State>() {
     }
 
     override fun renderState(state: State) {
-        userLogoutBtn.isEnabled = !state.isLoading
         state.user?.let(this::renderProfile)
         state.playerState?.let(this::renderPlayerState)
         state.currentTrack?.let(this::renderTrackDetails)
     }
 
-    private fun renderProfile(user: UserResponse) {
-        userDisplayNameTv.text = user.display_name
-        userAvaterIv.load(user.images.firstOrNull()?.url) {
+    private fun renderProfile(user: UserProfile) {
+        userDisplayNameTv.text = user.displayName
+        userFollowersCountTv.setScore("Followers", user.followersCount.toString())
+        userPlaylistsCountView.setScore("Playlists", user.playlistCount.toString())
+        userAvaterIv.load(user.imageUrl) {
             transformations(CircleCropTransformation())
         }
     }
@@ -66,8 +67,6 @@ class ProfileFragment : BaseFragment<State>() {
         Timber.d("Render Tracl: $trackResponse")
         trackArtistTv.text = trackResponse.artists.first().name
         trackNameTv.text = trackResponse.name
-        trackImageIv.load(trackResponse.album.images.firstOrNull()?.url) {
-            transformations(CircleCropTransformation())
-        }
+        trackImageIv.load(trackResponse.album.images.firstOrNull()?.url)
     }
 }
