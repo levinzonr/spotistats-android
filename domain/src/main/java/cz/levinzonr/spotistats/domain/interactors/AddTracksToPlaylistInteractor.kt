@@ -16,12 +16,8 @@ class AddTracksToPlaylistInteractor(
     override suspend fun invoke(): CompleteResult<Boolean> = safeInteractorCall {
         requireNotNull(input).let { input ->
             val playlist = api.getPlaylistById(input.playlist.id)
-            println("To add :${input.ids}")
-            val uris = playlist.tracks.items.map { it.track.id }.also {
-                println("Ids: $it")
-            }
+            val uris = playlist.tracks.items.map { it.track.id }
             val noDuplicates = uris.none { input.ids.contains(it) }
-            println("No dup: $noDuplicates, forceAdd: ${input.forceAdd}")
             if (noDuplicates || input.forceAdd) {
                 val r = api.addTrackToPlaylist(input.playlist.id, input.ids.map { it.spotifyTrackUri })
                 return@safeInteractorCall true
