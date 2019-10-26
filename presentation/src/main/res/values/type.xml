@@ -80,7 +80,7 @@
     </style>
 
     <style name="TextAppearance.MyTheme.Button" parent="TextAppearance.MaterialComponents.Button">
-        <!--Your custom type style here-->
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="TextAppearance.MyTheme.Caption" parent="TextAppearance.MaterialComponents.Caption">

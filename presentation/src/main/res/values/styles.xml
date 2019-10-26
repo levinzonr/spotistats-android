@@ -28,6 +28,16 @@
         <item name="android:background">?selectableItemBackground</item>
     </style>
 
+    <style name="TextStyle.DrawableLabel">
+        <item name="android:padding">8dp</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
+    <!--Navigation Drawer-->
+    <style name="Widget.MyTheme.ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:padding">12dp</item>
+        <item name="iconGravity">textStart</item>
+    </style>
     <!--Bottom Sheets-->
     <style name="ThemeOverlay.MyTheme.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
         <item name="android:windowIsFloating">false</item>

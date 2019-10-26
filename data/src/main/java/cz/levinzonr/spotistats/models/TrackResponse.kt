@@ -5,7 +5,7 @@ data class TrackResponse(
     val artists: List<Artist>,
     val available_markets: List<String>,
     val disc_number: Int,
-    val duration_ms: Int,
+    val duration_ms: Long,
     val explicit: Boolean,
     val external_ids: Map<String, String>,
     val external_urls: Map<String, String>,
@@ -19,3 +19,8 @@ data class TrackResponse(
     val type: String,
     val uri: String
 )
+
+
+fun TrackResponse.artists() : String {
+    return artists.joinToString(", "){ it.name }
+}

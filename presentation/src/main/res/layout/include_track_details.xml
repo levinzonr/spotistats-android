@@ -1,54 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
-        <TextView
-            android:id="@+id/trackNameTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            tools:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/trackNameTv"
+        style="@style/TextStyle.DrawableLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_audiotrack_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="You're going down" />
 
-        <TextView
-            android:id="@+id/trackArtistTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            tools:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/trackNameTv" />
+    <TextView
+        style="@style/TextStyle.DrawableLabel"
+        android:id="@+id/trackAlbumTv"
+        android:layout_width="0dp"
+        android:drawableStart="@drawable/ic_album_black_24dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trackNameTv"
+        tools:text="Tri-Polar" />
 
-        <TextView
-            android:id="@+id/trackDurationTb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            tools:text="TextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/trackArtistTv" />
+    <TextView
 
-        <TextView
-            android:id="@+id/trackPopularityTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            tools:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/trackDurationTb" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        style="@style/TextStyle.DrawableLabel"
+        android:id="@+id/trackArtistTv"
+        android:layout_width="0dp"
+        android:drawableStart="@drawable/ic_group_black_24dp"
+        android:layout_height="wrap_content"
+        tools:text="Sick Puppies"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/trackAlbumTv"
+        app:layout_constraintTop_toBottomOf="@+id/trackAlbumTv" />
 
 
-</FrameLayout>
+    <TextView
+        android:drawableStart="@drawable/ic_access_time_black_24dp"
+        style="@style/TextStyle.DrawableLabel"
+        android:id="@+id/trackDurationTb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trackArtistTv"
+        tools:text="2:30" />
+
+    <TextView
+        android:drawableStart="@drawable/ic_whatshot_black_24dp"
+        android:id="@+id/trackPopularityTv"
+        style="@style/TextStyle.DrawableLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@+id/trackDurationTb"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="32" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
