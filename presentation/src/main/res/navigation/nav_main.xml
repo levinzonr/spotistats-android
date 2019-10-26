@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_trackDetailsFragment_to_playlistsDialogFragment"
             app:destination="@id/playlistsDialogFragment" />
+        <action
+            android:id="@+id/action_trackDetailsFragment_self"
+            app:destination="@id/trackDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

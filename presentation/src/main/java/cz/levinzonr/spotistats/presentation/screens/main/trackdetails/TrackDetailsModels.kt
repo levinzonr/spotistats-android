@@ -42,8 +42,9 @@ sealed class Action : BaseAction {
 
     data class LoadTrack(val trackId: String) : Action()
     data class LoadFeatures(val trackId: String) : Action()
-    data class LoadRecommended(val track: TrackResponse, val genres: List<String>) : Action()
+    data class LoadRecommended(val track: TrackResponse) : Action()
 
+    data class RecommendedTrackClicked(val trackResponse: TrackResponse) : Action()
 }
 
 data class State(

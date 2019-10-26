@@ -5,6 +5,7 @@ import cz.levinzonr.spotistats.domain.interactors.GetTrackDetailsInteractor
 import cz.levinzonr.spotistats.domain.interactors.GetTrackFeatures
 import cz.levinzonr.spotistats.domain.managers.SpotifyRemoteManager
 import cz.levinzonr.spotistats.domain.models.RemotePlayerState
+import cz.levinzonr.spotistats.models.TrackResponse
 import cz.levinzonr.spotistats.presentation.base.BaseViewModel
 import cz.levinzonr.spotistats.presentation.extensions.flowOnIO
 import cz.levinzonr.spotistats.presentation.extensions.isError
@@ -17,7 +18,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class TrackDetailsViewModel(
-        private val trackId: String,
+        trackId: String,
         private val getRecommendedTracks: GetRecommendedTracks,
         private val spotifyRemoteManager: SpotifyRemoteManager,
         private val getTrackFeatures: GetTrackFeatures,
@@ -61,12 +62,13 @@ class TrackDetailsViewModel(
     override fun emitAction(action: Action): Flow<Change> {
         return when (action) {
             is Action.LoadFeatures -> bindLoadFeaturesAction(action.trackId)
-            is Action.LoadRecommended -> bindLoadRecommendedAction()
+            is Action.LoadRecommended -> bindLoadRecommendedAction(action.track)
             is Action.LoadTrack -> bindLoadTrackAction(action.trackId)
             is Action.RemoteStateUpdated -> bindRemoteStateUpdate(action.remotePlayerState)
             is Action.PlayTrackClicked -> bindPlayTrackAction(action.trackId)
             is Action.QueueTrackClicked -> bindQueueTrackAction(action.trackId)
             is Action.AddToPlaylistClicked -> bindAddToPlaylistAction(action.trackId)
+            is Action.RecommendedTrackClicked -> bindRecommendedTrackClicked(action.trackResponse)
         }
     }
 
@@ -91,13 +93,22 @@ class TrackDetailsViewModel(
         emit(Change.TrackLoading)
         getTrackDetailsInteractor.input = GetTrackDetailsInteractor.Input(id)
         getTrackDetailsInteractor()
-                .isSuccess { emit(Change.TrackLoaded(it)) }
+                .isSuccess {
+                    emit(Change.TrackLoaded(it))
+                    dispatch(Action.LoadRecommended(it))
+                }
                 .isError { emit(Change.TrackLoadingError(it)) }
 
     }
 
-    private fun bindLoadRecommendedAction(): Flow<Change> = flowOnIO {
+    private fun bindLoadRecommendedAction(trackResponse: TrackResponse): Flow<Change> = flowOnIO {
+        emit(Change.RecommendedLoading)
+        getRecommendedTracks.input = GetRecommendedTracks.Input(listOf(trackResponse),
+                trackResponse.artists, listOf())
 
+        getRecommendedTracks.invoke()
+                .isSuccess { emit(Change.RecommendedLoaded(it)) }
+                .isError { emit(Change.RecommendedLoadingError(it)) }
     }
 
     private fun bindAddToPlaylistAction(trackId: String) : Flow<Change> = flow {
@@ -105,6 +116,10 @@ class TrackDetailsViewModel(
         emit(Change.Navigation(route))
     }
 
+    private fun bindRecommendedTrackClicked(trackResponse: TrackResponse) = flow {
+        val route = Route.Destination(TrackDetailsFragmentDirections.actionTrackDetailsFragmentSelf(trackResponse.id))
+        emit(Change.Navigation(route))
+    }
 
     private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState) : Flow<Change> = flow {
         when(remotePlayerState) {

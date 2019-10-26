@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -42,29 +43,28 @@
 
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <include
+                layout="@layout/include_track_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                layout="@layout/include_track_details"/>
+                android:layout_margin="16dp" />
 
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_margin="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/remotePlayerLayout"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp">
 
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -72,25 +72,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_play_arrow"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/remotePlayerQueueBtn"
-                        android:layout_width="0dp"
-                        app:icon="@drawable/ic_queue_music_black_24dp"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="_Add to Queue"
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="0dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="_Add to Queue"
+                        app:icon="@drawable/ic_queue_music_black_24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/remotePlayerPlayBtn"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <com.google.android.material.button.MaterialButton
@@ -98,14 +98,14 @@
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:icon="@drawable/ic_playlist_add_black_24dp"
-                        android:text="_Add to Playlist"
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="0dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="_Add to Playlist"
+                        app:icon="@drawable/ic_playlist_add_black_24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/remotePlayerPlayBtn" />
+                        app:layout_constraintStart_toEndOf="@+id/remotePlayerPlayBtn"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -113,10 +113,31 @@
 
 
             <include
-                android:layout_height="wrap_content"
+                layout="@layout/include_track_features"
                 android:layout_width="match_parent"
-                android:layout_margin="16dp"
-                layout="@layout/include_track_features" />
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Recommended"
+                android:textAppearance="?textAppearanceHeadline6" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="8dp"
+                android:id="@+id/tracksRecommendedRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:text="@string/hello_blank_fragment"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_track" />
+
+
         </LinearLayout>
 
 

@@ -20,6 +20,7 @@ import cz.levinzonr.spotistats.presentation.base.BaseFragment
 import cz.levinzonr.spotistats.presentation.base.BaseViewModel
 import cz.levinzonr.spotistats.presentation.extensions.toMmSs
 import cz.levinzonr.spotistats.presentation.extensions.toPercentageString
+import cz.levinzonr.spotistats.presentation.screens.main.onrepeat.TrackListAdapter
 import cz.levinzonr.spotistats.presentation.util.Source
 import kotlinx.android.synthetic.main.fragment_track_details.*
 import kotlinx.android.synthetic.main.include_track_details.*
@@ -31,11 +32,11 @@ import timber.log.Timber
 /**
  * A simple [Fragment] subclass.
  */
-class TrackDetailsFragment : BaseFragment<State>() {
+class TrackDetailsFragment : BaseFragment<State>(), TrackListAdapter.TrackItemListener {
 
     private val args: TrackDetailsFragmentArgs by navArgs()
     override val viewModel: TrackDetailsViewModel by viewModel { parametersOf(args.trackId) }
-
+    private lateinit var adapter: TrackListAdapter
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +47,8 @@ class TrackDetailsFragment : BaseFragment<State>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = TrackListAdapter(this)
+        tracksRecommendedRv.adapter = adapter
         remotePlayerPlayBtn.setOnClickListener { viewModel.dispatch(Action.PlayTrackClicked(args.trackId)) }
         remotePlayerQueueBtn.setOnClickListener { viewModel.dispatch(Action.QueueTrackClicked(args.trackId)) }
         remotePlayerPlaylistBtn.setOnClickListener { viewModel.dispatch(Action.AddToPlaylistClicked(args.trackId)) }
@@ -60,6 +63,10 @@ class TrackDetailsFragment : BaseFragment<State>() {
 
     }
 
+
+    override fun onTrackClicked(track: TrackResponse) {
+        viewModel.dispatch(Action.RecommendedTrackClicked(track))
+    }
 
     private fun renderTrackFeatures(features: Source<TrackFeaturesResponse>) {
         features.data?.let { feats ->
@@ -76,16 +83,20 @@ class TrackDetailsFragment : BaseFragment<State>() {
     }
 
     private fun renderTrackDetails(detail: Source<TrackResponse>) {
-        Timber.d("Details state: $detail")
-        trackImageIv.load(detail.data?.album?.images?.firstOrNull()?.url)
-        trackArtistTv.text = detail.data?.artists()
-        trackAlbumTv.text = detail.data?.album?.name
-        trackDurationTb.text = detail.data?.duration_ms?.toMmSs()
-        trackPopularityTv.text = detail.data?.popularity?.toDouble()?.toPercentageString()
-        trackNameTv.text = detail.data?.name
+        detail.data?.let { data ->
+            trackImageIv.load(data.album.images.firstOrNull()?.url)
+            trackArtistTv.text = data.artists()
+            trackAlbumTv.text = data.album.name
+            trackDurationTb.text = data.duration_ms.toMmSs()
+            trackPopularityTv.text = data.popularity.toDouble().toPercentageString()
+            trackNameTv.text = data.name
+        }
+
     }
 
     private fun renderTrackRecommended(recommendedTracks: Source<RecommendedTracks>) {
-        Timber.d("Recommended state: $recommendedTracks")
+        recommendedTracks.data?.let {
+            adapter.submitList(it.tracks)
+        }
     }
 }
