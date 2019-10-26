@@ -21,13 +21,6 @@ class MainActivity : BaseActivity() {
     }
 
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-        // If we checked for hockey updates, unregister
-        UpdateManager.unregister()
-    }
-
     companion object {
         fun createIntent(context: Context) = Intent(context, MainActivity::class.java)
                 .apply {

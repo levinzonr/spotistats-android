@@ -18,6 +18,6 @@ val viewModels = module {
     viewModel { OnRepeatViewModel(get()) }
     viewModel { ProfileViewModel(get(), get(), get(), get()) }
     viewModel { (id: String) -> TrackDetailsViewModel(id, get(), get(), get(), get()) }
-    viewModel { SettingsViewModel(get()) }
+    viewModel { SettingsViewModel(get(), get()) }
     viewModel { (id: String) -> PlaylistsViewModel(id, get(), get()) }
 }

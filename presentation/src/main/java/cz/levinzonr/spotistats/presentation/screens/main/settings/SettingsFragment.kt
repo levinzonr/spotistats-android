@@ -33,6 +33,9 @@ class SettingsFragment : BaseFragment<State>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         settingsDarkModeBtn.setOnClickListener { viewModel.dispatch(Action.DarkModePreferencePressed) }
+        settingsLogoutBtn.setOnClickListener { viewModel.dispatch(Action.LogoutButtonClicked) }
+        settingsFeedbackBtn.setOnClickListener { viewModel.dispatch(Action.FeedbackButtonClicked) }
+        settingsAboutBtn.setOnClickListener { viewModel.dispatch(Action.AboutButtonClicked) }
     }
 
     override fun renderState(state: State) {
