@@ -69,16 +69,17 @@ class TrackDetailsFragment : BaseFragment<State>(), TrackListAdapter.TrackItemLi
     }
 
     private fun renderTrackFeatures(features: Source<TrackFeaturesResponse>) {
+        trackFeaturesLayout.transitionToEnd()
         features.data?.let { feats ->
-            scoreEnergy.setScore("Energy", feats.energy.toPercentageString())
-            scoreLoudness.setScore("Loudness", feats.loudness.toPercentageString())
-            scoreTempo.setScore("Rhythm", feats.tempo.toString())
-            scoreAcoustic.setScore("Acoustic", feats.acousticness.toPercentageString())
-            scoreDancebility.setScore("Dancebility", feats.danceability.toPercentageString())
-            scoreValence.setScore("Valence", feats.valence.toPercentageString())
-            scoreInstrumentalness.setScore("Instrumentalness", feats.instrumentalness.toPercentageString())
-            scoreSpeachness.setScore("Speachness", feats.speechiness.toPercentageString())
-            scoreLiveness.setScore("Liveness", feats.liveness.toPercentageString())
+            scoreEnergy?.setScore("Energy", feats.energy.toPercentageString())
+            scoreLoudness?.setScore("Loudness", feats.loudness.toPercentageString())
+            scoreTempo?.setScore("Rhythm", feats.tempo.toString())
+            scoreAcoustic?.setScore("Acoustic", feats.acousticness.toPercentageString())
+            scoreDancebility?.setScore("Dancebility", feats.danceability.toPercentageString())
+            scoreValence?.setScore("Valence", feats.valence.toPercentageString())
+            scoreInstrumentalness?.setScore("Instrumentalness", feats.instrumentalness.toPercentageString())
+            scoreSpeachness?.setScore("Speachness", feats.speechiness.toPercentageString())
+            scoreLiveness?.setScore("Liveness", feats.liveness.toPercentageString())
         }
     }
 
