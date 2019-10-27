@@ -26,7 +26,7 @@ class PlaylistsAdapter : ListAdapter<PlaylistResponse, PlaylistsAdapter.ViewHold
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bindView(playlistResponse: PlaylistResponse) {
-            view.playlistNameTv.text = playlistResponse.name
+            view.playlistCoverIv.text = playlistResponse.name
             view.playlistImageIv.load(playlistResponse.images.firstOrNull()?.url)
             view.setOnClickListener { listener?.onPlaylistClicked(playlistResponse) }
         }

@@ -6,13 +6,13 @@ import com.ww.roxie.BaseChange
 import com.ww.roxie.BaseState
 import cz.levinzonr.spotistats.domain.models.RemotePlayerState
 import cz.levinzonr.spotistats.domain.models.UserProfile
+import cz.levinzonr.spotistats.models.PlaylistResponse
 import cz.levinzonr.spotistats.models.TrackResponse
 import cz.levinzonr.spotistats.presentation.navigation.Route
 
 
 sealed class Action : BaseAction {
     object Init : Action()
-    object LogoutPressed : Action()
     object SettingsPressed: Action()
     data class RemotePlayerStateUpdated(val remotePlayerState: RemotePlayerState) : Action()
     object PlayTrackPressed: Action()
@@ -22,13 +22,14 @@ sealed class Action : BaseAction {
 
 
 sealed class Change : BaseChange {
-    object LogoutStarted : Change()
-    object LogoutFinished : Change()
     object ProfileLoading: Change()
 
     data class Navigation(val route: Route): Change()
     data class ProfileLoaded(val user: UserProfile) : Change()
     data class ProfileLoadingError(val throwable: Throwable) : Change()
+
+    data class RecentPlaylistsLoded(val playlists: List<PlaylistResponse>) : Change()
+    data class RecentPlaylistsError(val throwable: Throwable) : Change()
 
     data class TrackDetailsLoaded(val trackResponse: TrackResponse) : Change()
     data class RemotePlayerReady(val state: PlayerState) : Change()
@@ -43,5 +44,6 @@ data class State(
         val playerState: PlayerState? = null,
         val isLoading: Boolean = false,
         val currentTrack: TrackResponse? = null,
+        val recentPlaylists: List<PlaylistResponse> = listOf(),
         val user: UserProfile? = null
 ) : BaseState

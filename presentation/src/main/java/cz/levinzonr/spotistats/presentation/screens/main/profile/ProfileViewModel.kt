@@ -1,11 +1,13 @@
 package cz.levinzonr.spotistats.presentation.screens.main.profile
 
+import cz.levinzonr.spotistats.domain.interactors.GetPlaylistsInteractor
 import cz.levinzonr.spotistats.domain.interactors.GetTrackDetailsInteractor
 import cz.levinzonr.spotistats.domain.interactors.GetUserProfileInteractor
 import cz.levinzonr.spotistats.domain.managers.SpotifyRemoteManager
 import cz.levinzonr.spotistats.domain.managers.UserManager
 import cz.levinzonr.spotistats.domain.models.RemotePlayerState
 import cz.levinzonr.spotistats.presentation.base.BaseViewModel
+import cz.levinzonr.spotistats.presentation.extensions.first
 import cz.levinzonr.spotistats.presentation.extensions.flowOnIO
 import cz.levinzonr.spotistats.presentation.extensions.isError
 import cz.levinzonr.spotistats.presentation.extensions.isSuccess
@@ -16,16 +18,15 @@ import timber.log.Timber
 
 class ProfileViewModel(
         private val spotifyRemoteManager: SpotifyRemoteManager,
+        private val getPlaylistsInteractor: GetPlaylistsInteractor,
         private val getUserProfileInteractor: GetUserProfileInteractor,
-        private val getTrackDetailsInteractor: GetTrackDetailsInteractor,
-        private val userManager: UserManager) : BaseViewModel<Action, Change, State>() {
+        private val getTrackDetailsInteractor: GetTrackDetailsInteractor)
+    : BaseViewModel<Action, Change, State>() {
 
     override val initialState: State = State()
 
     override val reducer: suspend (state: State, change: Change) -> State = { state, change ->
         when (change) {
-            is Change.LogoutStarted -> state.copy(isLoading = true)
-            is Change.LogoutFinished -> state.copy(isLoading = false)
             is Change.ProfileLoading -> state.copy(isLoading = true)
             is Change.ProfileLoaded -> state.copy(isLoading = false, user = change.user)
             is Change.ProfileLoadingError -> state.copy(isLoading = false)
@@ -36,6 +37,9 @@ class ProfileViewModel(
             is Change.RemotePlayerError -> state.copy(playerState = null)
             is Change.RemotePlayerReady -> state.copy(playerState = change.state)
             is Change.TrackDetailsLoaded -> state.copy(currentTrack = change.trackResponse)
+
+            is Change.RecentPlaylistsError -> state.copy()
+            is Change.RecentPlaylistsLoded -> state.copy(recentPlaylists = change.playlists)
         }
     }
 
@@ -49,7 +53,6 @@ class ProfileViewModel(
 
     override fun emitAction(action: Action): Flow<Change> {
         return when (action) {
-            is Action.LogoutPressed -> bindLogoutAction()
             is Action.Init -> bindInitAction()
             is Action.SettingsPressed -> bindSettingsClickActions()
             is Action.RemotePlayerStateUpdated -> bindRemoteStateUpdate(action.remotePlayerState)
@@ -59,15 +62,15 @@ class ProfileViewModel(
         }
     }
 
-    private fun bindLogoutAction(): Flow<Change> = flowOnIO {
-        emit(Change.LogoutStarted)
-        userManager.logout()
-        emit(Change.LogoutFinished)
-        emit(Change.Navigation(Route.Onboarding))
-    }
+
 
     private fun bindInitAction(): Flow<Change> = flowOnIO {
         emit(Change.ProfileLoading)
+
+        getPlaylistsInteractor()
+                .isSuccess { emit(Change.RecentPlaylistsLoded(it.first(3))) }
+                .isError { emit(Change.RecentPlaylistsError(it)) }
+
         getUserProfileInteractor()
                 .isError { emit(Change.ProfileLoadingError(it)) }
                 .isSuccess { emit(Change.ProfileLoaded(it)) }

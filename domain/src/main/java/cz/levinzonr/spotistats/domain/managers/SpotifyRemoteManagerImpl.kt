@@ -45,6 +45,7 @@ class SpotifyRemoteManagerImpl(
 
     override fun onFailure(p0: Throwable?) {
         println("Error: $p0")
+        _stateLiveData.postValue(RemotePlayerState.Error(p0))
 
     }
 
@@ -59,14 +60,9 @@ class SpotifyRemoteManagerImpl(
 
 
     private fun init(playerApi: PlayerApi) = launchOnIO {
-
-        val result = playerApi.playerState.await()
-        if (result.isSuccessful) {
-            _stateLiveData.postValue(RemotePlayerState.Ready(result.data))
-            playerApi.subscribeToPlayerState().setEventCallback {
-                if (it.track != null)
-                    _stateLiveData.postValue(RemotePlayerState.Ready(it))
-            }
+        playerApi.subscribeToPlayerState().setEventCallback {
+            if (it.track != null)
+                _stateLiveData.postValue(RemotePlayerState.Ready(it))
         }
     }
 
@@ -107,8 +103,6 @@ class SpotifyRemoteManagerImpl(
             }
         }
     }
-
-
 
 
 }

@@ -10,10 +10,12 @@ import coil.api.load
 import coil.transform.CircleCropTransformation
 import com.spotify.protocol.types.PlayerState
 import cz.levinzonr.spotistats.domain.models.UserProfile
+import cz.levinzonr.spotistats.models.PlaylistResponse
 import cz.levinzonr.spotistats.models.TrackResponse
 import cz.levinzonr.spotistats.models.UserResponse
 import cz.levinzonr.spotistats.presentation.R
 import cz.levinzonr.spotistats.presentation.base.BaseFragment
+import cz.levinzonr.spotistats.presentation.util.VerticalSpaceDecoration
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -21,7 +23,9 @@ import timber.log.Timber
 /**
  * A simple [Fragment] subclass.
  */
-class ProfileFragment : BaseFragment<State>() {
+class ProfileFragment : BaseFragment<State>(), RecentPlaylistsAdapter.RecentPlaylistItemListener {
+
+    private lateinit var adapter: RecentPlaylistsAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -34,16 +38,35 @@ class ProfileFragment : BaseFragment<State>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        recentPlaylistsRv.addItemDecoration(VerticalSpaceDecoration(8))
+
         settingsBtn.setOnClickListener { viewModel.dispatch(Action.SettingsPressed) }
         trackPlayBtn.setOnClickListener { viewModel.dispatch(Action.PlayTrackPressed) }
         trackNextBtn.setOnClickListener { viewModel.dispatch(Action.NextTrackPressed) }
         trackPreviousBtn.setOnClickListener { viewModel.dispatch(Action.PreviousTrackPressed) }
     }
 
+    override fun onPlayOrderedClicked(playlist: PlaylistResponse) {
+
+
+    }
+
+    override fun onPlayShuffledClicked(playlist: PlaylistResponse) {
+
+    }
+
+    private fun setupRecyclerView() {
+        adapter = RecentPlaylistsAdapter()
+        recentPlaylistsRv.adapter = adapter
+        adapter.listener = this
+    }
+
     override fun renderState(state: State) {
         state.user?.let(this::renderProfile)
         state.playerState?.let(this::renderPlayerState)
         state.currentTrack?.let(this::renderTrackDetails)
+        adapter.submitList(state.recentPlaylists)
     }
 
     private fun renderProfile(user: UserProfile) {

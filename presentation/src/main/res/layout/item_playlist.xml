@@ -16,7 +16,7 @@
 
 
     <TextView
-        android:id="@+id/playlistNameTv"
+        android:id="@+id/playlistCoverIv"
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

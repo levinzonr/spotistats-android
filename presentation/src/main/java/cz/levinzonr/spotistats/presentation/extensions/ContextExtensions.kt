@@ -63,3 +63,7 @@ fun Fragment.dpToPx(dp: Int): Int {
 fun Context.dpToPx(dp: Int): Int {
     return (dp * (resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
 }
+
+fun <T> List<T>.first(n: Int = 3) : List<T> {
+    return if (size <= n) this else subList(0, n)
+}
