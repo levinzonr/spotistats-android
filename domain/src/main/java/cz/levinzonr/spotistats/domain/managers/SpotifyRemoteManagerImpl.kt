@@ -91,6 +91,10 @@ class SpotifyRemoteManagerImpl(
         launchOnIO { playerApi.skipPrevious() }
     }
 
+    override fun shuffle(shuffle: Boolean) = withPlayerApi { playerApi ->
+        playerApi.setShuffle(shuffle)
+    }
+
     override fun toggle() = withPlayerApi { playerApi ->
         launchOnIO {
             val state = playerApi.playerState.await()

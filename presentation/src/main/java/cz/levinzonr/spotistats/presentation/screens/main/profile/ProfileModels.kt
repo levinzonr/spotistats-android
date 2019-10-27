@@ -14,7 +14,7 @@ import cz.levinzonr.spotistats.presentation.navigation.Route
 sealed class Action : BaseAction {
     object Init : Action()
     object SettingsPressed: Action()
-
+    data class PlaylistPlayButtonPressed(val playlist: PlaylistResponse, val shuffled: Boolean) : Action()
 }
 
 

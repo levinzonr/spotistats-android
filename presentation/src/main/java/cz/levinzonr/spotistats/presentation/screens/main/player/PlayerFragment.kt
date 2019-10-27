@@ -28,6 +28,12 @@ class PlayerFragment : BaseFragment<State>() {
         return inflater.inflate(R.layout.fragment_player, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        trackNextBtn.setOnClickListener { viewModel.dispatch(Action.NextTrackPressed) }
+        trackPlayBtn.setOnClickListener { viewModel.dispatch(Action.PlayTrackPressed) }
+        trackPreviousBtn.setOnClickListener { viewModel.dispatch(Action.PreviousTrackPressed) }
+    }
 
     override fun renderState(state: State) {
         Timber.d("Plyerastate: $state")

@@ -13,5 +13,5 @@ interface SpotifyRemoteManager {
     fun toggle()
     fun previous()
     fun addToQueue(trackId: String)
-
+    fun shuffle(shuffle: Boolean)
 }

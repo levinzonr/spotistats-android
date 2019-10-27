@@ -45,12 +45,11 @@ class ProfileFragment : BaseFragment<State>(), RecentPlaylistsAdapter.RecentPlay
     }
 
     override fun onPlayOrderedClicked(playlist: PlaylistResponse) {
-
-
+        viewModel.dispatch(Action.PlaylistPlayButtonPressed(playlist, false))
     }
 
     override fun onPlayShuffledClicked(playlist: PlaylistResponse) {
-
+        viewModel.dispatch(Action.PlaylistPlayButtonPressed(playlist, true))
     }
 
     private fun setupRecyclerView() {
