@@ -42,9 +42,6 @@ class ProfileFragment : BaseFragment<State>(), RecentPlaylistsAdapter.RecentPlay
         recentPlaylistsRv.addItemDecoration(VerticalSpaceDecoration(8))
 
         settingsBtn.setOnClickListener { viewModel.dispatch(Action.SettingsPressed) }
-        trackPlayBtn.setOnClickListener { viewModel.dispatch(Action.PlayTrackPressed) }
-        trackNextBtn.setOnClickListener { viewModel.dispatch(Action.NextTrackPressed) }
-        trackPreviousBtn.setOnClickListener { viewModel.dispatch(Action.PreviousTrackPressed) }
     }
 
     override fun onPlayOrderedClicked(playlist: PlaylistResponse) {
@@ -64,8 +61,6 @@ class ProfileFragment : BaseFragment<State>(), RecentPlaylistsAdapter.RecentPlay
 
     override fun renderState(state: State) {
         state.user?.let(this::renderProfile)
-        state.playerState?.let(this::renderPlayerState)
-        state.currentTrack?.let(this::renderTrackDetails)
         adapter.submitList(state.recentPlaylists)
     }
 
@@ -78,18 +73,7 @@ class ProfileFragment : BaseFragment<State>(), RecentPlaylistsAdapter.RecentPlay
         }
     }
 
-    private fun renderPlayerState(playerState: PlayerState) {
-        val imageRes = if (playerState.isPaused) R.drawable.ic_play_arrow else R.drawable.ic_pause_black
-        trackPlayBtn.setImageResource(imageRes)
-        trackArtistTv.text = playerState.track.name
-        trackNameTv.text = playerState.track.artist.name
 
-    }
 
-    private fun renderTrackDetails(trackResponse: TrackResponse) {
-        Timber.d("Render Tracl: $trackResponse")
-        trackArtistTv.text = trackResponse.artists.first().name
-        trackNameTv.text = trackResponse.name
-        trackImageIv.load(trackResponse.album.images.firstOrNull()?.url)
-    }
+
 }

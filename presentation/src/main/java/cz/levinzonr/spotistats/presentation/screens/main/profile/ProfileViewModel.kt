@@ -17,10 +17,8 @@ import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 
 class ProfileViewModel(
-        private val spotifyRemoteManager: SpotifyRemoteManager,
         private val getPlaylistsInteractor: GetPlaylistsInteractor,
-        private val getUserProfileInteractor: GetUserProfileInteractor,
-        private val getTrackDetailsInteractor: GetTrackDetailsInteractor)
+        private val getUserProfileInteractor: GetUserProfileInteractor)
     : BaseViewModel<Action, Change, State>() {
 
     override val initialState: State = State()
@@ -33,10 +31,6 @@ class ProfileViewModel(
 
             is Change.Navigation -> state.also { navigateTo(change.route) }
 
-            is Change.RemotePlayerReading -> state.copy(playerState = null)
-            is Change.RemotePlayerError -> state.copy(playerState = null)
-            is Change.RemotePlayerReady -> state.copy(playerState = change.state)
-            is Change.TrackDetailsLoaded -> state.copy(currentTrack = change.trackResponse)
 
             is Change.RecentPlaylistsError -> state.copy()
             is Change.RecentPlaylistsLoded -> state.copy(recentPlaylists = change.playlists)
@@ -45,9 +39,6 @@ class ProfileViewModel(
 
     init {
         startActionsObserver()
-        addStateSource(spotifyRemoteManager.stateLiveData) {
-            dispatch(Action.RemotePlayerStateUpdated(it))
-        }
         dispatch(Action.Init)
     }
 
@@ -55,10 +46,6 @@ class ProfileViewModel(
         return when (action) {
             is Action.Init -> bindInitAction()
             is Action.SettingsPressed -> bindSettingsClickActions()
-            is Action.RemotePlayerStateUpdated -> bindRemoteStateUpdate(action.remotePlayerState)
-            is Action.NextTrackPressed -> flow { spotifyRemoteManager.next() }
-            is Action.PreviousTrackPressed -> flow { spotifyRemoteManager.previous() }
-            is Action.PlayTrackPressed -> flow { spotifyRemoteManager.toggle() }
         }
     }
 
@@ -83,20 +70,5 @@ class ProfileViewModel(
     }
 
 
-    private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState): Flow<Change> = flowOnIO {
-        when (remotePlayerState) {
-            is RemotePlayerState.Ready -> {
-                emit(Change.RemotePlayerReady(remotePlayerState.state))
-                val id = remotePlayerState.state.track.uri.split(":").last()
-                if (currentState.currentTrack?.id !=  id) {
-                    getTrackDetailsInteractor.input = GetTrackDetailsInteractor.Input(id)
-                    getTrackDetailsInteractor()
-                            .isSuccess { emit(Change.TrackDetailsLoaded(it)) }
-                            .isError { Timber.e(it) }
-                }
-            }
-            is RemotePlayerState.Error -> emit(Change.RemotePlayerError)
-            is RemotePlayerState.Initilizing -> emit(Change.RemotePlayerReading)
-        }
-    }
+
 }

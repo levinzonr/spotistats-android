@@ -35,87 +35,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userAvaterIv" />
 
-        <com.google.android.material.card.MaterialCardView
+        <fragment
+            tools:layout="@layout/fragment_player"
+            class="cz.levinzonr.spotistats.presentation.screens.main.player.PlayerFragment"
             android:id="@+id/materialCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="@+id/userFollowersCountTv"
             app:layout_constraintStart_toStartOf="@+id/userPlaylistsCountView"
-            app:layout_constraintTop_toBottomOf="@+id/userFollowersCountTv">
+            app:layout_constraintTop_toBottomOf="@+id/userFollowersCountTv"/>
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
 
-
-                <ImageView
-                    android:id="@+id/trackImageIv"
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <ImageButton
-                    android:id="@+id/trackPlayBtn"
-                    style="@style/ImageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_play_arrow"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/trackImageIv" />
-
-
-                <TextView
-                    android:id="@+id/trackNameTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/trackImageIv"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/trackArtistTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/trackNameTv"
-                    app:layout_constraintTop_toBottomOf="@+id/trackNameTv" />
-
-                <ImageButton
-                    android:id="@+id/trackPreviousBtn"
-                    style="@style/ImageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_skip_previous"
-                    app:layout_constraintEnd_toStartOf="@+id/trackPlayBtn"
-                    app:layout_constraintTop_toTopOf="@+id/trackPlayBtn" />
-
-                <ImageButton
-                    android:id="@+id/trackNextBtn"
-                    style="@style/ImageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_skip_next"
-                    app:layout_constraintStart_toEndOf="@+id/trackPlayBtn"
-                    app:layout_constraintTop_toTopOf="@+id/trackPlayBtn" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
 
 
         <ImageButton
@@ -157,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:text="Recent playlists"
             android:textAppearance="?textAppearanceHeadline6"
@@ -167,7 +101,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintTop_toBottomOf="@+id/recentLabel">
 

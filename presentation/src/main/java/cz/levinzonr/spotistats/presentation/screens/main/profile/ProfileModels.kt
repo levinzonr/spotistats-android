@@ -14,10 +14,7 @@ import cz.levinzonr.spotistats.presentation.navigation.Route
 sealed class Action : BaseAction {
     object Init : Action()
     object SettingsPressed: Action()
-    data class RemotePlayerStateUpdated(val remotePlayerState: RemotePlayerState) : Action()
-    object PlayTrackPressed: Action()
-    object NextTrackPressed: Action()
-    object PreviousTrackPressed: Action()
+
 }
 
 
@@ -31,17 +28,13 @@ sealed class Change : BaseChange {
     data class RecentPlaylistsLoded(val playlists: List<PlaylistResponse>) : Change()
     data class RecentPlaylistsError(val throwable: Throwable) : Change()
 
-    data class TrackDetailsLoaded(val trackResponse: TrackResponse) : Change()
-    data class RemotePlayerReady(val state: PlayerState) : Change()
-    object RemotePlayerReading : Change()
-    object RemotePlayerError:  Change()
+
 
 
 }
 
 
 data class State(
-        val playerState: PlayerState? = null,
         val isLoading: Boolean = false,
         val currentTrack: TrackResponse? = null,
         val recentPlaylists: List<PlaylistResponse> = listOf(),

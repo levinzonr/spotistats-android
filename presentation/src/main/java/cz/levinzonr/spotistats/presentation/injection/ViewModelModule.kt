@@ -1,6 +1,7 @@
 package cz.levinzonr.spotistats.presentation.injection
 
 import cz.levinzonr.spotistats.presentation.screens.main.onrepeat.OnRepeatViewModel
+import cz.levinzonr.spotistats.presentation.screens.main.player.PlayerViewModel
 import cz.levinzonr.spotistats.presentation.screens.main.playlists.PlaylistsViewModel
 import cz.levinzonr.spotistats.presentation.screens.main.profile.ProfileViewModel
 import cz.levinzonr.spotistats.presentation.screens.main.settings.SettingsViewModel
@@ -16,8 +17,9 @@ val viewModels = module {
     viewModel { SplashViewModel(get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { OnRepeatViewModel(get()) }
-    viewModel { ProfileViewModel(get(), get(), get(), get()) }
+    viewModel { ProfileViewModel(get(), get()) }
     viewModel { (id: String) -> TrackDetailsViewModel(id, get(), get(), get(), get()) }
     viewModel { SettingsViewModel(get(), get()) }
     viewModel { (id: String) -> PlaylistsViewModel(id, get(), get()) }
+    viewModel { PlayerViewModel(get(), get()) }
 }
