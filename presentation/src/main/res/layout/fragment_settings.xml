@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".screens.main.settings.SettingsFragment">
 
-    <cz.levinzonr.spotistats.presentation.views.SettingsButtonView
+    <cz.levinzonr.spoton.presentation.views.SettingsButtonView
         android:id="@+id/settingsDarkModeBtn"
         app:showSection="true"
         app:sectionIcon="@drawable/ic_baseline_brightness_6_24"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"/>
 
 
-    <cz.levinzonr.spotistats.presentation.views.SettingsButtonView
+    <cz.levinzonr.spoton.presentation.views.SettingsButtonView
         android:id="@+id/settingsLogoutBtn"
         app:showSection="true"
         android:layout_marginTop="8dp"
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <cz.levinzonr.spotistats.presentation.views.SettingsButtonView
+    <cz.levinzonr.spoton.presentation.views.SettingsButtonView
         android:id="@+id/settingsFeedbackBtn"
         app:showSection="true"
         android:layout_marginTop="8dp"
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <cz.levinzonr.spotistats.presentation.views.SettingsButtonView
+    <cz.levinzonr.spoton.presentation.views.SettingsButtonView
         android:id="@+id/settingsAboutBtn"
         app:showSection="false"
         app:text="Send Feedback"

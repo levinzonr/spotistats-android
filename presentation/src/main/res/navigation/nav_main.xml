@@ -6,7 +6,7 @@
             app:startDestination="@id/onRepeatFragment">
 
     <fragment android:id="@+id/onRepeatFragment"
-              android:name="cz.levinzonr.spotistats.presentation.screens.main.onrepeat.OnRepeatFragment"
+              android:name="cz.levinzonr.spoton.presentation.screens.main.onrepeat.OnRepeatFragment"
               tools:layout="@layout/fragment_on_repeat">
         <action
             android:id="@+id/action_onRepeatFragment_to_trackDetailsFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="cz.levinzonr.spotistats.presentation.screens.main.profile.ProfileFragment"
+        android:name="cz.levinzonr.spoton.presentation.screens.main.profile.ProfileFragment"
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_settingsFragment"
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/trackDetailsFragment"
-        android:name="cz.levinzonr.spotistats.presentation.screens.main.trackdetails.TrackDetailsFragment"
+        android:name="cz.levinzonr.spoton.presentation.screens.main.trackdetails.TrackDetailsFragment"
         android:label="TrackDetailsFragment" >
         <argument
             android:name="trackId"
@@ -36,11 +36,11 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="cz.levinzonr.spotistats.presentation.screens.main.settings.SettingsFragment"
+        android:name="cz.levinzonr.spoton.presentation.screens.main.settings.SettingsFragment"
         android:label="SettingsFragment" />
     <dialog
         android:id="@+id/playlistsDialogFragment"
-        android:name="cz.levinzonr.spotistats.presentation.screens.main.playlists.PlaylistsDialogFragment"
+        android:name="cz.levinzonr.spoton.presentation.screens.main.playlists.PlaylistsDialogFragment"
         android:label="fragment_playlists_dialog"
         tools:layout="@layout/fragment_playlists_dialog" >
         <argument

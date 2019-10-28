@@ -37,7 +37,7 @@
 
         <fragment
             tools:layout="@layout/fragment_player"
-            class="cz.levinzonr.spotistats.presentation.screens.main.player.PlayerFragment"
+            class="cz.levinzonr.spoton.presentation.screens.main.player.PlayerFragment"
             android:id="@+id/materialCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <cz.levinzonr.spotistats.presentation.views.ScoreItemView
+        <cz.levinzonr.spoton.presentation.views.ScoreItemView
             android:id="@+id/userPlaylistsCountView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userDisplayNameTv" />
 
-        <cz.levinzonr.spotistats.presentation.views.ScoreItemView
+        <cz.levinzonr.spoton.presentation.views.ScoreItemView
             android:id="@+id/userFollowersCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cz.levinzonr.spotistats.presentation">
+    package="cz.levinzonr.spoton.presentation">
 
     <application>
         <activity android:name=".screens.onboarding.login.LoginActivity"></activity>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="cz.levinzonr.spotistats">
+    package="cz.levinzonr.spoton">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
@@ -9,7 +9,7 @@
         tools:node="replace" />
 
     <application
-        android:name="cz.levinzonr.spotistats.App"
+        android:name="cz.levinzonr.spoton.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="${APP_NAME}"
@@ -18,12 +18,8 @@
         android:theme="@style/MyTheme.DayNight">
 
 
-        <!-- hockey id included from build.gradle manifest placeholder -->
-        <meta-data
-            android:name="net.hockeyapp.android.appIdentifier"
-            android:value="${HOCKEYAPP_APP_ID}" />
 
-        <activity android:name="cz.levinzonr.spotistats.presentation.screens.onboarding.OnboardingActivity">
+        <activity android:name="cz.levinzonr.spoton.presentation.screens.onboarding.OnboardingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -33,7 +29,7 @@
         </activity>
 
         <activity
-            android:name="cz.levinzonr.spotistats.presentation.screens.main.MainActivity"
+            android:name="cz.levinzonr.spoton.presentation.screens.main.MainActivity"
             android:exported="false"></activity>
 
         <activity

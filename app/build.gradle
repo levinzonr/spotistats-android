@@ -10,18 +10,22 @@ def propFile = rootProject.file("spotify.properties")
 def spotifyProps = new Properties()
 spotifyProps.load(new FileInputStream(propFile))
 
+def keyFile = rootProject.file("keystore.properties")
+def keystoreProps = new Properties()
+keystoreProps.load(new FileInputStream((keyFile)))
+
 android {
     compileSdkVersion sdks.compileSdkVersion
     buildToolsVersion sdks.buildToolsVersion
     flavorDimensions "default"
 
     defaultConfig {
-        applicationId "cz.levinzonr.spotistats"
+        applicationId "cz.levinzonr.spoton"
         minSdkVersion sdks.minSdkVersion
         targetSdkVersion sdks.targetSdkVersion
         multiDexEnabled true
         versionCode 1
-        versionName "2.0.3"
+        versionName "0.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         compileOptions {
@@ -40,22 +44,15 @@ android {
     }
 
     // Uncomment the following if you include signingConfigs
-    /*
+
     signingConfigs {
-        staging {
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storeFile file('debug.keystore')
-            storePassword 'android'
-        }
-        production {
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storeFile file('debug.keystore')
-            storePassword 'android'
+        release {
+            keyAlias keystoreProps['keyAlias']
+            keyPassword keystoreProps['keyAlias']
+            storeFile file('../spoton.keystore')
+            storePassword keystoreProps['storePassword']
         }
     }
-    */
 
     buildTypes {
         debug {
@@ -63,38 +60,19 @@ android {
             //signingConfig null
         }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
     productFlavors {
-        staging {
-            dimension "default"
-            applicationIdSuffix ".staging"
-            //signingConfig signingConfigs.staging
-            deploy = "debug"
-            hockeyAppId = ""
-            manifestPlaceholders = [
-                    HOCKEYAPP_APP_ID: hockeyAppId,
-                    APP_NAME        : "SpotON"
-            ]
-            buildConfigField "String", "API_URL", "\"https://api.spotify.com/\""
-            buildConfigField "String", "CLIENT_ID", "\"${spotifyProps['client_id']}\""
-            buildConfigField "String", "CLIENT_SECRET", "\"${spotifyProps['client_secret']}\""
-            buildConfigField "String", "REDIRECT_URI", "\"${spotifyProps['redirect_uri']}\""
-            buildConfigField "String", "API_AUTH_URL", "\"https://accounts.spotify.com/\""
-
-        }
         production {
             dimension "default"
-            applicationIdSuffix ".production"
-            //signingConfig signingConfigs.production
             deploy = "release"
             hockeyAppId = ""
             manifestPlaceholders = [
-                    HOCKEYAPP_APP_ID: hockeyAppId,
-                    APP_NAME        : "SpotON"
+                    APP_NAME        : "SpotOn"
             ]
             buildConfigField "String", "CLIENT_ID", "\"${spotifyProps['client_id']}\""
             buildConfigField "String", "CLIENT_SECRET", "\"${spotifyProps['client_secret']}\""

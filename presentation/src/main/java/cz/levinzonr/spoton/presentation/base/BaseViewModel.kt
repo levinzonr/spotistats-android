@@ -1,0 +1,29 @@
+package cz.levinzonr.spoton.presentation.base
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.ww.roxie.BaseAction
+import com.ww.roxie.BaseChange
+import com.ww.roxie.BaseState
+import com.ww.roxie.BaseViewModel
+import cz.levinzonr.spoton.presentation.navigation.Route
+import cz.levinzonr.spoton.presentation.util.SingleEvent
+
+abstract class BaseViewModel<A: BaseAction,C: BaseChange,S: BaseState> : BaseViewModel<A, S, C>() {
+
+
+    protected val _navigationLiveData: MutableLiveData<SingleEvent<Route>> = MutableLiveData()
+
+
+    protected val currentState: S
+        get() = viewState.value ?: initialState
+
+    val navigationLiveData: LiveData<SingleEvent<Route>>
+        get() = _navigationLiveData
+
+    fun navigateTo(route: Route) {
+        _navigationLiveData.postValue(SingleEvent(route))
+    }
+
+
+}
