@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "663861480215",
+    "firebase_url": "https://spoton-db0ce.firebaseio.com",
+    "project_id": "spoton-db0ce",
+    "storage_bucket": "spoton-db0ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663861480215:android:ad967287059fe09b094552",
+        "android_client_info": {
+          "package_name": "cz.levinzonr.spoton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663861480215-45j4vn18u6rmqs45sntvmsc1vp0aio3e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cz.levinzonr.spoton",
+            "certificate_hash": "9d7792e617d21c3b8ea03f9b75ebee623e7d5c41"
+          }
+        },
+        {
+          "client_id": "663861480215-mrc2k1ku1b077cv7ho33cf5grhbblbj6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM6ckoBf59s7ni3jSeLUOK4CKzZosUSE8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663861480215-mrc2k1ku1b077cv7ho33cf5grhbblbj6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
