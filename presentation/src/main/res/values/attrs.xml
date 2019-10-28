@@ -2,4 +2,12 @@
     <declare-styleable name="ScoreItemView">
         <attr name="name" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="SettingsButtonView">
+        <attr name="text" format="string"/>
+        <attr name="sectionIcon" format="reference"/>
+        <attr name="sectionName" format="string"/>
+        <attr name="showSection" format="boolean"/>
+        <attr name="value" format="string"/>
+    </declare-styleable>
 </resources>

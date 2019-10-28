@@ -7,74 +7,45 @@
     android:orientation="vertical"
     tools:context=".screens.main.settings.SettingsFragment">
 
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <cz.levinzonr.spotistats.presentation.views.SettingsButtonView
         android:id="@+id/settingsDarkModeBtn"
-        android:background="?selectableItemBackground"
-        android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            style="@style/TextStyle"
-            android:id="@+id/settingsDarkModeTv"
-            android:layout_width="0dp"
-            android:textSize="16sp"
-            android:layout_height="wrap_content"
-            android:text="Dark Mode"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:textAppearance="?textAppearanceCaption"
-            android:id="@+id/textView"
-            style="@style/TextStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_blank_fragment"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_chevron_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/settingsAboutBtn"
-        android:text="About"
-        style="@style/TextStyle.Preference"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/settingsFeedbackBtn"
-        android:text="Send Feedback"
-        style="@style/TextStyle.Preference"
+        app:showSection="true"
+        app:sectionIcon="@drawable/ic_baseline_brightness_6_24"
+        app:sectionName="Appearence"
+        android:layout_marginTop="8dp"
+        app:text="Dark Mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
 
-    <TextView
+    <cz.levinzonr.spotistats.presentation.views.SettingsButtonView
         android:id="@+id/settingsLogoutBtn"
-        android:text="Logout"
-        style="@style/TextStyle.Preference"
+        app:showSection="true"
+        android:layout_marginTop="8dp"
+        app:sectionIcon="@drawable/ic_person_black_24dp"
+        app:sectionName="Account"
+        app:text="Logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <cz.levinzonr.spotistats.presentation.views.SettingsButtonView
+        android:id="@+id/settingsFeedbackBtn"
+        app:showSection="true"
+        android:layout_marginTop="8dp"
+        app:sectionIcon="@drawable/ic_info_outline_black_24dp"
+        app:sectionName="Application Info"
+        app:text="About"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <cz.levinzonr.spotistats.presentation.views.SettingsButtonView
+        android:id="@+id/settingsAboutBtn"
+        app:showSection="false"
+        app:text="Send Feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
 
 </LinearLayout>

@@ -39,7 +39,7 @@ class SettingsFragment : BaseFragment<State>() {
     }
 
     override fun renderState(state: State) {
-        textView.text = state.darkMode.name
+        settingsDarkModeBtn.value = state.darkMode.name
         setDarkMode(state.darkMode)
         state.showDarkModeDialog?.consume()?.let(this::showSelectDarkModeDialog)
 
