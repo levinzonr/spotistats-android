@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.Composable
+import androidx.ui.core.Text
+import androidx.ui.tooling.preview.Preview
 import cz.levinzonr.spotistats.models.DarkMode
 
 import cz.levinzonr.spotistats.presentation.R
@@ -50,4 +53,11 @@ class SettingsFragment : BaseFragment<State>() {
                 viewModel.dispatch(Action.DarkModePrefSelected(DarkMode.values()[i]))
                 d.dismiss()
             }.show()
+
+
+    @Preview
+    @Composable
+    fun SettingsButton() {
+        Text(text = "Hello World")
+    }
 }

@@ -1,23 +1,21 @@
 package cz.levinzonr.spotistats.presentation.screens.main.trackdetails
 
 
+import android.graphics.Rect
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
+import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.api.load
 import cz.levinzonr.spotistats.models.RecommendedTracks
 import cz.levinzonr.spotistats.models.TrackFeaturesResponse
 import cz.levinzonr.spotistats.models.TrackResponse
 import cz.levinzonr.spotistats.models.artists
-
 import cz.levinzonr.spotistats.presentation.R
 import cz.levinzonr.spotistats.presentation.base.BaseFragment
-import cz.levinzonr.spotistats.presentation.base.BaseViewModel
 import cz.levinzonr.spotistats.presentation.extensions.toMmSs
 import cz.levinzonr.spotistats.presentation.extensions.toPercentageString
 import cz.levinzonr.spotistats.presentation.screens.main.onrepeat.TrackListAdapter
@@ -28,6 +26,7 @@ import kotlinx.android.synthetic.main.include_track_features.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
+
 
 /**
  * A simple [Fragment] subclass.
@@ -52,6 +51,18 @@ class TrackDetailsFragment : BaseFragment<State>(), TrackListAdapter.TrackItemLi
         remotePlayerPlayBtn.setOnClickListener { viewModel.dispatch(Action.PlayTrackClicked(args.trackId)) }
         remotePlayerQueueBtn.setOnClickListener { viewModel.dispatch(Action.QueueTrackClicked(args.trackId)) }
         remotePlayerPlaylistBtn.setOnClickListener { viewModel.dispatch(Action.AddToPlaylistClicked(args.trackId)) }
+
+        val hitRect = Rect()
+        trackFeaturesLayout.getHitRect(hitRect)
+
+       root.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+           if (v.getGlobalVisibleRect(hitRect)) {
+               trackFeaturesLayout.transitionToEnd()
+           } else {
+               trackFeaturesLayout.transitionToStart()
+           }
+       }
+
     }
 
 
@@ -69,7 +80,6 @@ class TrackDetailsFragment : BaseFragment<State>(), TrackListAdapter.TrackItemLi
     }
 
     private fun renderTrackFeatures(features: Source<TrackFeaturesResponse>) {
-        trackFeaturesLayout.transitionToEnd()
         features.data?.let { feats ->
             scoreEnergy?.setScore("Energy", feats.energy.toPercentageString())
             scoreLoudness?.setScore("Loudness", feats.loudness.toPercentageString())

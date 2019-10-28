@@ -6,7 +6,7 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
+        motion:duration="1500">
 
 
        <KeyFrameSet>
@@ -28,6 +28,7 @@
                 motion:customFloatValue="0" />
         </Constraint>
         <Constraint
+
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toTopOf="@id/scoreAcoustic"
             motion:layout_constraintBottom_toBottomOf="@+id/scoreAcoustic"
