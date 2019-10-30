@@ -4,6 +4,7 @@ import cz.levinzonr.spoton.domain.interactors.GetRecommendedTracks
 import cz.levinzonr.spoton.domain.interactors.GetTrackDetailsInteractor
 import cz.levinzonr.spoton.domain.interactors.GetTrackFeatures
 import cz.levinzonr.spoton.domain.managers.SpotifyRemoteManager
+import cz.levinzonr.spoton.domain.models.PlayerActionResult
 import cz.levinzonr.spoton.domain.models.RemotePlayerState
 import cz.levinzonr.spoton.models.TrackResponse
 import cz.levinzonr.spoton.presentation.base.BaseViewModel
@@ -11,6 +12,7 @@ import cz.levinzonr.spoton.presentation.extensions.flowOnIO
 import cz.levinzonr.spoton.presentation.extensions.isError
 import cz.levinzonr.spoton.presentation.extensions.isSuccess
 import cz.levinzonr.spoton.presentation.navigation.Route
+import cz.levinzonr.spoton.presentation.util.SingleEvent
 import cz.levinzonr.spoton.presentation.util.error
 import cz.levinzonr.spoton.presentation.util.loaded
 import cz.levinzonr.spoton.presentation.util.loading
@@ -42,9 +44,16 @@ class TrackDetailsViewModel(
             is Change.FeaturesLoading -> state.copy(recommendedSource = state.recommendedSource.loading())
             is Change.TrackLoading -> state.copy(recommendedSource = state.recommendedSource.loading())
 
+            is Change.PlayerActionError -> state.copy(toast = SingleEvent(change.error))
+            is Change.PlayerActionSuccess -> state.copy(toast = SingleEvent(change.message))
+
+
             is Change.RemoteStateReady -> state.copy(remotePlayerReady = true)
             is Change.RemoteStateLoading -> state.copy(remotePlayerReady = false)
-            is Change.RemoteStateError -> state.copy(remotePlayerReady = false)
+
+            is Change.RemoteStateError -> state.copy(
+                    remotePlayerReady = false,
+                    toast = SingleEvent(change.error.localizedMessage))
 
             is Change.Navigation -> state.copy().also { navigateTo(change.route) }
         }
@@ -82,11 +91,18 @@ class TrackDetailsViewModel(
     }
 
     private fun bindPlayTrackAction(id: String) : Flow<Change> = flowOnIO {
-        spotifyRemoteManager.play("spotify:track:$id")
-    }
+        val result = spotifyRemoteManager.play("spotify:track:$id")
+        when(result) {
+            is PlayerActionResult.Success -> emit(Change.PlayerActionSuccess("Track playback started"))
+            is PlayerActionResult.Error -> emit(Change.PlayerActionError("Error playing track (${result.message}"))
+        }    }
 
     private fun bindQueueTrackAction(id: String) : Flow<Change> = flowOnIO {
-        spotifyRemoteManager.addToQueue("spotify:track:$id")
+        val result = spotifyRemoteManager.addToQueue("spotify:track:$id")
+        when(result) {
+            is PlayerActionResult.Success -> emit(Change.PlayerActionSuccess("Added to queue"))
+            is PlayerActionResult.Error -> emit(Change.PlayerActionError("Error adding to gueue (${result.message}"))
+        }
     }
 
     private fun bindLoadTrackAction(id: String): Flow<Change> = flowOnIO {
@@ -124,7 +140,7 @@ class TrackDetailsViewModel(
     private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState) : Flow<Change> = flow {
         when(remotePlayerState) {
             is RemotePlayerState.Ready -> emit(Change.RemoteStateReady(remotePlayerState))
-            is RemotePlayerState.Error -> emit(Change.RemoteStateError(remotePlayerState))
+            is RemotePlayerState.Error -> emit(Change.RemoteStateError(remotePlayerState, remotePlayerState.throwable ?: Exception("Null")))
             is RemotePlayerState.Initilizing -> emit(Change.RemoteStateLoading(remotePlayerState))
         }
     }

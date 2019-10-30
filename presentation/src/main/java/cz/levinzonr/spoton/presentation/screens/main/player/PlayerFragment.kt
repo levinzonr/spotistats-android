@@ -11,6 +11,7 @@ import com.spotify.protocol.types.PlayerState
 import cz.levinzonr.spoton.models.TrackResponse
 import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.base.BaseFragment
+import cz.levinzonr.spoton.presentation.extensions.showToast
 import kotlinx.android.synthetic.main.fragment_player.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
@@ -39,6 +40,7 @@ class PlayerFragment : BaseFragment<State>() {
         Timber.d("Plyerastate: $state")
         state.playerState?.let(this::renderPlayerState)
         state.currentTrack?.let(this::renderTrackDetails)
+        state.toast?.consume()?.let(this::showToast)
     }
 
     private fun renderPlayerState(state: PlayerState) {
@@ -46,9 +48,9 @@ class PlayerFragment : BaseFragment<State>() {
         trackPlayBtn.setImageResource(imageRes)
         trackArtistTv.text = state.track.name
         trackNameTv.text = state.track.artist.name
-
-
     }
+
+
 
 
     private fun renderTrackDetails(trackResponse: TrackResponse) {

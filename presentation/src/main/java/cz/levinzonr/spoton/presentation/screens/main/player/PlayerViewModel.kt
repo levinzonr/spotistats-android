@@ -7,6 +7,8 @@ import cz.levinzonr.spoton.presentation.base.BaseViewModel
 import cz.levinzonr.spoton.presentation.extensions.flowOnIO
 import cz.levinzonr.spoton.presentation.extensions.isError
 import cz.levinzonr.spoton.presentation.extensions.isSuccess
+import cz.levinzonr.spoton.presentation.extensions.toErrorEvent
+import cz.levinzonr.spoton.presentation.util.SingleEvent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
@@ -23,6 +25,8 @@ class PlayerViewModel(
             is Change.RemotePlayerError -> state.copy(error = change.throwable)
             is Change.RemotePlayerReady -> state.copy(playerState = change.state)
             is Change.TrackDetailsLoaded -> state.copy(currentTrack = change.trackResponse)
+            is Change.PlayerActionSuccess -> state.copy()
+            is Change.PlayerActionError -> state.copy(toast = SingleEvent(change.throwable.localizedMessage))
         }
     }
 

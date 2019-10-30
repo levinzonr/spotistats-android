@@ -8,6 +8,7 @@ import cz.levinzonr.spoton.models.RecommendedTracks
 import cz.levinzonr.spoton.models.TrackFeaturesResponse
 import cz.levinzonr.spoton.models.TrackResponse
 import cz.levinzonr.spoton.presentation.navigation.Route
+import cz.levinzonr.spoton.presentation.util.SingleEvent
 import cz.levinzonr.spoton.presentation.util.Source
 
 
@@ -23,8 +24,10 @@ sealed class Change : BaseChange {
 
     data class RemoteStateLoading(val remotePlayerState: RemotePlayerState) : Change()
     data class RemoteStateReady(val remotePlayerState: RemotePlayerState) : Change()
-    data class RemoteStateError(val remotePlayerState: RemotePlayerState) : Change()
+    data class RemoteStateError(val remotePlayerState: RemotePlayerState, val error: Throwable) : Change()
 
+    data class PlayerActionSuccess(val message: String) : Change()
+    data class PlayerActionError(val error: String) : Change()
 
     data class Navigation(val route: Route) : Change()
 
@@ -48,6 +51,7 @@ sealed class Action : BaseAction {
 }
 
 data class State(
+        val toast: SingleEvent<String>? = null,
         val remotePlayerReady: Boolean = false,
         val featuresSource: Source<TrackFeaturesResponse> = Source(),
         val trackSource: Source<TrackResponse> = Source(),

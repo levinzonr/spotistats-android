@@ -18,6 +18,7 @@ import cz.levinzonr.spoton.models.artists
 import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.base.BaseFragment
 import cz.levinzonr.spoton.presentation.base.BaseViewModel
+import cz.levinzonr.spoton.presentation.extensions.showToast
 import cz.levinzonr.spoton.presentation.extensions.toMmSs
 import cz.levinzonr.spoton.presentation.extensions.toPercentageString
 import cz.levinzonr.spoton.presentation.screens.main.onrepeat.TrackListAdapter
@@ -59,6 +60,7 @@ class TrackDetailsFragment : BaseFragment<State>(), TrackListAdapter.TrackItemLi
         renderTrackDetails(state.trackSource)
         renderTrackFeatures(state.featuresSource)
         renderTrackRecommended(state.recommendedSource)
+        state.toast?.consume()?.let(this::showToast)
         // remotePlayerLayout.isVisible = state.remotePlayerReady
 
     }

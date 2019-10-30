@@ -6,6 +6,8 @@ import com.ww.roxie.BaseChange
 import com.ww.roxie.BaseState
 import cz.levinzonr.spoton.domain.models.RemotePlayerState
 import cz.levinzonr.spoton.models.TrackResponse
+import cz.levinzonr.spoton.presentation.util.SingleEvent
+import io.reactivex.Single
 
 
 sealed class Action : BaseAction {
@@ -20,10 +22,14 @@ sealed class Change : BaseChange {
     data class RemotePlayerReady(val state: PlayerState) : Change()
     object RemotePlayerReading : Change()
     data class RemotePlayerError(val throwable: Throwable):  Change()
+    data class PlayerActionSuccess(val message: String) : Change()
+    data class PlayerActionError(val throwable: Throwable) : Change()
 }
 
 data class State(
         val remotePlayerError: String? = null,
         val currentTrack: TrackResponse? = null,
         val playerState: PlayerState? = null,
+        val toast: SingleEvent<String>? = null,
+        val snackbar: SingleEvent<String>? = null,
         val error: Throwable? = null) : BaseState
