@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".screens.main.settings.SettingsFragment">
 
+    <TextView
+        android:textAppearance="?attr/textAppearanceHeadline4"
+        android:padding="16dp"
+        android:text="Settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
     <cz.levinzonr.spoton.presentation.views.SettingsButtonView
         android:id="@+id/settingsDarkModeBtn"
         app:showSection="true"
