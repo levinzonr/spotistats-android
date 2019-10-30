@@ -36,9 +36,9 @@ class PlayerViewModel(
     override fun emitAction(action: Action): Flow<Change> {
        return when(action) {
             is Action.RemotePlayerStateUpdated -> bindRemoteStateUpdate(action.remotePlayerState)
-            is Action.NextTrackPressed -> flow { spotifyRemoteManager.next() }
-            is Action.PreviousTrackPressed -> flow { spotifyRemoteManager.previous() }
-            is Action.PlayTrackPressed -> flow { spotifyRemoteManager.toggle() }
+            is Action.NextTrackPressed -> flowOnIO { spotifyRemoteManager.next() }
+            is Action.PreviousTrackPressed -> flowOnIO { spotifyRemoteManager.previous() }
+            is Action.PlayTrackPressed -> flowOnIO { spotifyRemoteManager.toggle() }
         }
     }
 

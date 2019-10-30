@@ -23,6 +23,7 @@ sealed class Change : BaseChange {
 }
 
 data class State(
+        val remotePlayerError: String? = null,
         val currentTrack: TrackResponse? = null,
         val playerState: PlayerState? = null,
         val error: Throwable? = null) : BaseState

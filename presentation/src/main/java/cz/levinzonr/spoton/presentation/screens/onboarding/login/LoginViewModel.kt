@@ -52,7 +52,7 @@ class LoginViewModel(
     private fun bindLoginAction(fragment: Fragment) : Flow<Change> = flow {
         emit(Change.LoginStarted)
         val builder = AuthenticationRequest.Builder(credentials.clientId, AuthenticationResponse.Type.CODE, credentials.redirectUri)
-        builder.setScopes(arrayOf("streaming, user-top-read", "playlist-modify-public"))
+        builder.setScopes(arrayOf("app-remote-control", "streaming, user-top-read", "playlist-modify-public"))
         val request = builder.build()
         val intent = AuthenticationClient.createLoginActivityIntent(fragment.requireActivity(), request)
         fragment.startActivityForResult(intent, REQUEST_CODE)
