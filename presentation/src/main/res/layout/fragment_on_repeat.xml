@@ -50,7 +50,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:text="Over last weeks"
-                    android:textAppearance="?textAppearanceHeadline4" />
+                    android:textAppearance="?textAppearanceHeadline6" />
 
                 <!-- TODO: Update blank fragment layout -->
                 <androidx.recyclerview.widget.RecyclerView
@@ -76,7 +76,7 @@
 
 
             <ProgressBar
-                android:layout_gravity="bottom|center"
+                android:layout_gravity="center"
                 android:id="@+id/midProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -94,7 +94,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:text="Over 6 month"
-                    android:textAppearance="?textAppearanceHeadline4" />
+                    android:textAppearance="?textAppearanceHeadline6" />
 
                 <!-- TODO: Update blank fragment layout -->
                 <androidx.recyclerview.widget.RecyclerView
@@ -139,7 +139,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:text="Over years"
-                    android:textAppearance="?textAppearanceHeadline4" />
+                    android:textAppearance="?textAppearanceHeadline6" />
 
                 <!-- TODO: Update blank fragment layout -->
                 <androidx.recyclerview.widget.RecyclerView
