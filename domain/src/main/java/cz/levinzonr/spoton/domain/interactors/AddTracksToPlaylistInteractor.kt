@@ -3,10 +3,10 @@ package cz.levinzonr.spoton.domain.interactors
 import cz.levinzonr.spoton.domain.extensions.safeInteractorCall
 import cz.levinzonr.spoton.domain.extensions.spotifyTrackUri
 import cz.levinzonr.spoton.models.PlaylistResponse
-import cz.levinzonr.spoton.network.Api
+import cz.levinzonr.spoton.network.SpotifyApi
 
 class AddTracksToPlaylistInteractor(
-        private val api: Api
+        private val api: SpotifyApi
 ) : BaseAsyncInteractor<CompleteResult<Boolean>> {
 
     data class Input(val playlist: PlaylistResponse, val ids: List<String>, val forceAdd: Boolean = false)

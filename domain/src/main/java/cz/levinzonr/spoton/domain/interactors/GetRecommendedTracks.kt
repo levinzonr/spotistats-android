@@ -4,9 +4,9 @@ import cz.levinzonr.spoton.domain.extensions.safeInteractorCall
 import cz.levinzonr.spoton.models.Artist
 import cz.levinzonr.spoton.models.RecommendedTracks
 import cz.levinzonr.spoton.models.TrackResponse
-import cz.levinzonr.spoton.network.Api
+import cz.levinzonr.spoton.network.SpotifyApi
 
-class GetRecommendedTracks(private val api: Api) : BaseAsyncInteractor<CompleteResult<RecommendedTracks>> {
+class GetRecommendedTracks(private val api: SpotifyApi) : BaseAsyncInteractor<CompleteResult<RecommendedTracks>> {
 
     data class Input(val tracks: List<TrackResponse>,
                      val artists: List<Artist>,

@@ -4,8 +4,8 @@ import com.google.gson.GsonBuilder
 import com.google.gson.TypeAdapterFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import cz.levinzonr.spoton.BuildConfig
-import cz.levinzonr.spoton.network.Api
-import cz.levinzonr.spoton.network.AuthApi
+import cz.levinzonr.spoton.network.SpotifyApi
+import cz.levinzonr.spoton.network.SpotifyAuthApi
 import cz.levinzonr.spoton.network.token.AppAuthenticator
 import cz.levinzonr.spoton.network.token.AuthTokenInterceptor
 import cz.levinzonr.spoton.network.util.DateDeserializer
@@ -22,6 +22,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import com.spotify.android.appremote.api.ConnectionParams
 import cz.levinzonr.spoton.models.SpotifyCredentials
+import cz.levinzonr.spoton.network.LyricsApi
 
 
 val restModule = module {
@@ -31,6 +32,9 @@ val restModule = module {
     single(named(Constants.URL_API)) { BuildConfig.API_URL }
     single(named(Constants.CLIENT_SECRET)) { BuildConfig.CLIENT_SECRET }
     single(named(Constants.CLIENT_REDIRECT_URI)) { BuildConfig.REDIRECT_URI }
+
+    single(named(Constants.LYRICS_API_URL)) { BuildConfig.MUSICXMATCH_API_URL }
+    single(named(Constants.LYRICS_KEY)) { BuildConfig.MUSICXMATCH_API_KEY }
 
 
     factory {
@@ -99,15 +103,33 @@ val restModule = module {
         clientBuilder.build()
     }
 
+    // Okhttp
+    single(named("OKHTTP_LYRICS")) {
+
+        val clientBuilder = OkHttpClient.Builder()
+                .connectTimeout(45, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+        if (BuildConfig.DEBUG) {
+            val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+            clientBuilder.addInterceptor(logger)
+        }
+
+        clientBuilder.build()
+    }
 
 
 
     single(named(Constants.CLIENT_API)) {
-        get<Retrofit>(named(Constants.RETROFIT_API)).create<Api>(Api::class.java)
+        get<Retrofit>(named(Constants.RETROFIT_API)).create<SpotifyApi>(SpotifyApi::class.java)
     }
 
     single(named(Constants.AUTH_API)) {
-        get<Retrofit>(named(Constants.RETROFIT_AUTH_API)).create<AuthApi>(AuthApi::class.java)
+        get<Retrofit>(named(Constants.RETROFIT_AUTH_API)).create<SpotifyAuthApi>(SpotifyAuthApi::class.java)
+    }
+
+    single(named(Constants.LYRICS_API)) {
+        get<Retrofit>(named(Constants.RETROFIT_AUTH_API)).create<LyricsApi>(LyricsApi::class.java)
     }
 
     // Retrofit
@@ -125,6 +147,15 @@ val restModule = module {
         Retrofit.Builder()
                 .client(get(named("OKHTTP_AUTH")))
                 .baseUrl(get<String>(named(Constants.URL_API_AUTH)))
+                .addConverterFactory(GsonConverterFactory.create(get()))
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .build()
+    }
+
+    single(named(Constants.RETROFIT_LYRICS)) {
+        Retrofit.Builder()
+                .client(get(named("OKHTTP_LYRICS")))
+                .baseUrl(get<String>(named(Constants.LYRICS_API_URL)))
                 .addConverterFactory(GsonConverterFactory.create(get()))
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()

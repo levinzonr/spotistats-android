@@ -15,7 +15,7 @@ def keyFile = rootProject.file("keystore.properties")
 def keystoreProps = new Properties()
 keystoreProps.load(new FileInputStream((keyFile)))
 
-def lyricsPropsFile = rootProject.file("musixmatch.properties")
+def lyricsPropsFile = rootProject.file("musicxmatch.properties")
 def lyricsProps = new Properties()
 lyricsProps.load(new FileInputStream((lyricsPropsFile)))
 

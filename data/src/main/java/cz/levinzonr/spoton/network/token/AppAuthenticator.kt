@@ -1,10 +1,8 @@
 package cz.levinzonr.spoton.network.token
 
 import android.util.Base64
-import cz.levinzonr.spoton.network.AuthApi
+import cz.levinzonr.spoton.network.SpotifyAuthApi
 import cz.levinzonr.spoton.repositories.AuthTokenRepository
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -14,7 +12,7 @@ import org.koin.core.KoinComponent
 
 class AppAuthenticator(
         private val authTokenRepository: AuthTokenRepository,
-        private val authApi: AuthApi,
+        private val authApi: SpotifyAuthApi,
         private val clientId: String,
         private val clientSecret: String
 ) : Authenticator, KoinComponent {

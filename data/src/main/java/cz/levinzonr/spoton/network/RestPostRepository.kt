@@ -4,7 +4,7 @@ import cz.levinzonr.spoton.models.Post
 import cz.levinzonr.spoton.repositories.PostRepository
 import cz.levinzonr.spoton.repositories.RepositoryException
 
-class RestPostRepository(private val api: Api) : PostRepository {
+class RestPostRepository(private val api: SpotifyApi) : PostRepository {
     @Throws(RepositoryException::class)
     override suspend fun getPosts(cached: Boolean): List<Post> {
         val response = api.getPosts()

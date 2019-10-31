@@ -8,7 +8,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface Api {
+interface SpotifyApi {
     @GET("posts")
     suspend fun getPosts(): Response<List<Post>>
 

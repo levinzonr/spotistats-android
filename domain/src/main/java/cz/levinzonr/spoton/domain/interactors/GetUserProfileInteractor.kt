@@ -2,12 +2,11 @@ package cz.levinzonr.spoton.domain.interactors
 
 import cz.levinzonr.spoton.domain.extensions.safeInteractorCall
 import cz.levinzonr.spoton.domain.models.UserProfile
-import cz.levinzonr.spoton.models.UserResponse
-import cz.levinzonr.spoton.network.Api
+import cz.levinzonr.spoton.network.SpotifyApi
 import cz.levinzonr.spoton.repositories.UserRepository
 
 class GetUserProfileInteractor(
-        private val api: Api,
+        private val api: SpotifyApi,
         private val userRepository: UserRepository) : BaseAsyncInteractor<CompleteResult<UserProfile>> {
 
     override suspend fun invoke(): CompleteResult<UserProfile> = safeInteractorCall {

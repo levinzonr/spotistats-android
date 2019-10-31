@@ -1,11 +1,11 @@
 package cz.levinzonr.spoton.repositories
 
 import cz.levinzonr.spoton.models.AccessToken
-import cz.levinzonr.spoton.network.AuthApi
+import cz.levinzonr.spoton.network.SpotifyAuthApi
 import org.koin.core.KoinComponent
 
 class RestKeychainRepository(
-        private val api: AuthApi,
+        private val api: SpotifyAuthApi,
         private val clientId: String,
         private val clientSecret: String)
     : KeychainRepository, KoinComponent {
