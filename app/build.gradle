@@ -15,6 +15,10 @@ def keyFile = rootProject.file("keystore.properties")
 def keystoreProps = new Properties()
 keystoreProps.load(new FileInputStream((keyFile)))
 
+def lyricsPropsFile = rootProject.file("musixmatch.properties")
+def lyricsProps = new Properties()
+lyricsProps.load(new FileInputStream((lyricsPropsFile)))
+
 android {
     compileSdkVersion sdks.compileSdkVersion
     buildToolsVersion sdks.buildToolsVersion
@@ -80,6 +84,10 @@ android {
             buildConfigField "String", "REDIRECT_URI", "\"${spotifyProps['redirect_uri']}\""
             buildConfigField "String", "API_URL", "\"https://api.spotify.com/\""
             buildConfigField "String", "API_AUTH_URL", "\"https://accounts.spotify.com/\""
+
+            buildConfigField "String", "MUSICXMATCH_API_URL", "\"https://api.musixmatch.com/ws/1.1/\""
+            buildConfigField "String", "MUSICXMATCH_API_KEY", "\"${lyricsProps['key']}\""
+
         }
     }
 }
