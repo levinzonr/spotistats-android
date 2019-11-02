@@ -26,7 +26,7 @@ class AppAuthenticator(
         val refreshed = authApi.refreshAccessToken(token.refresh_token, header).execute()
         if (refreshed.isSuccessful) {
             val newToken = refreshed.body() ?: return null
-            println("Body: $newToken")
+            println("TrackList: $newToken")
             authTokenRepository.set(newToken)
             return response.request().newBuilder()
                     .header("Authorization", "Bearer ${newToken.access_token}")
