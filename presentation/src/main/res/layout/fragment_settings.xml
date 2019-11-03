@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"/>
 
 
+    <include layout="@layout/include_divider"/>
 
 
 </LinearLayout>

@@ -1,7 +1,8 @@
 package cz.levinzonr.spoton.presentation.extensions
 
 fun Double.toPercentageString() : String {
-   return StringBuilder("%.0f".format(this)).append("%").toString()
+    val toFormat = if (this <= 1) this * 100.0 else this
+   return StringBuilder("%.0f".format(toFormat)).append("%").toString()
 }
 
 fun Long.toMmSs() : String {

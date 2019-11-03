@@ -39,7 +39,6 @@
 
     <!--Shape Appearance for medium components like cards, alert dialogs-->
     <style name="ShapeAppearance.MyTheme.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <!--Your custom shape here-->
     </style>
 
     <!--Shape Appearance for large components like side and bottom navigation drawers-->
