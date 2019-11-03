@@ -55,6 +55,6 @@
     <color name="color_on_surface">#000000</color>
     <color name="color_on_error">#ffffff</color>
 
-    <color name="color_divider">#5E5D5D</color>
+    <color name="color_divider">#C4C4C4</color>
 
 </resources>

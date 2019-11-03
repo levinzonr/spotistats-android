@@ -35,8 +35,8 @@
     <color name="color_on_secondary">#ffffff</color>
     <color name="color_on_background">#ffffff</color>
     <color name="color_on_surface">#ffffff</color>
-    <color name="color_on_error"></color>
+    <color name="color_on_error">#ffffff</color>
 
-    <color name="color_divider">#686666</color>
+    <color name="color_divider">#4B4A4A</color>
 
 </resources>
