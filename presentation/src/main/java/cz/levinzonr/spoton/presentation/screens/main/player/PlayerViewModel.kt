@@ -23,7 +23,7 @@ class PlayerViewModel(
         when (change) {
             is Change.RemotePlayerReading -> state.copy(playerState = null)
             is Change.RemotePlayerError -> state.copy(error = change.throwable)
-            is Change.RemotePlayerReady -> state.copy(playerState = change.state)
+            is Change.RemotePlayerReady -> state.copy(playerState = change.state, currentTrack = null)
             is Change.TrackDetailsLoaded -> state.copy(currentTrack = change.trackResponse)
             is Change.PlayerActionSuccess -> state.copy()
             is Change.PlayerActionError -> state.copy(toast = SingleEvent(change.throwable.localizedMessage))

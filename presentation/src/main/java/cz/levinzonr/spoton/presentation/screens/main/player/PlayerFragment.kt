@@ -13,6 +13,9 @@ import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.base.BaseFragment
 import cz.levinzonr.spoton.presentation.extensions.showToast
 import kotlinx.android.synthetic.main.fragment_player.*
+import kotlinx.android.synthetic.main.fragment_player.trackArtistTv
+import kotlinx.android.synthetic.main.fragment_player.trackNameTv
+import kotlinx.android.synthetic.main.item_track.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
@@ -48,6 +51,7 @@ class PlayerFragment : BaseFragment<State>() {
         trackPlayBtn.setImageResource(imageRes)
         trackArtistTv.text = state.track.name
         trackNameTv.text = state.track.artist.name
+        trackImageIv.setImageResource(R.drawable.background_no_album)
     }
 
 
@@ -56,7 +60,9 @@ class PlayerFragment : BaseFragment<State>() {
     private fun renderTrackDetails(trackResponse: TrackResponse) {
         trackArtistTv.text = trackResponse.artists.first().name
         trackNameTv.text = trackResponse.name
-        trackImageIv.load(trackResponse.album.images.firstOrNull()?.url)
+        trackImageIv.load(trackResponse.album.images.firstOrNull()?.url) {
+            error(R.drawable.background_no_album)
+        }
     }
 
 }
