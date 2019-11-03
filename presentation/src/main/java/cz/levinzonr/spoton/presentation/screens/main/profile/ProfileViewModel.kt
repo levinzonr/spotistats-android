@@ -50,8 +50,8 @@ class ProfileViewModel(
 
 
     private fun bindPlayPlaylistAction(playlist: PlaylistResponse, shuffled: Boolean): Flow<Change> = flow {
-        spotifyRemoteManager.play("spotify:playlist:${playlist.id}")
         spotifyRemoteManager.shuffle(shuffled)
+        spotifyRemoteManager.play("spotify:playlist:${playlist.id}")
 
     }
 

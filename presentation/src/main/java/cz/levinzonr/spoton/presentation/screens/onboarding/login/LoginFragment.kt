@@ -31,9 +31,10 @@ class LoginFragment : BaseFragment<State>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginBtn.setOnClickListener {
-           viewModel.dispatch(Action.LoginClicked(this))
+        viewPager.adapter = OnboardingAdapter {
+            viewModel.dispatch(Action.LoginClicked(this))
         }
+        circleIndicator3.setViewPager(viewPager)
     }
 
 
