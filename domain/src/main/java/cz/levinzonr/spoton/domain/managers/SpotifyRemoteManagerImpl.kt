@@ -40,9 +40,15 @@ class SpotifyRemoteManagerImpl(
 
     init {
         _stateLiveData.postValue(RemotePlayerState.Initilizing)
+    }
+
+    override fun connect() {
         SpotifyAppRemote.connect(context, params, this)
     }
 
+    override fun disconnect() {
+        appRemote?.let(SpotifyAppRemote::disconnect)
+    }
     private var appRemote: SpotifyAppRemote? = null
 
 

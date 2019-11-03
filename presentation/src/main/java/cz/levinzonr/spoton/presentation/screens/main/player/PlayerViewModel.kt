@@ -32,6 +32,7 @@ class PlayerViewModel(
 
     init {
         startActionsObserver()
+        spotifyRemoteManager.connect()
         addStateSource(spotifyRemoteManager.stateLiveData) {
             dispatch(Action.RemotePlayerStateUpdated(it))
         }
@@ -62,5 +63,10 @@ class PlayerViewModel(
             is RemotePlayerState.Error -> emit(Change.RemotePlayerError(remotePlayerState.throwable ?: Exception()))
             is RemotePlayerState.Initilizing -> emit(Change.RemotePlayerReading)
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        spotifyRemoteManager.disconnect()
     }
 }

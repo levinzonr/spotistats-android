@@ -15,4 +15,6 @@ interface SpotifyRemoteManager {
     suspend fun previous() : PlayerActionResult
     suspend fun addToQueue(trackId: String) : PlayerActionResult
     suspend fun shuffle(shuffle: Boolean) : PlayerActionResult
+    fun connect()
+    fun disconnect()
 }

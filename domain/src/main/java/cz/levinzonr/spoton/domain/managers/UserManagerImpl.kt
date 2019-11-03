@@ -10,7 +10,6 @@ class UserManagerImpl(private val authTokenRepository: AuthTokenRepository) : Us
     }
 
     override fun logout() {
-
         authTokenRepository.clear()
     }
 }

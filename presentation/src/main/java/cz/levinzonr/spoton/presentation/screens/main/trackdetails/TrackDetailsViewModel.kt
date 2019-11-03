@@ -64,6 +64,7 @@ class TrackDetailsViewModel(
 
     init {
         startActionsObserver()
+        spotifyRemoteManager.connect()
         addStateSource(spotifyRemoteManager.stateLiveData) {
             dispatch(Action.RemoteStateUpdated(it))
         }
@@ -150,5 +151,10 @@ class TrackDetailsViewModel(
             is RemotePlayerState.Error -> emit(Change.RemoteStateError(remotePlayerState, remotePlayerState.throwable ?: Exception("Null")))
             is RemotePlayerState.Initilizing -> emit(Change.RemoteStateLoading(remotePlayerState))
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        spotifyRemoteManager.disconnect()
     }
 }
