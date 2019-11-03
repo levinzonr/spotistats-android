@@ -14,8 +14,7 @@ class LoginInteractor(
 
     override suspend fun invoke() = safeInteractorCall {
         val code = requireNotNull(input).code
-        val accessToken = keychainRepository.obtainAccessToken(code)
-        authTokenRepository.set(accessToken)
+        keychainRepository.obtainAccessToken(code)
         true
     }
 }

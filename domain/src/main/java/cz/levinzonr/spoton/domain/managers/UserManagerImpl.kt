@@ -6,7 +6,7 @@ import cz.levinzonr.spoton.repositories.AuthTokenRepository
 class UserManagerImpl(private val authTokenRepository: AuthTokenRepository) : UserManager {
 
     override fun isLoggedIn(): Boolean {
-        return authTokenRepository.get() != null
+        return authTokenRepository.accessToken != null
     }
 
     override fun logout() {

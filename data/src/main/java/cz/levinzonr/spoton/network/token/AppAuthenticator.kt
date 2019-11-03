@@ -3,8 +3,6 @@ package cz.levinzonr.spoton.network.token
 import android.util.Base64
 import cz.levinzonr.spoton.network.AuthApi
 import cz.levinzonr.spoton.repositories.AuthTokenRepository
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -21,11 +19,10 @@ class AppAuthenticator(
 
 
     override fun authenticate(route: Route?, response: Response): Request? {
-        val token = authTokenRepository.get() ?: return null
+        val refreshToken = authTokenRepository.refreshToken ?: return null
         val encoded = Base64.encode("$clientId:$clientSecret".toByteArray(), Base64.NO_WRAP)
         val header = "Basic ${String(encoded)}"
-        println("Token: ${authTokenRepository.get()}")
-        val refreshed = authApi.refreshAccessToken(token.refresh_token, header).execute()
+        val refreshed = authApi.refreshAccessToken(refreshToken, header).execute()
         if (refreshed.isSuccessful) {
             val newToken = refreshed.body() ?: return null
             println("Body: $newToken")

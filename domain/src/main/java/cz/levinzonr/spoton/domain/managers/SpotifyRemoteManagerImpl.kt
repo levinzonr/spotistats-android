@@ -118,7 +118,7 @@ class SpotifyRemoteManagerImpl(
         val result = await()
         return when {
             result.isSuccessful && result.data != null -> PlayerActionResult.Success
-            else -> PlayerActionResult.Error(result.error, result.errorMessage)
+            else -> PlayerActionResult.Error(result.error, result.errorMessage ?: "Error")
         }
     }
 

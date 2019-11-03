@@ -22,8 +22,7 @@ val repositoryModule = module {
 
     single<KeychainRepository> {
         RestKeychainRepository(get(named(Constants.AUTH_API)),
-                get(named(Constants.CLIENT_ID)),
-                get(named(Constants.CLIENT_SECRET))
+             get(), get()
         )
     }
 }
