@@ -8,7 +8,7 @@
     tools:context=".screens.main.settings.SettingsFragment">
 
     <TextView
-        android:textAppearance="?attr/textAppearanceHeadline4"
+        android:textAppearance="?attr/textAppearanceHeadline5"
         android:padding="16dp"
         android:text="Settings"
         android:layout_width="match_parent"
@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <include layout="@layout/include_divider"/>
 
     <cz.levinzonr.spoton.presentation.views.SettingsButtonView
         android:id="@+id/settingsLogoutBtn"
@@ -36,6 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <include layout="@layout/include_divider"/>
+
     <cz.levinzonr.spoton.presentation.views.SettingsButtonView
         android:id="@+id/settingsFeedbackBtn"
         app:showSection="true"
@@ -45,6 +48,12 @@
         app:text="About"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        layout="@layout/include_divider"/>
 
     <cz.levinzonr.spoton.presentation.views.SettingsButtonView
         android:id="@+id/settingsAboutBtn"
