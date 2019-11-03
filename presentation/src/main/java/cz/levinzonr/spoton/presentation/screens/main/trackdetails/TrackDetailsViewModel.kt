@@ -1,5 +1,6 @@
 package cz.levinzonr.spoton.presentation.screens.main.trackdetails
 
+import cz.levinzonr.spoton.domain.extensions.spotifyTrackUri
 import cz.levinzonr.spoton.domain.interactors.GetRecommendedTracks
 import cz.levinzonr.spoton.domain.interactors.GetTrackDetailsInteractor
 import cz.levinzonr.spoton.domain.interactors.GetTrackFeatures
@@ -20,7 +21,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class TrackDetailsViewModel(
-        trackId: String,
+        private val trackId: String,
         private val getRecommendedTracks: GetRecommendedTracks,
         private val spotifyRemoteManager: SpotifyRemoteManager,
         private val getTrackFeatures: GetTrackFeatures,
@@ -47,6 +48,8 @@ class TrackDetailsViewModel(
             is Change.PlayerActionError -> state.copy(toast = SingleEvent(change.error))
             is Change.PlayerActionSuccess -> state.copy(toast = SingleEvent(change.message))
 
+
+            is Change.TrackPlaying -> state.copy(isPlaying = change.isPlaying)
 
             is Change.RemoteStateReady -> state.copy(remotePlayerReady = true)
             is Change.RemoteStateLoading -> state.copy(remotePlayerReady = false)
@@ -91,15 +94,15 @@ class TrackDetailsViewModel(
     }
 
     private fun bindPlayTrackAction(id: String) : Flow<Change> = flowOnIO {
-        val result = spotifyRemoteManager.play("spotify:track:$id")
-        when(result) {
+
+        val isPlaying = currentState.isPlaying
+        when(val result = if (isPlaying) spotifyRemoteManager.pause() else spotifyRemoteManager.play(id.spotifyTrackUri)) {
             is PlayerActionResult.Success -> emit(Change.PlayerActionSuccess("Track playback started"))
             is PlayerActionResult.Error -> emit(Change.PlayerActionError("Error playing track (${result.message}"))
         }    }
 
     private fun bindQueueTrackAction(id: String) : Flow<Change> = flowOnIO {
-        val result = spotifyRemoteManager.addToQueue("spotify:track:$id")
-        when(result) {
+        when(val result = spotifyRemoteManager.addToQueue(id.spotifyTrackUri)) {
             is PlayerActionResult.Success -> emit(Change.PlayerActionSuccess("Added to queue"))
             is PlayerActionResult.Error -> emit(Change.PlayerActionError("Error adding to gueue (${result.message}"))
         }
@@ -139,7 +142,11 @@ class TrackDetailsViewModel(
 
     private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState) : Flow<Change> = flow {
         when(remotePlayerState) {
-            is RemotePlayerState.Ready -> emit(Change.RemoteStateReady(remotePlayerState))
+            is RemotePlayerState.Ready -> {
+                val currentTrack = remotePlayerState.state.track?.uri == trackId.spotifyTrackUri
+                emit(Change.TrackPlaying(currentTrack && !remotePlayerState.state.isPaused))
+                emit(Change.RemoteStateReady(remotePlayerState))
+            }
             is RemotePlayerState.Error -> emit(Change.RemoteStateError(remotePlayerState, remotePlayerState.throwable ?: Exception("Null")))
             is RemotePlayerState.Initilizing -> emit(Change.RemoteStateLoading(remotePlayerState))
         }

@@ -34,6 +34,7 @@ sealed class Change : BaseChange {
     object TrackLoading : Change()
     object FeaturesLoading : Change()
     object RecommendedLoading : Change()
+    data class TrackPlaying(val isPlaying: Boolean) : Change()
 
 }
 
@@ -48,9 +49,11 @@ sealed class Action : BaseAction {
     data class LoadRecommended(val track: TrackResponse) : Action()
 
     data class RecommendedTrackClicked(val trackResponse: TrackResponse) : Action()
+
 }
 
 data class State(
+        val isPlaying: Boolean = false,
         val toast: SingleEvent<String>? = null,
         val remotePlayerReady: Boolean = false,
         val featuresSource: Source<TrackFeaturesResponse> = Source(),

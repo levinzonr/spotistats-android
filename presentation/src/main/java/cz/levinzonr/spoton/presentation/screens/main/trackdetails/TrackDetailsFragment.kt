@@ -61,13 +61,19 @@ class TrackDetailsFragment : BaseFragment<State>(), TrackListAdapter.TrackItemLi
         renderTrackFeatures(state.featuresSource)
         renderTrackRecommended(state.recommendedSource)
         state.toast?.consume()?.let(this::showToast)
-        // remotePlayerLayout.isVisible = state.remotePlayerReady
-
+        renderCurrentTrackState(state.isPlaying)
+        // remotePlayerLayout.isVisible = state.remotePlayerRea
     }
 
 
     override fun onTrackClicked(track: TrackResponse) {
         viewModel.dispatch(Action.RecommendedTrackClicked(track))
+    }
+
+    private fun renderCurrentTrackState(isPlaying: Boolean) {
+        val imageRes = if (isPlaying) R.drawable.ic_pause_black else R.drawable.ic_play_arrow
+        remotePlayerPlayBtn.setImageResource(imageRes)
+
     }
 
     private fun renderTrackFeatures(features: Source<TrackFeaturesResponse>) {
