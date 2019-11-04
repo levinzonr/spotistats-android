@@ -84,7 +84,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"
-                        android:text="To Queue"
+                        android:text="@string/track_details_add_to_queue"
                         android:padding="4dp"
                         app:icon="@drawable/ic_queue_music_black_24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="0dp"
-                        android:text="To Playlist"
+                        android:text="@string/track_details_add_playlist"
                         app:icon="@drawable/ic_playlist_add_black_24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Recommended"
+                android:text="@string/track_details_recommended"
                 android:textAppearance="?textAppearanceHeadline6" />
 
             <androidx.recyclerview.widget.RecyclerView

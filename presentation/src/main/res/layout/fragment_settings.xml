@@ -10,7 +10,7 @@
     <TextView
         android:textAppearance="?attr/textAppearanceHeadline5"
         android:padding="16dp"
-        android:text="Settings"
+        android:text="@string/settings_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -32,8 +32,8 @@
         app:showSection="true"
         android:layout_marginTop="8dp"
         app:sectionIcon="@drawable/ic_person_black_24dp"
-        app:sectionName="Account"
-        app:text="Logout"
+        app:sectionName="@string/settings_account"
+        app:text="@string/settings_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -44,8 +44,8 @@
         app:showSection="true"
         android:layout_marginTop="8dp"
         app:sectionIcon="@drawable/ic_info_outline_black_24dp"
-        app:sectionName="Application Info"
-        app:text="About"
+        app:sectionName="@string/settings_application"
+        app:text="@string/settings_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -58,7 +58,7 @@
     <cz.levinzonr.spoton.presentation.views.SettingsButtonView
         android:id="@+id/settingsAboutBtn"
         app:showSection="false"
-        app:text="Send Feedback"
+        app:text="@string/settings_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

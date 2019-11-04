@@ -15,13 +15,14 @@
 
 
     <TextView
-        android:layout_marginStart="16dp"
         android:id="@+id/playlistNameTv"
-        app:layout_constraintStart_toEndOf="@id/playlistCoverIv"
-        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:gravity="center|start"
         android:text="Playlist name"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
+        app:layout_constraintEnd_toStartOf="@+id/playlistPlayShuffledBtn"
+        app:layout_constraintStart_toEndOf="@id/playlistCoverIv" />
 
 
     <ImageButton

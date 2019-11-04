@@ -9,6 +9,7 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import androidx.annotation.IdRes
 import com.google.android.material.card.MaterialCardView
 import cz.levinzonr.spoton.presentation.R
 import kotlinx.android.synthetic.main.view_score_item.view.*
@@ -37,8 +38,10 @@ class ScoreItemView @JvmOverloads constructor(
     }
 
 
-    fun setScore(label: String, value: String) {
-        scoreTitleTv.text = label
+    fun setScore(label: Int, value: String) {
+        scoreTitleTv.setText(label)
         scoreValueTv.text = value
+
+
     }
 }

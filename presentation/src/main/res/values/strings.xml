@@ -5,4 +5,44 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="com_spotify_sdk_redirect_scheme">yourscheme</string>
     <string name="com_spotify_sdk_redirect_host">yourhost</string>
+
+    <string name="top_tracks_title">Your top tracks</string>
+    <string name="top_tracks_weeks">Over last weeks</string>
+    <string name="top_tracks_months">Over 6 month</string>
+    <string name="top_tracks_years">Over years</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_logout">Logout</string>
+    <string name="settings_account">Account</string>
+    <string name="settings_about">About</string>
+    <string name="settings_application">Application Info</string>
+    <string name="settings_feedback">Send Feedback</string>
+
+    <string name="track_details_add_to_queue">To Queue</string>
+    <string name="track_details_add_playlist">To Playlist</string>
+    <string name="track_details_add_to_playlist">Choose a playlist to add song to</string>
+    <string name="track_details_recommended">Recommended</string>
+    <string name="track_details_features">Track Features</string>
+
+    <string name="profile_followers">Followers</string>
+    <string name="profile_playlists">Playlists</string>
+    <string name="track_feature_energy">Energy</string>
+
+    <string name="track_feature_loudness">Loudness</string>
+    <string name="track_feature_rythm">Rhythm</string>
+    <string name="track_feature_acousticness">Acoustic</string>
+    <string name="track_feature_danceability">Dancebility</string>
+    <string name="track_feature_valence">Valence</string>
+    <string name="track_feature_instrumental">Instrumentalness</string>
+    <string name="track_feature_speachness">Speachness</string>
+    <string name="track_feature_liveness">Liveness</string>
+
+    <string name="onboarding_title_1">Welcome to SpotOn!</string>
+    <string name="onboarding_title_2">Re-live Your favorite music</string>
+    <string name="onboarding_title_3">One click away</string>
+
+    <string name="onboarding_message_1">SpotOn allows to you view your most listened more music on Spotify over the years.</string>
+    <string name="onboarding_message_2">Add them to Your playlits once again, learn interesting facts about their audio-features and more</string>
+    <string name="onboarding_message_3">SpotOn requires your permission to access your music library</string>
+
 </resources>

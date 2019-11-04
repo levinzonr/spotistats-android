@@ -65,8 +65,8 @@ class ProfileFragment : BaseFragment<State>(), RecentPlaylistsAdapter.RecentPlay
 
     private fun renderProfile(user: UserProfile) {
         userDisplayNameTv.text = user.displayName
-        userFollowersCountTv.setScore("Followers", user.followersCount.toString())
-        userPlaylistsCountView.setScore("Playlists", user.playlistCount.toString())
+        userFollowersCountTv.setScore(R.string.profile_followers, user.followersCount.toString())
+        userPlaylistsCountView.setScore(R.string.profile_playlists, user.playlistCount.toString())
         userAvaterIv.load(user.imageUrl) {
             transformations(CircleCropTransformation())
         }

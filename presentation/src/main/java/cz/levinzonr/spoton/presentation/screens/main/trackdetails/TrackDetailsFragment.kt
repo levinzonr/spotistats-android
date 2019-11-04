@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import coil.api.load
 import cz.levinzonr.spoton.models.RecommendedTracks
@@ -17,7 +15,6 @@ import cz.levinzonr.spoton.models.artists
 
 import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.base.BaseFragment
-import cz.levinzonr.spoton.presentation.base.BaseViewModel
 import cz.levinzonr.spoton.presentation.extensions.showToast
 import cz.levinzonr.spoton.presentation.extensions.toMmSs
 import cz.levinzonr.spoton.presentation.extensions.toPercentageString
@@ -28,7 +25,6 @@ import kotlinx.android.synthetic.main.include_track_details.*
 import kotlinx.android.synthetic.main.include_track_features.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -79,15 +75,15 @@ class TrackDetailsFragment : BaseFragment<State>(), TrackListAdapter.TrackItemLi
     private fun renderTrackFeatures(features: Source<TrackFeaturesResponse>) {
         trackFeaturesLayout.transitionToEnd()
         features.data?.let { feats ->
-            scoreEnergy?.setScore("Energy", feats.energy.toPercentageString())
-            scoreLoudness?.setScore("Loudness", feats.loudness.toPercentageString())
-            scoreTempo?.setScore("Rhythm", feats.tempo.toString())
-            scoreAcoustic?.setScore("Acoustic", feats.acousticness.toPercentageString())
-            scoreDancebility?.setScore("Dancebility", feats.danceability.toPercentageString())
-            scoreValence?.setScore("Valence", feats.valence.toPercentageString())
-            scoreInstrumentalness?.setScore("Instrumentalness", feats.instrumentalness.toPercentageString())
-            scoreSpeachness?.setScore("Speachness", feats.speechiness.toPercentageString())
-            scoreLiveness?.setScore("Liveness", feats.liveness.toPercentageString())
+            scoreEnergy?.setScore(R.string.track_feature_energy, feats.energy.toPercentageString())
+            scoreLoudness?.setScore(R.string.track_feature_loudness, feats.loudness.toPercentageString())
+            scoreTempo?.setScore(R.string.track_feature_rythm, feats.tempo.toString())
+            scoreAcoustic?.setScore(R.string.track_feature_acousticness, feats.acousticness.toPercentageString())
+            scoreDancebility?.setScore(R.string.track_feature_danceability, feats.danceability.toPercentageString())
+            scoreValence?.setScore(R.string.track_feature_valence, feats.valence.toPercentageString())
+            scoreInstrumentalness?.setScore(R.string.track_feature_instrumental, feats.instrumentalness.toPercentageString())
+            scoreSpeachness?.setScore(R.string.track_feature_speachness, feats.speechiness.toPercentageString())
+            scoreLiveness?.setScore(R.string.track_feature_liveness, feats.liveness.toPercentageString())
         }
     }
 

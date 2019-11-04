@@ -26,6 +26,20 @@ class OnboardingAdapter(var onLoginClicked: (() -> Unit)? = null) : RecyclerView
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bindViewAtPosition(position: Int) {
             view.loginButton.isVisible = position == itemCount - 1
+            when(position) {
+                0 -> {
+                    view.onboardingTitle.setText(R.string.onboarding_title_1)
+                    view.onboardingMessage.setText(R.string.onboarding_message_1)
+                }
+                1 -> {
+                    view.onboardingTitle.setText(R.string.onboarding_title_2)
+                    view.onboardingMessage.setText(R.string.onboarding_message_2)
+                }
+                else -> {
+                    view.onboardingTitle.setText(R.string.onboarding_title_3)
+                    view.onboardingMessage.setText(R.string.onboarding_message_3)
+                }
+            }
             view.loginButton.setOnClickListener { onLoginClicked?.invoke() }
         }
     }
