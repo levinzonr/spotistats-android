@@ -11,6 +11,7 @@
         android:textAppearance="?attr/textAppearanceHeadline5"
         android:padding="16dp"
         android:text="@string/settings_title"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

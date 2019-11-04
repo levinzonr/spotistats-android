@@ -30,14 +30,19 @@ class OnboardingAdapter(var onLoginClicked: (() -> Unit)? = null) : RecyclerView
                 0 -> {
                     view.onboardingTitle.setText(R.string.onboarding_title_1)
                     view.onboardingMessage.setText(R.string.onboarding_message_1)
+                    view.imageView.setImageResource(R.drawable.ic_album_black_24dp)
                 }
                 1 -> {
                     view.onboardingTitle.setText(R.string.onboarding_title_2)
                     view.onboardingMessage.setText(R.string.onboarding_message_2)
+                    view.imageView.setImageResource(R.drawable.ic_audiotrack_black_24dp)
+
                 }
                 else -> {
                     view.onboardingTitle.setText(R.string.onboarding_title_3)
                     view.onboardingMessage.setText(R.string.onboarding_message_3)
+                    view.imageView.setImageResource(R.drawable.spotify_icon_rgb_green)
+
                 }
             }
             view.loginButton.setOnClickListener { onLoginClicked?.invoke() }
