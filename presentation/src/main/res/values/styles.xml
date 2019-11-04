@@ -52,6 +52,9 @@
     <!--Navigation Drawer-->
     <style name="Widget.MyTheme.ButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="android:padding">12dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="cornerRadius">8dp</item>
         <item name="iconGravity">textStart</item>
     </style>
     <!--Bottom Sheets-->
