@@ -21,7 +21,7 @@
 
 
     <cz.levinzonr.spoton.presentation.views.ScoreItemView
-        android:id="@+id/scoreAcoustic"
+        android:id="@+id/score2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,87 +30,87 @@
 
 
     <cz.levinzonr.spoton.presentation.views.ScoreItemView
-        android:id="@+id/scoreDancebility"
+        android:id="@+id/score1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/scoreAcoustic"
-        app:layout_constraintEnd_toStartOf="@+id/scoreAcoustic"
+        app:layout_constraintBottom_toBottomOf="@+id/score2"
+        app:layout_constraintEnd_toStartOf="@+id/score2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/scoreAcoustic"
+        app:layout_constraintTop_toTopOf="@id/score2"
         app:layout_constraintVertical_bias="0.0" />
 
     <cz.levinzonr.spoton.presentation.views.ScoreItemView
-        android:id="@+id/scoreEnergy"
+        android:id="@+id/score3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/scoreAcoustic"
+        app:layout_constraintBottom_toBottomOf="@+id/score2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@id/scoreAcoustic"
-        app:layout_constraintTop_toTopOf="@id/scoreAcoustic" />
+        app:layout_constraintStart_toEndOf="@id/score2"
+        app:layout_constraintTop_toTopOf="@id/score2" />
 
 
     <cz.levinzonr.spoton.presentation.views.ScoreItemView
-        android:id="@+id/scoreInstrumentalness"
+        android:id="@+id/score5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scoreAcoustic" />
+        app:layout_constraintTop_toBottomOf="@id/score2" />
 
 
     <cz.levinzonr.spoton.presentation.views.ScoreItemView
-        android:id="@+id/scoreLiveness"
+        android:id="@+id/score4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/scoreInstrumentalness"
-        app:layout_constraintEnd_toStartOf="@+id/scoreInstrumentalness"
+        app:layout_constraintBottom_toBottomOf="@+id/score5"
+        app:layout_constraintEnd_toStartOf="@+id/score5"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/scoreInstrumentalness" />
+        app:layout_constraintTop_toTopOf="@id/score5" />
 
 
     <cz.levinzonr.spoton.presentation.views.ScoreItemView
-        android:id="@+id/scoreLoudness"
+        android:id="@+id/score6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/scoreInstrumentalness"
+        app:layout_constraintBottom_toBottomOf="@+id/score5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@id/scoreInstrumentalness"
-        app:layout_constraintTop_toTopOf="@id/scoreInstrumentalness" />
+        app:layout_constraintStart_toEndOf="@id/score5"
+        app:layout_constraintTop_toTopOf="@id/score5" />
 
 
     <cz.levinzonr.spoton.presentation.views.ScoreItemView
-        android:id="@+id/scoreSpeachness"
+        android:id="@+id/score8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scoreInstrumentalness" />
+        app:layout_constraintTop_toBottomOf="@id/score5" />
 
 
     <cz.levinzonr.spoton.presentation.views.ScoreItemView
-        android:id="@+id/scoreValence"
+        android:id="@+id/score7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/scoreSpeachness"
-        app:layout_constraintEnd_toStartOf="@+id/scoreSpeachness"
+        app:layout_constraintBottom_toBottomOf="@+id/score8"
+        app:layout_constraintEnd_toStartOf="@+id/score8"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/scoreSpeachness" />
+        app:layout_constraintTop_toTopOf="@id/score8" />
 
 
     <cz.levinzonr.spoton.presentation.views.ScoreItemView
-        android:id="@+id/scoreTempo"
+        android:id="@+id/score9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/scoreSpeachness"
+        app:layout_constraintBottom_toBottomOf="@+id/score8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@id/scoreSpeachness"
-        app:layout_constraintTop_toTopOf="@id/scoreSpeachness" />
+        app:layout_constraintStart_toEndOf="@id/score8"
+        app:layout_constraintTop_toTopOf="@id/score8" />
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

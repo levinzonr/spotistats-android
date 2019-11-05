@@ -11,7 +11,7 @@
 
        <KeyFrameSet>
        </KeyFrameSet>
-        <OnClick motion:targetId="@+id/scoreAcoustic" />
+        <OnClick motion:targetId="@+id/score2" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toBottomOf="@+id/textView2"
             motion:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/scoreAcoustic"
+            android:id="@+id/score2"
             motion:layout_constraintHorizontal_bias="0.0" >
             <CustomAttribute
                 motion:attributeName="alpha"
@@ -29,11 +29,11 @@
         </Constraint>
         <Constraint
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toTopOf="@id/scoreAcoustic"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreAcoustic"
+            motion:layout_constraintTop_toTopOf="@id/score2"
+            motion:layout_constraintBottom_toBottomOf="@+id/score2"
             motion:layout_constraintHorizontal_bias="1"
             android:layout_width="wrap_content"
-            android:id="@+id/scoreEnergy"
+            android:id="@+id/score3"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp">
@@ -43,11 +43,11 @@
         </Constraint>
         <Constraint
             android:layout_height="wrap_content"
-            motion:layout_constraintStart_toStartOf="@+id/scoreAcoustic"
-            motion:layout_constraintTop_toTopOf="@+id/scoreAcoustic"
+            motion:layout_constraintStart_toStartOf="@+id/score2"
+            motion:layout_constraintTop_toTopOf="@+id/score2"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
-            android:id="@+id/scoreInstrumentalness"
+            android:id="@+id/score5"
             motion:layout_constraintHorizontal_bias="0.0">
             <CustomAttribute
                 motion:attributeName="alpha"
@@ -57,11 +57,11 @@
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreInstrumentalness"
+            motion:layout_constraintBottom_toBottomOf="@+id/score5"
             motion:layout_constraintHorizontal_bias="0.0"
-            motion:layout_constraintTop_toTopOf="@id/scoreInstrumentalness"
-            android:id="@+id/scoreLoudness"
-            motion:layout_constraintStart_toStartOf="@+id/scoreAcoustic" >
+            motion:layout_constraintTop_toTopOf="@id/score5"
+            android:id="@+id/score6"
+            motion:layout_constraintStart_toStartOf="@+id/score2" >
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="0" />
@@ -69,10 +69,10 @@
         <Constraint
             android:layout_height="wrap_content"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="@+id/scoreAcoustic"
+            motion:layout_constraintTop_toTopOf="@+id/score2"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
-            android:id="@+id/scoreSpeachness"
+            android:id="@+id/score8"
             motion:layout_constraintHorizontal_bias="0.0">
             <CustomAttribute
                 motion:attributeName="alpha"
@@ -80,52 +80,52 @@
         </Constraint>
         <Constraint
             android:layout_height="wrap_content"
-            motion:layout_constraintStart_toStartOf="@+id/scoreAcoustic"
-            motion:layout_constraintTop_toTopOf="@id/scoreSpeachness"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreSpeachness"
+            motion:layout_constraintStart_toStartOf="@+id/score2"
+            motion:layout_constraintTop_toTopOf="@id/score8"
+            motion:layout_constraintBottom_toBottomOf="@+id/score8"
             motion:layout_constraintHorizontal_bias="0.0"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
-            android:id="@+id/scoreTempo" >
+            android:id="@+id/score9" >
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="0" />
         </Constraint>
         <Constraint
-            android:id="@+id/scoreDancebility"
-            motion:layout_constraintEnd_toStartOf="@+id/scoreAcoustic"
+            android:id="@+id/score1"
+            motion:layout_constraintEnd_toStartOf="@+id/score2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreAcoustic"
+            motion:layout_constraintBottom_toBottomOf="@+id/score2"
             motion:layout_constraintVertical_bias="0.0"
             motion:layout_constraintHorizontal_bias="0.0"
-            motion:layout_constraintTop_toTopOf="@id/scoreAcoustic"
+            motion:layout_constraintTop_toTopOf="@id/score2"
             motion:layout_constraintStart_toStartOf="parent">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="0" />
         </Constraint>
         <Constraint
-            android:id="@+id/scoreLiveness"
-            motion:layout_constraintEnd_toStartOf="@+id/scoreInstrumentalness"
+            android:id="@+id/score4"
+            motion:layout_constraintEnd_toStartOf="@+id/score5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreInstrumentalness"
+            motion:layout_constraintBottom_toBottomOf="@+id/score5"
             motion:layout_constraintHorizontal_bias="0.0"
-            motion:layout_constraintTop_toTopOf="@id/scoreInstrumentalness"
+            motion:layout_constraintTop_toTopOf="@id/score5"
             motion:layout_constraintStart_toStartOf="parent">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="0" />
         </Constraint>
         <Constraint
-            android:id="@+id/scoreValence"
-            motion:layout_constraintEnd_toStartOf="@+id/scoreSpeachness"
+            android:id="@+id/score7"
+            motion:layout_constraintEnd_toStartOf="@+id/score8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreSpeachness"
+            motion:layout_constraintBottom_toBottomOf="@+id/score8"
             motion:layout_constraintHorizontal_bias="0.0"
-            motion:layout_constraintTop_toTopOf="@id/scoreSpeachness"
+            motion:layout_constraintTop_toTopOf="@id/score8"
             motion:layout_constraintStart_toStartOf="parent">
             <CustomAttribute
                 motion:attributeName="alpha"
@@ -135,7 +135,7 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/scoreAcoustic"
+            android:id="@+id/score2"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -146,101 +146,101 @@
                 motion:customFloatValue="1" />
         </Constraint>
         <Constraint
-            android:id="@+id/scoreEnergy"
+            android:id="@+id/score3"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/scoreAcoustic"
+            motion:layout_constraintStart_toEndOf="@id/score2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreAcoustic"
+            motion:layout_constraintBottom_toBottomOf="@+id/score2"
             motion:layout_constraintHorizontal_bias="1"
-            motion:layout_constraintTop_toTopOf="@id/scoreAcoustic">
+            motion:layout_constraintTop_toTopOf="@id/score2">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
         </Constraint>
         <Constraint
-            android:id="@+id/scoreLoudness"
+            android:id="@+id/score6"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/scoreInstrumentalness"
+            motion:layout_constraintStart_toEndOf="@id/score5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreInstrumentalness"
+            motion:layout_constraintBottom_toBottomOf="@+id/score5"
             motion:layout_constraintHorizontal_bias="1"
-            motion:layout_constraintTop_toTopOf="@id/scoreInstrumentalness">
+            motion:layout_constraintTop_toTopOf="@id/score5">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
         </Constraint>
         <Constraint
-            android:id="@+id/scoreTempo"
+            android:id="@+id/score9"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/scoreSpeachness"
+            motion:layout_constraintStart_toEndOf="@id/score8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreSpeachness"
+            motion:layout_constraintBottom_toBottomOf="@+id/score8"
             motion:layout_constraintHorizontal_bias="1"
-            motion:layout_constraintTop_toTopOf="@id/scoreSpeachness">
+            motion:layout_constraintTop_toTopOf="@id/score8">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
         </Constraint>
         <Constraint
-            android:id="@+id/scoreSpeachness"
+            android:id="@+id/score8"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@id/scoreInstrumentalness"
+            motion:layout_constraintTop_toBottomOf="@id/score5"
             motion:layout_constraintStart_toStartOf="parent">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
         </Constraint>
         <Constraint
-            android:id="@+id/scoreInstrumentalness"
+            android:id="@+id/score5"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@id/scoreAcoustic"
+            motion:layout_constraintTop_toBottomOf="@id/score2"
             motion:layout_constraintStart_toStartOf="parent">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
         </Constraint>
         <Constraint
-            android:id="@+id/scoreValence"
-            motion:layout_constraintEnd_toStartOf="@+id/scoreSpeachness"
+            android:id="@+id/score7"
+            motion:layout_constraintEnd_toStartOf="@+id/score8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreSpeachness"
+            motion:layout_constraintBottom_toBottomOf="@+id/score8"
             motion:layout_constraintHorizontal_bias="0.0"
-            motion:layout_constraintTop_toTopOf="@id/scoreSpeachness"
+            motion:layout_constraintTop_toTopOf="@id/score8"
             motion:layout_constraintStart_toStartOf="parent">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
         </Constraint>
         <Constraint
-            android:id="@+id/scoreLiveness"
-            motion:layout_constraintEnd_toStartOf="@+id/scoreInstrumentalness"
+            android:id="@+id/score4"
+            motion:layout_constraintEnd_toStartOf="@+id/score5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreInstrumentalness"
+            motion:layout_constraintBottom_toBottomOf="@+id/score5"
             motion:layout_constraintHorizontal_bias="0.0"
-            motion:layout_constraintTop_toTopOf="@id/scoreInstrumentalness"
+            motion:layout_constraintTop_toTopOf="@id/score5"
             motion:layout_constraintStart_toStartOf="parent">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
         </Constraint>
         <Constraint
-            android:id="@+id/scoreDancebility"
-            motion:layout_constraintEnd_toStartOf="@+id/scoreAcoustic"
+            android:id="@+id/score1"
+            motion:layout_constraintEnd_toStartOf="@+id/score2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/scoreAcoustic"
+            motion:layout_constraintBottom_toBottomOf="@+id/score2"
             motion:layout_constraintVertical_bias="0.0"
             motion:layout_constraintHorizontal_bias="0.0"
-            motion:layout_constraintTop_toTopOf="@id/scoreAcoustic"
+            motion:layout_constraintTop_toTopOf="@id/score2"
             motion:layout_constraintStart_toStartOf="parent">
             <CustomAttribute
                 motion:attributeName="alpha"

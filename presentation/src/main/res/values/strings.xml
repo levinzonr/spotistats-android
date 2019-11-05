@@ -30,12 +30,13 @@
 
     <string name="track_feature_loudness">Loudness</string>
     <string name="track_feature_rythm">Rhythm</string>
-    <string name="track_feature_acousticness">Acoustic</string>
-    <string name="track_feature_danceability">Dancebility</string>
+    <string name="track_feature_acousticness">Acousticness</string>
+    <string name="track_feature_danceability">Danceability</string>
     <string name="track_feature_valence">Valence</string>
     <string name="track_feature_instrumental">Instrumentalness</string>
-    <string name="track_feature_speachness">Speachness</string>
+    <string name="track_feature_speachness">Speechiness</string>
     <string name="track_feature_liveness">Liveness</string>
+    <string name="track_feature_key">Key</string>
 
     <string name="onboarding_title_1">Welcome to SpotOn!</string>
     <string name="onboarding_title_2">Re-live Your favorite music</string>

@@ -41,7 +41,23 @@ class ScoreItemView @JvmOverloads constructor(
     fun setScore(label: Int, value: String) {
         scoreTitleTv.setText(label)
         scoreValueTv.text = value
-
-
     }
+}
+
+fun ScoreItemView.setKey(key: Int) {
+    val keyString = when(key) {
+        0 -> "C/B♯"
+        1 -> "C♯/D♭"
+        2 -> "D"
+        3 -> "D♯/E♭"
+        4 -> "E/F♭"
+        5 -> "F/E♯"
+        6 -> "F♯/G♭"
+        7 -> "G"
+        8 -> "G♯/A♭"
+        9 -> "A"
+        10 -> "A♯/B♭"
+        else -> "B"
+    }
+    setScore(R.string.track_feature_key, keyString)
 }

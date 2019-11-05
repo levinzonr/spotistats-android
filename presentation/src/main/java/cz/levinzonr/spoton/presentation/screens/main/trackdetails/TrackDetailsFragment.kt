@@ -20,6 +20,7 @@ import cz.levinzonr.spoton.presentation.extensions.toMmSs
 import cz.levinzonr.spoton.presentation.extensions.toPercentageString
 import cz.levinzonr.spoton.presentation.screens.main.onrepeat.TrackListAdapter
 import cz.levinzonr.spoton.presentation.util.Source
+import cz.levinzonr.spoton.presentation.views.setKey
 import kotlinx.android.synthetic.main.fragment_track_details.*
 import kotlinx.android.synthetic.main.include_track_details.*
 import kotlinx.android.synthetic.main.include_track_features.*
@@ -75,15 +76,18 @@ class TrackDetailsFragment : BaseFragment<State>(), TrackListAdapter.TrackItemLi
     private fun renderTrackFeatures(features: Source<TrackFeaturesResponse>) {
         trackFeaturesLayout.transitionToEnd()
         features.data?.let { feats ->
-            scoreEnergy?.setScore(R.string.track_feature_energy, feats.energy.toPercentageString())
-            scoreLoudness?.setScore(R.string.track_feature_loudness, feats.loudness.toPercentageString())
-            scoreTempo?.setScore(R.string.track_feature_rythm, feats.tempo.toString())
-            scoreAcoustic?.setScore(R.string.track_feature_acousticness, feats.acousticness.toPercentageString())
-            scoreDancebility?.setScore(R.string.track_feature_danceability, feats.danceability.toPercentageString())
-            scoreValence?.setScore(R.string.track_feature_valence, feats.valence.toPercentageString())
-            scoreInstrumentalness?.setScore(R.string.track_feature_instrumental, feats.instrumentalness.toPercentageString())
-            scoreSpeachness?.setScore(R.string.track_feature_speachness, feats.speechiness.toPercentageString())
-            scoreLiveness?.setScore(R.string.track_feature_liveness, feats.liveness.toPercentageString())
+            score1?.setScore(R.string.track_feature_rythm, "${feats.tempo.toInt()} BPM")
+            score2?.setKey(feats.key)
+            score3?.setScore(R.string.track_feature_loudness, "${feats.loudness.toInt()} dB")
+
+            score4?.setScore(R.string.track_feature_valence, feats.valence.toPercentageString())
+            score5.setScore(R.string.track_feature_danceability, feats.danceability.toPercentageString())
+            score6.setScore(R.string.track_feature_energy, feats.energy.toPercentageString())
+
+            score7?.setScore(R.string.track_feature_liveness, feats.liveness.toPercentageString())
+            score8?.setScore(R.string.track_feature_instrumental, feats.instrumentalness.toPercentageString())
+            score9.setScore(R.string.track_feature_acousticness, feats.acousticness.toPercentageString())
+
         }
     }
 
