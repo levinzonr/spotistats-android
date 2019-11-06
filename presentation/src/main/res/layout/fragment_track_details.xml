@@ -12,14 +12,15 @@
         android:layout_height="250dp"
         android:fitsSystemWindows="true">
 
+
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
 
             <ImageView
                 android:id="@+id/trackImageIv"
@@ -33,6 +34,16 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+
+    <cz.levinzonr.spoton.presentation.views.FloatingImageView
+        app:layout_collapseMode="pin"
+        android:id="@+id/trackImageAlbumIv"
+        app:layout_anchorGravity="end|bottom"
+        android:layout_marginEnd="16dp"
+        app:layout_anchor="@id/appbar"
+        android:layout_width="120dp"
+        android:layout_height="120dp"/>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll"

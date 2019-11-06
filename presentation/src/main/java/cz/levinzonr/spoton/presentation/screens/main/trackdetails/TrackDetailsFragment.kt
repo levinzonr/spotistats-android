@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import coil.api.load
+import coil.transform.BlurTransformation
 import cz.levinzonr.spoton.models.RecommendedTracks
 import cz.levinzonr.spoton.models.TrackFeaturesResponse
 import cz.levinzonr.spoton.models.TrackResponse
@@ -93,7 +94,10 @@ class TrackDetailsFragment : BaseFragment<State>(), TrackListAdapter.TrackItemLi
 
     private fun renderTrackDetails(detail: Source<TrackResponse>) {
         detail.data?.let { data ->
-            trackImageIv.load(data.album.images.firstOrNull()?.url)
+            trackImageIv.load(data.album.images.firstOrNull()?.url) {
+                transformations(BlurTransformation(requireContext()))
+            }
+            trackImageAlbumIv.load(data.album.images.firstOrNull()?.url)
             trackArtistTv.text = data.artists()
             trackAlbumTv.text = data.album.name
             trackDurationTb.text = data.duration_ms.toMmSs()
