@@ -9,7 +9,7 @@ import cz.levinzonr.spoton.presentation.util.ViewError
 
 sealed class Action : BaseAction {
     object Init: Action()
-    data class PlaylistClicked(val playlistResponse: PlaylistResponse, val force: Boolean = false) : Action()
+    data class PlaylistClicked(val playlistResponse: PlaylistResponse, val skip: Boolean? = null) : Action()
 }
 
 sealed class Change : BaseChange {

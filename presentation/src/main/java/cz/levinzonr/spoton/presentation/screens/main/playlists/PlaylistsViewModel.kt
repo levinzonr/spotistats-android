@@ -40,7 +40,7 @@ class PlaylistsViewModel(
     override fun emitAction(action: Action): Flow<Change> {
         return when (action) {
             is Action.Init -> bindInitAction()
-            is Action.PlaylistClicked -> bindPlaylistClicked(action.playlistResponse, action.force)
+            is Action.PlaylistClicked -> bindPlaylistClicked(action.playlistResponse, action.skip)
         }
     }
 
@@ -51,8 +51,8 @@ class PlaylistsViewModel(
                 .isSuccess { emit(Change.PlaylistsLoaded(it)) }
     }
 
-    private fun bindPlaylistClicked(playlistResponse: PlaylistResponse, force: Boolean): Flow<Change> = flowOnIO {
-        addTracksToPlaylistInteractor.input = AddTracksToPlaylistInteractor.Input(playlistResponse, listOf(trackId), force)
+    private fun bindPlaylistClicked(playlistResponse: PlaylistResponse, skipRepeated: Boolean? = null): Flow<Change> = flowOnIO {
+        addTracksToPlaylistInteractor.input = AddTracksToPlaylistInteractor.Input(playlistResponse, listOf(trackId), skipRepeated)
         addTracksToPlaylistInteractor.invoke()
                 .isError { emit(Change.TrackAdditionError(it)) }
                 .isSuccess {

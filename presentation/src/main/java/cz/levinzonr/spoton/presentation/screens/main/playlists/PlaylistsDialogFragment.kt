@@ -1,7 +1,6 @@
 package cz.levinzonr.spoton.presentation.screens.main.playlists
 
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import cz.levinzonr.spoton.models.PlaylistResponse
 import cz.levinzonr.spoton.presentation.R
@@ -55,11 +53,18 @@ class PlaylistsDialogFragment : BottomSheetDialogFragment(), PlaylistsAdapter.Pl
     }
 
     private fun renderConfirmationDialog(playlistResponse: PlaylistResponse) = AlertDialog.Builder(context)
-            .setTitle("Duplicate")
-            .setMessage("Some of the tracks are already present in the playlist, added them anyway?")
-            .setPositiveButton("Yes") { dialogInterface, i -> viewModel.dispatch(Action.PlaylistClicked(playlistResponse)); dialogInterface.dismiss() }
-            .setNegativeButton("No") { dialogInterface, i -> dialogInterface.dismiss() }
-            .show()
+            .setTitle("Duplicates")
+            .setMessage("Some of the tracks are already present in this playlist, add them anyway?")
+            .setPositiveButton("Skip duplicates") { dialogInterface, i ->
+                viewModel.dispatch(Action.PlaylistClicked(playlistResponse, true))
+                dialogInterface.dismiss()
+            }
+            .setNegativeButton("Add anyway") { dialogInterface, i ->
+                viewModel.dispatch(Action.PlaylistClicked(playlistResponse, false))
+                dialogInterface.dismiss()
+
+            }.show()
+
 
     override fun onPlaylistClicked(playlistResponse: PlaylistResponse) {
         viewModel.dispatch(Action.PlaylistClicked(playlistResponse))
