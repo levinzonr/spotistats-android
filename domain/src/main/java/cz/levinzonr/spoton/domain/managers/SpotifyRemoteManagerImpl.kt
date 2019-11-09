@@ -38,11 +38,9 @@ class SpotifyRemoteManagerImpl(
     override val stateLiveData: LiveData<RemotePlayerState>
         get() = _stateLiveData
 
-    init {
-        _stateLiveData.postValue(RemotePlayerState.Initilizing)
-    }
 
     override fun connect() {
+        _stateLiveData.postValue(RemotePlayerState.Initilizing)
         SpotifyAppRemote.connect(context, params, this)
     }
 

@@ -51,3 +51,7 @@ fun<T> ViewModel.flowOnIO(block: suspend FlowCollector<T>.() -> Unit) : Flow<T> 
     return flow(block).flowOn(Dispatchers.IO)
 }
 
+fun<T> ViewModel.flowOnMain(block: suspend FlowCollector<T>.() -> Unit) : Flow<T> {
+    return flow(block).flowOn(Dispatchers.Main)
+}
+

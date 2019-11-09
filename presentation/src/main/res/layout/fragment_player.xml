@@ -19,7 +19,9 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/playerContent"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="100dp">
 
 
@@ -49,7 +51,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="TextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/trackImageIv"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +60,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="TextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/trackNameTv"
                 app:layout_constraintTop_toBottomOf="@+id/trackNameTv" />
@@ -83,6 +83,42 @@
                 app:layout_constraintTop_toTopOf="@+id/trackPlayBtn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:orientation="vertical"
+            android:id="@+id/playerError"
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/playerErrorMessage"
+                android:text="@string/player_error_message"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playerRetryBtn"
+                android:layout_margin="16dp"
+                android:text="@string/default_retry"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"/>
 
     </com.google.android.material.card.MaterialCardView>
 

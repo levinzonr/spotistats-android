@@ -5,17 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import coil.api.load
 import com.spotify.protocol.types.PlayerState
-import cz.levinzonr.spoton.models.TrackResponse
 import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.base.BaseFragment
 import cz.levinzonr.spoton.presentation.extensions.showToast
 import kotlinx.android.synthetic.main.fragment_player.*
-import kotlinx.android.synthetic.main.fragment_player.trackArtistTv
-import kotlinx.android.synthetic.main.fragment_player.trackNameTv
-import kotlinx.android.synthetic.main.item_track.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
@@ -37,13 +34,25 @@ class PlayerFragment : BaseFragment<State>() {
         trackNextBtn.setOnClickListener { viewModel.dispatch(Action.NextTrackPressed) }
         trackPlayBtn.setOnClickListener { viewModel.dispatch(Action.PlayTrackPressed) }
         trackPreviousBtn.setOnClickListener { viewModel.dispatch(Action.PreviousTrackPressed) }
+        playerRetryBtn.setOnClickListener {
+            viewModel.dispatch(Action.RetryConnectionPressed)
+        }
     }
 
     override fun renderState(state: State) {
         Timber.d("Plyerastate: $state")
         state.playerState?.let(this::renderPlayerState)
-        state.currentTrack?.let(this::renderTrackDetails)
         state.toast?.consume()?.let(this::showToast)
+
+        state.error?.let(this::renderPlayerError)
+        trackImageIv.load(state.currentTrack?.album?.images?.firstOrNull()?.url) {
+            error(R.drawable.background_no_album)
+        }
+        progressBar.isVisible = state.isLoading
+        if (state.isLoading) {
+            playerContent.isVisible = false
+            playerError.isVisible = false
+        }
     }
 
     private fun renderPlayerState(state: PlayerState) {
@@ -51,18 +60,15 @@ class PlayerFragment : BaseFragment<State>() {
         trackPlayBtn.setImageResource(imageRes)
         trackArtistTv.text = state.track.name
         trackNameTv.text = state.track.artist.name
-        trackImageIv.setImageResource(R.drawable.background_no_album)
+        playerContent.isVisible = true
+        playerError.isVisible = false
     }
 
 
+    private fun renderPlayerError(throwable: Throwable) {
+        playerContent.isVisible = false
+        playerError.isVisible = true
 
-
-    private fun renderTrackDetails(trackResponse: TrackResponse) {
-        trackArtistTv.text = trackResponse.artists.first().name
-        trackNameTv.text = trackResponse.name
-        trackImageIv.load(trackResponse.album.images.firstOrNull()?.url) {
-            error(R.drawable.background_no_album)
-        }
     }
 
 }

@@ -46,5 +46,8 @@
     <string name="onboarding_message_2">Add them to Your playlits once again, learn interesting facts about their audio-features and more</string>
     <string name="onboarding_message_3">SpotOn requires your permission to access your music library</string>
     <string name="onboarding_login_btn">Login With Spotify</string>
+    <string name="profile_recent_playlists">Recent playlists</string>
+    <string name="player_error_message">There was an error connecting to your Spotify Player</string>
+    <string name="default_retry">Retry</string>
 
 </resources>

@@ -15,6 +15,7 @@ sealed class Action : BaseAction {
     object PlayTrackPressed: Action()
     object NextTrackPressed: Action()
     object PreviousTrackPressed: Action()
+    object RetryConnectionPressed: Action()
 }
 
 sealed class Change : BaseChange {
@@ -30,6 +31,7 @@ data class State(
         val remotePlayerError: String? = null,
         val currentTrack: TrackResponse? = null,
         val playerState: PlayerState? = null,
+        val isLoading: Boolean = false,
         val toast: SingleEvent<String>? = null,
         val snackbar: SingleEvent<String>? = null,
         val error: Throwable? = null) : BaseState
