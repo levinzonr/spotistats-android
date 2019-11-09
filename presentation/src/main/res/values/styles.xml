@@ -48,6 +48,13 @@
         <item name="android:textAlignment">viewStart</item>
     </style>
 
+    <style name="OptionsDialogButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:padding">18dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="iconTint">?attr/colorPrimary</item>
+    </style>
 
     <!--Navigation Drawer-->
     <style name="Widget.MyTheme.ButtonStyle" parent="Widget.MaterialComponents.Button">

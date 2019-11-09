@@ -11,6 +11,9 @@ import cz.levinzonr.spoton.models.TrackResponse
 
 import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.base.BaseFragment
+import cz.levinzonr.spoton.presentation.base.BaseOptionsDialog
+import cz.levinzonr.spoton.presentation.base.TrackOptionsDialog
+import cz.levinzonr.spoton.presentation.extensions.showOptionsDialog
 import kotlinx.android.synthetic.main.fragment_on_repeat.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -36,6 +39,19 @@ class OnRepeatFragment : BaseFragment<State>(), TrackListAdapter.TrackItemListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        tracksShortMoreBtn.setOnClickListener {
+            showOptionsDialog<TrackOptionsDialog> {
+
+            }
+        }
+
+        tracksLongMoreBtn.setOnClickListener {
+            showOptionsDialog<TrackOptionsDialog> {  }
+        }
+
+        tracksMidMoreBtn.setOnClickListener {
+            showOptionsDialog<TrackOptionsDialog> {  }
+        }
     }
 
 

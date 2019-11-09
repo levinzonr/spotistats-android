@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tracksNewPlaylistBtn"
+        style="@style/OptionsDialogButton"
+        android:layout_width="match_parent"
+        app:icon="@drawable/ic_library_add_black_24dp"
+        android:layout_height="wrap_content"
+        android:text="Create New Playlist" />
+
+    <com.google.android.material.button.MaterialButton
+        app:icon="@drawable/ic_playlist_add_black_24dp"
+        android:id="@+id/tracksAddTopPlaylistBtn"
+        style="@style/OptionsDialogButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add to existent playlist" />
+
+</LinearLayout>

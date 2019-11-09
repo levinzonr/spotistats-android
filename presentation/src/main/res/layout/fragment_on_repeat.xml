@@ -38,31 +38,48 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/title1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/top_tracks_weeks"
-                    android:textAppearance="?textAppearanceHeadline6" />
+                    android:textAppearance="?textAppearanceHeadline6"
+                    app:layout_constraintEnd_toStartOf="@+id/tracksShortMoreBtn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_more"
+                    android:id="@+id/tracksShortMoreBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- TODO: Update blank fragment layout -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/tracksShortRv"
+                    android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:text="@string/hello_blank_fragment"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/tracksShortMoreBtn"
                     tools:listitem="@layout/item_track" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -82,19 +99,33 @@
                 android:layout_height="wrap_content"/>
 
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/top_tracks_months"
-                    android:textAppearance="?textAppearanceHeadline6" />
+                    android:textAppearance="?textAppearanceHeadline6"
+                    app:layout_constraintEnd_toStartOf="@+id/tracksMidMoreBtn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_more"
+                    android:id="@+id/tracksMidMoreBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- TODO: Update blank fragment layout -->
                 <androidx.recyclerview.widget.RecyclerView
@@ -104,9 +135,10 @@
                     android:orientation="horizontal"
                     android:text="@string/hello_blank_fragment"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/tracksMidMoreBtn"
                     tools:listitem="@layout/item_track" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -127,20 +159,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/top_tracks_years"
-                    android:textAppearance="?textAppearanceHeadline6" />
+                    android:textAppearance="?textAppearanceHeadline6"
+                    app:layout_constraintEnd_toStartOf="@+id/tracksLongMoreBtn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageButton
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_more"
+                    android:id="@+id/tracksLongMoreBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
                 <!-- TODO: Update blank fragment layout -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/tracksLongRv"
@@ -149,9 +194,10 @@
                     android:orientation="horizontal"
                     android:text="@string/hello_blank_fragment"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/tracksLongMoreBtn"
                     tools:listitem="@layout/item_track" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
 

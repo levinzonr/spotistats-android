@@ -14,7 +14,36 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import cz.levinzonr.spoton.models.DarkMode
+import cz.levinzonr.spoton.presentation.base.BaseOptionsDialog
 import timber.log.Timber
+
+
+
+fun ViewGroup.asSequence(): Sequence<View> = object : Sequence<View> {
+    override fun iterator(): Iterator<View> = object : Iterator<View> {
+        private var nextValue: View? = null
+        private var done = false
+        private var position: Int = 0
+
+        override fun hasNext(): Boolean {
+            if (nextValue == null && !done) {
+                nextValue = getChildAt(position)
+                position++
+                if (nextValue == null) done = true
+            }
+            return nextValue != null
+        }
+
+        override fun next(): View {
+            if (!hasNext()) {
+                throw NoSuchElementException()
+            }
+            val answer = nextValue
+            nextValue = null
+            return answer!!
+        }
+    }
+}
 
 fun Fragment.hideKeyboard() {
     activity?.hideKeyboard()
@@ -26,6 +55,12 @@ fun Activity.hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
         imm?.hideSoftInputFromWindow(view.windowToken, 0)
         view.clearFocus()
+    }
+}
+
+inline fun<reified T: BaseOptionsDialog> Fragment.showOptionsDialog(crossinline onClick: (Int) -> Unit) {
+    BaseOptionsDialog.Builder(T::class).show(fragmentManager!!) {
+        onClick.invoke(it)
     }
 }
 
