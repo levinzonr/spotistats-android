@@ -132,7 +132,7 @@ class TrackDetailsViewModel(
     }
 
     private fun bindAddToPlaylistAction(trackId: String) : Flow<Change> = flow {
-        val route = Route.Destination(TrackDetailsFragmentDirections.actionTrackDetailsFragmentToPlaylistsDialogFragment(trackId))
+        val route = Route.Destination(TrackDetailsFragmentDirections.actionTrackDetailsFragmentToPlaylistsDialogFragment(arrayOf(trackId)))
         emit(Change.Navigation(route))
     }
 

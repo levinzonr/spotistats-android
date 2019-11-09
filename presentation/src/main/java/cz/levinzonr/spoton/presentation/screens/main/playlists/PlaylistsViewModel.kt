@@ -13,7 +13,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 
 class PlaylistsViewModel(
-        private val trackId: String,
+        private val trackIds: Array<String>,
         private val getPlaylistsInteractor: GetPlaylistsInteractor,
         private val addTracksToPlaylistInteractor: AddTracksToPlaylistInteractor
 ) : BaseViewModel<Action, Change, State>() {
@@ -52,7 +52,7 @@ class PlaylistsViewModel(
     }
 
     private fun bindPlaylistClicked(playlistResponse: PlaylistResponse, skipRepeated: Boolean? = null): Flow<Change> = flowOnIO {
-        addTracksToPlaylistInteractor.input = AddTracksToPlaylistInteractor.Input(playlistResponse, listOf(trackId), skipRepeated)
+        addTracksToPlaylistInteractor.input = AddTracksToPlaylistInteractor.Input(playlistResponse, trackIds.toList(), skipRepeated)
         addTracksToPlaylistInteractor.invoke()
                 .isError { emit(Change.TrackAdditionError(it)) }
                 .isSuccess {

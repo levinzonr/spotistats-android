@@ -21,7 +21,7 @@ import org.koin.core.parameter.parametersOf
 class PlaylistsDialogFragment : BottomSheetDialogFragment(), PlaylistsAdapter.PlaylistItemListener {
 
     private val args: PlaylistsDialogFragmentArgs by navArgs()
-    private val viewModel: PlaylistsViewModel by viewModel { parametersOf(args.trackId) }
+    private val viewModel: PlaylistsViewModel by viewModel { parametersOf(args.trackIds) }
     private lateinit var adapter: PlaylistsAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

@@ -13,6 +13,8 @@ import cz.levinzonr.spoton.presentation.util.ViewError
 sealed class Action : BaseAction {
     object Init: Action()
     data class TrackClicked(val track: TrackResponse) : Action()
+    data class CreatePlaylistAction(val tracks: List<TrackResponse>, val playlistName: String) : Action()
+    data class AddToPlaylistAction(val tracks: List<TrackResponse>) : Action()
 }
 
 

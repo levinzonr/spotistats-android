@@ -2,16 +2,14 @@ package cz.levinzonr.spoton.presentation.screens.main.onrepeat
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import cz.levinzonr.spoton.models.TrackResponse
-
 import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.base.BaseFragment
-import cz.levinzonr.spoton.presentation.base.BaseOptionsDialog
 import cz.levinzonr.spoton.presentation.base.TrackOptionsDialog
 import cz.levinzonr.spoton.presentation.extensions.showOptionsDialog
 import kotlinx.android.synthetic.main.fragment_on_repeat.*
@@ -39,36 +37,53 @@ class OnRepeatFragment : BaseFragment<State>(), TrackListAdapter.TrackItemListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        tracksShortMoreBtn.setOnClickListener {
-            showOptionsDialog<TrackOptionsDialog> {
-
-            }
-        }
-
-        tracksLongMoreBtn.setOnClickListener {
-            showOptionsDialog<TrackOptionsDialog> {  }
-        }
-
-        tracksMidMoreBtn.setOnClickListener {
-            showOptionsDialog<TrackOptionsDialog> {  }
-        }
     }
 
 
     override fun renderState(state: State) {
         state.tracks?.let { tracks ->
-            listOf(longProgressBar, shortProgressBar, midProgressBar).forEach {it.isVisible = state.isLoading}
+            listOf(longProgressBar, shortProgressBar, midProgressBar).forEach { it.isVisible = state.isLoading }
             shortAdapter.submitList(tracks.tracksShort)
             longAdapter.submitList(tracks.tracksLong)
             midAdapter.submitList(tracks.tracksMid)
+
+
+            tracksShortMoreBtn.setOnClickListener {
+                showOptionsDialog<TrackOptionsDialog> {
+                   onOptionSelected(it, tracks.tracksShort)
+                }
+            }
+
+            tracksLongMoreBtn.setOnClickListener {
+                showOptionsDialog<TrackOptionsDialog> {
+                    onOptionSelected(it, tracks.tracksLong)
+
+                }
+            }
+
+            tracksMidMoreBtn.setOnClickListener {
+                showOptionsDialog<TrackOptionsDialog> {
+                    onOptionSelected(it, tracks.tracksMid)
+                }
+            }
+
         }
     }
+
+
+    private fun onOptionSelected(id: Int, tracks: List<TrackResponse>) {
+        when(id) {
+            R.id.tracksAddTopPlaylistBtn -> viewModel.dispatch(Action.AddToPlaylistAction(tracks))
+            R.id.tracksNewPlaylistBtn -> viewModel.dispatch(Action.CreatePlaylistAction(tracks, "Name"))
+        }
+    }
+
 
     private fun setupRecyclerView() {
         shortAdapter = TrackListAdapter(this)
         longAdapter = TrackListAdapter(this)
         midAdapter = TrackListAdapter(this)
-        tracksShortRv.adapter  = shortAdapter
+        tracksShortRv.adapter = shortAdapter
         tracksLongRv.adapter = longAdapter
         tracksMidRv.adapter = midAdapter
     }

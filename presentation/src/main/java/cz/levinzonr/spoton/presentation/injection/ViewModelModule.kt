@@ -20,6 +20,6 @@ val viewModels = module {
     viewModel { ProfileViewModel(get(), get(), get()) }
     viewModel { (id: String) -> TrackDetailsViewModel(id, get(), get(), get(), get()) }
     viewModel { SettingsViewModel(get(), get()) }
-    viewModel { (id: String) -> PlaylistsViewModel(id, get(), get()) }
+    viewModel { (id: Array<String>) -> PlaylistsViewModel(id, get(), get()) }
     viewModel { PlayerViewModel(get(), get()) }
 }

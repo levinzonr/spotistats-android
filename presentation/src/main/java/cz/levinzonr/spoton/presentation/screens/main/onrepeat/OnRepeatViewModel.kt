@@ -37,8 +37,11 @@ class OnRepeatViewModel(
         return when (action) {
             is Action.Init -> bindLoadTracksAction()
             is Action.TrackClicked -> bindTrackClickAction(action.track)
+            is Action.AddToPlaylistAction -> bindAddToPlaylistActions(action.tracks)
+            is Action.CreatePlaylistAction -> bindCreateNewPlaylistAction(action.tracks, action.playlistName)
         }
     }
+
 
     private fun bindLoadTracksAction(): Flow<Change> = flowOnIO {
         emit(Change.LoadingStarted)
@@ -50,5 +53,15 @@ class OnRepeatViewModel(
     private fun bindTrackClickAction(track: TrackResponse) : Flow<Change> = flow {
         val route = Route.Destination(OnRepeatFragmentDirections.actionOnRepeatFragmentToTrackDetailsFragment(track.id))
         emit(Change.Navigation(route))
+    }
+
+    private fun bindAddToPlaylistActions(tracks: List<TrackResponse>) : Flow<Change> = flow {
+        val ids = tracks.map { it.id }.toTypedArray()
+        val route = Route.Destination(OnRepeatFragmentDirections.actionOnRepeatFragmentToPlaylistsDialogFragment(ids))
+        emit(Change.Navigation(route))
+    }
+
+    private fun bindCreateNewPlaylistAction(tracks: List<TrackResponse>, name: String) : Flow<Change> = flow {
+
     }
 }
