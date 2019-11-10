@@ -28,8 +28,8 @@
 
 
             <TextView
+                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textSize="17sp"
-                style="@style/TextStyle"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="16dp"
                 tools:text="_Title"

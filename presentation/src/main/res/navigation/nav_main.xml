@@ -10,7 +10,11 @@
               tools:layout="@layout/fragment_on_repeat">
         <action
             android:id="@+id/action_onRepeatFragment_to_trackDetailsFragment"
-            app:destination="@id/trackDetailsFragment" />
+            app:destination="@id/trackDetailsFragment"
+            app:enterAnim="@animator/slide_left_enter"
+            app:exitAnim="@animator/slide_left_exit"
+            app:popEnterAnim="@animator/slide_right_enter"
+            app:popExitAnim="@animator/slide_right_exit" />
         <action
             android:id="@+id/action_onRepeatFragment_to_playlistsDialogFragment"
             app:destination="@id/playlistsDialogFragment" />
@@ -21,7 +25,11 @@
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@animator/slide_left_enter"
+            app:exitAnim="@animator/slide_left_exit"
+            app:popEnterAnim="@animator/slide_right_enter"
+            app:popExitAnim="@animator/slide_right_exit" />
         <action
             android:id="@+id/action_profileFragment_to_trackDetailsFragment"
             app:destination="@id/trackDetailsFragment" />
@@ -38,7 +46,11 @@
             app:destination="@id/playlistsDialogFragment" />
         <action
             android:id="@+id/action_trackDetailsFragment_self"
-            app:destination="@id/trackDetailsFragment" />
+            app:destination="@id/trackDetailsFragment"
+            app:enterAnim="@animator/slide_left_enter"
+            app:exitAnim="@animator/slide_left_exit"
+            app:popEnterAnim="@animator/slide_right_enter"
+            app:popExitAnim="@animator/slide_right_exit" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
