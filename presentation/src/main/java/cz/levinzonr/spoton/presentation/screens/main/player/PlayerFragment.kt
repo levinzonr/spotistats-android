@@ -37,6 +37,7 @@ class PlayerFragment : BaseFragment<State>() {
         playerRetryBtn.setOnClickListener {
             viewModel.dispatch(Action.RetryConnectionPressed)
         }
+
     }
 
     override fun renderState(state: State) {
@@ -62,8 +63,12 @@ class PlayerFragment : BaseFragment<State>() {
         trackNameTv.text = state.track.artist.name
         playerContent.isVisible = true
         playerError.isVisible = false
-    }
 
+        trackImageIv.setOnClickListener {
+            viewModel.dispatch(Action.PlayerTrackActionPressed(state.track.uri.split(":").last()))
+        }
+
+    }
 
     private fun renderPlayerError(throwable: Throwable) {
         playerContent.isVisible = false

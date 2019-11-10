@@ -6,6 +6,7 @@ import com.ww.roxie.BaseChange
 import com.ww.roxie.BaseState
 import cz.levinzonr.spoton.domain.models.RemotePlayerState
 import cz.levinzonr.spoton.models.TrackResponse
+import cz.levinzonr.spoton.presentation.navigation.Route
 import cz.levinzonr.spoton.presentation.util.SingleEvent
 import io.reactivex.Single
 
@@ -16,12 +17,14 @@ sealed class Action : BaseAction {
     object NextTrackPressed: Action()
     object PreviousTrackPressed: Action()
     object RetryConnectionPressed: Action()
+    data class PlayerTrackActionPressed(val trackId: String): Action()
 }
 
 sealed class Change : BaseChange {
     data class TrackDetailsLoaded(val trackResponse: TrackResponse) : Change()
     data class RemotePlayerReady(val state: PlayerState) : Change()
     object RemotePlayerReading : Change()
+    data class Navigation(val route: Route) : Change()
     data class RemotePlayerError(val throwable: Throwable):  Change()
     data class PlayerActionSuccess(val message: String) : Change()
     data class PlayerActionError(val throwable: Throwable) : Change()

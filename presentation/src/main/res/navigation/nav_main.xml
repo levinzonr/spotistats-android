@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_profileFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_trackDetailsFragment"
+            app:destination="@id/trackDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/trackDetailsFragment"
@@ -50,6 +53,7 @@
             android:name="trackIds"
             app:argType="string[]" />
     </dialog>
+
 
 
 </navigation>
