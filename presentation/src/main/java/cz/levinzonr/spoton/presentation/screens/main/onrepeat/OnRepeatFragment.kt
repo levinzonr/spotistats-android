@@ -12,8 +12,11 @@ import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.base.BaseFragment
 import cz.levinzonr.spoton.presentation.base.TrackOptionsDialog
 import cz.levinzonr.spoton.presentation.extensions.showOptionsDialog
+import cz.levinzonr.spoton.presentation.views.AppDialog
 import kotlinx.android.synthetic.main.fragment_on_repeat.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -74,10 +77,20 @@ class OnRepeatFragment : BaseFragment<State>(), TrackListAdapter.TrackItemListen
     private fun onOptionSelected(id: Int, tracks: List<TrackResponse>) {
         when(id) {
             R.id.tracksAddTopPlaylistBtn -> viewModel.dispatch(Action.AddToPlaylistAction(tracks))
-            R.id.tracksNewPlaylistBtn -> viewModel.dispatch(Action.CreatePlaylistAction(tracks, "Name"))
+            R.id.tracksNewPlaylistBtn -> showCreatePlaylistDialog(tracks)
         }
     }
 
+    private fun showCreatePlaylistDialog(tracks: List<TrackResponse>) {
+        val format = SimpleDateFormat("dd MMMM", Locale.getDefault())
+        val defaultName = "Created by SpotOn on " + format.format(Date())
+        AppDialog.Builder(context)
+                .setTitle(getString(R.string.playlist_create_title))
+                .setMessage(getString(R.string.playlist_create_message))
+                .setInputField(getString(R.string.playlist_create_hint), defaultName) {
+                    viewModel.dispatch(Action.CreatePlaylistAction(tracks, it))
+                }.show()
+    }
 
     private fun setupRecyclerView() {
         shortAdapter = TrackListAdapter(this)

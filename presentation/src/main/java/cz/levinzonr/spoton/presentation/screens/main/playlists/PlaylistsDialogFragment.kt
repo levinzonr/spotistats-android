@@ -13,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import cz.levinzonr.spoton.models.PlaylistResponse
 import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.extensions.observeNonNull
+import cz.levinzonr.spoton.presentation.views.AppDialog
 import kotlinx.android.synthetic.main.fragment_playlists_dialog.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -52,14 +53,14 @@ class PlaylistsDialogFragment : BottomSheetDialogFragment(), PlaylistsAdapter.Pl
         }
     }
 
-    private fun renderConfirmationDialog(playlistResponse: PlaylistResponse) = AlertDialog.Builder(context)
+    private fun renderConfirmationDialog(playlistResponse: PlaylistResponse) = AppDialog.Builder(context)
             .setTitle("Duplicates")
             .setMessage("Some of the tracks are already present in this playlist, add them anyway?")
-            .setPositiveButton("Skip duplicates") { dialogInterface, i ->
+            .setPositiveButton("Skip duplicates") { dialogInterface ->
                 viewModel.dispatch(Action.PlaylistClicked(playlistResponse, true))
                 dialogInterface.dismiss()
             }
-            .setNegativeButton("Add anyway") { dialogInterface, i ->
+            .setNegativeButton("Add anyway") { dialogInterface  ->
                 viewModel.dispatch(Action.PlaylistClicked(playlistResponse, false))
                 dialogInterface.dismiss()
 

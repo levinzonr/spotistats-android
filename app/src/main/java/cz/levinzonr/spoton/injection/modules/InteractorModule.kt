@@ -14,4 +14,5 @@ val interactorModule = module {
     factory { GetTrackDetailsInteractor(get(named(Constants.CLIENT_API))) }
     factory { GetPlaylistsInteractor(get(named(Constants.CLIENT_API))) }
     factory { AddTracksToPlaylistInteractor(get(named(Constants.CLIENT_API))) }
+    factory { AddTracksToNewPlaylistInteractor(get(), get(named(Constants.CLIENT_API))) }
 }

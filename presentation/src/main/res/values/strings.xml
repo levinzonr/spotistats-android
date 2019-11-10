@@ -49,5 +49,10 @@
     <string name="profile_recent_playlists">Recent playlists</string>
     <string name="player_error_message">There was an error connecting to your Spotify Player</string>
     <string name="default_retry">Retry</string>
+    <string name="default_confirm">Confirm</string>
+    <string name="default_cancel">Cancel</string>
+    <string name="playlist_create_title">New Playlist</string>
+    <string name="playlist_create_message">Create new playlist to add your favorite tracks to</string>
+    <string name="playlist_create_hint">Playlist name</string>
 
 </resources>

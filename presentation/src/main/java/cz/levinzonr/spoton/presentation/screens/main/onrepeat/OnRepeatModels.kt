@@ -24,12 +24,14 @@ sealed class Change: BaseChange {
     data class Navigation(val route: Route) : Change()
     data class TracksLoaded(val items: Tracks) : Change()
     data class TracksLoadingError(val throwable: Throwable) : Change()
+    object PlaylistCreated: Change()
 }
 
 
 data class State(
         val isLoading: Boolean = false,
         val error: SingleEvent<ViewError>? = null,
+        val playlistCreated: SingleEvent<Unit>? = null,
         val tracks: Tracks? = null
 ) : BaseState
 

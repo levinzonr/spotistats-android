@@ -2,6 +2,7 @@ package cz.levinzonr.spoton.domain.interactors
 
 import cz.levinzonr.spoton.domain.extensions.safeInteractorCall
 import cz.levinzonr.spoton.domain.extensions.spotifyTrackUri
+import cz.levinzonr.spoton.models.AddTracksToPlaylistRequest
 import cz.levinzonr.spoton.models.PlaylistResponse
 import cz.levinzonr.spoton.network.Api
 
@@ -18,11 +19,12 @@ class AddTracksToPlaylistInteractor(
             val playlist = api.getPlaylistById(input.playlist.id)
             val uris = playlist.tracks.items.map { it.track.id }
             val noDuplicates = uris.none { input.ids.contains(it) }
+            val request = AddTracksToPlaylistRequest(input.ids.map { it.spotifyTrackUri })
             if (input.skipRepeated == null) {
 
                 // just add
                 if (noDuplicates) {
-                    api.addTrackToPlaylist(input.playlist.id, input.ids.map { it.spotifyTrackUri })
+                    api.addTrackToPlaylist(input.playlist.id, request)
                     return@safeInteractorCall true
                 } else {
                     return@safeInteractorCall false
@@ -31,7 +33,7 @@ class AddTracksToPlaylistInteractor(
             } else {
                 val toAdd = if (input.skipRepeated) input.ids.filterNot { uris.contains(it) } else input.ids
                 if (toAdd.isEmpty()) return@safeInteractorCall true
-                api.addTrackToPlaylist(input.playlist.id, toAdd.map { it.spotifyTrackUri })
+                api.addTrackToPlaylist(input.playlist.id, AddTracksToPlaylistRequest(toAdd.map { it.spotifyTrackUri }))
                 return@safeInteractorCall true
 
             }
