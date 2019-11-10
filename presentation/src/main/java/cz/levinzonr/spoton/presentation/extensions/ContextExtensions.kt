@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import cz.levinzonr.spoton.models.DarkMode
+import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.base.BaseOptionsDialog
 import timber.log.Timber
 
@@ -94,6 +95,15 @@ fun ViewGroup.inflate(@LayoutRes id: Int): View {
 
 fun Fragment.dpToPx(dp: Int): Int {
     return requireContext().dpToPx(dp)
+}
+
+fun DarkMode.toUIMessage(context: Context) : String {
+    val rest = when(this) {
+        DarkMode.Enabled -> R.string.darkmode_enabled
+        DarkMode.Disabled -> R.string.darkmode_disabled
+        DarkMode.FollowSystem -> R.string.darkmode_system
+    }
+    return context.getString(rest)
 }
 
 fun Context.dpToPx(dp: Int): Int {

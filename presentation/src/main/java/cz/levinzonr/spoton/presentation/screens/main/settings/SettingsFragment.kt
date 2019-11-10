@@ -13,6 +13,7 @@ import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.base.BaseFragment
 import cz.levinzonr.spoton.presentation.base.BaseViewModel
 import cz.levinzonr.spoton.presentation.extensions.setDarkMode
+import cz.levinzonr.spoton.presentation.extensions.toUIMessage
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -39,14 +40,14 @@ class SettingsFragment : BaseFragment<State>() {
     }
 
     override fun renderState(state: State) {
-        settingsDarkModeBtn.value = state.darkMode.name
+        settingsDarkModeBtn.value = state.darkMode.toUIMessage(requireContext())
         setDarkMode(state.darkMode)
         state.showDarkModeDialog?.consume()?.let(this::showSelectDarkModeDialog)
 
     }
 
     private fun showSelectDarkModeDialog(darkMode: DarkMode) = AlertDialog.Builder(context)
-            .setSingleChoiceItems(DarkMode.values().map { it.name }.toTypedArray(), darkMode.ordinal) { d, i ->
+            .setSingleChoiceItems(DarkMode.values().map { it.toUIMessage(requireContext()) }.toTypedArray(), darkMode.ordinal) { d, i ->
                 viewModel.dispatch(Action.DarkModePrefSelected(DarkMode.values()[i]))
                 d.dismiss()
             }.show()

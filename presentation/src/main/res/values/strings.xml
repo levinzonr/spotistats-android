@@ -55,4 +55,8 @@
     <string name="playlist_create_message">Create new playlist to add your favorite tracks to</string>
     <string name="playlist_create_hint">Playlist name</string>
 
+    <string name="darkmode_enabled">Enabled</string>
+    <string name="darkmode_disabled">Disabled</string>
+    <string name="darkmode_system">Systems default</string>
+
 </resources>
