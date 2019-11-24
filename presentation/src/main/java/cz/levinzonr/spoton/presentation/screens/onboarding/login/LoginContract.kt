@@ -2,9 +2,9 @@ package cz.levinzonr.spoton.presentation.screens.onboarding.login
 
 import android.content.Intent
 import androidx.fragment.app.Fragment
-import com.ww.roxie.BaseAction
-import com.ww.roxie.BaseChange
-import com.ww.roxie.BaseState
+import cz.levinzonr.roxie.BaseAction
+import cz.levinzonr.roxie.BaseChange
+import cz.levinzonr.roxie.BaseState
 
 data class State(val isLoading: Boolean) : BaseState
 

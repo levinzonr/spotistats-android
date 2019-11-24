@@ -1,8 +1,8 @@
 package cz.levinzonr.spoton.presentation.screens.main.onrepeat
 
-import com.ww.roxie.BaseAction
-import com.ww.roxie.BaseChange
-import com.ww.roxie.BaseState
+import cz.levinzonr.roxie.BaseAction
+import cz.levinzonr.roxie.BaseChange
+import cz.levinzonr.roxie.BaseState
 import cz.levinzonr.spoton.domain.models.Tracks
 import cz.levinzonr.spoton.models.TrackResponse
 import cz.levinzonr.spoton.presentation.navigation.Route

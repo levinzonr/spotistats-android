@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.ww.roxie.BaseState
+import cz.levinzonr.roxie.BaseState
 import cz.levinzonr.spoton.presentation.extensions.observeNonNull
 import cz.levinzonr.spoton.presentation.navigation.Route
 import cz.levinzonr.spoton.presentation.screens.main.MainActivity

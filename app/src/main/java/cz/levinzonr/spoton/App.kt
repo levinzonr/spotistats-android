@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
-import com.ww.roxie.Roxie
+import cz.levinzonr.roxie.Roxie
 import cz.levinzonr.spoton.inititializers.AppInitializer
 import cz.levinzonr.spoton.injection.modules.appModule
 import cz.levinzonr.spoton.presentation.extensions.setDarkMode

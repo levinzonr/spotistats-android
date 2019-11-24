@@ -1,8 +1,8 @@
 package cz.levinzonr.spoton.presentation.screens.main.trackdetails
 
-import com.ww.roxie.BaseAction
-import com.ww.roxie.BaseChange
-import com.ww.roxie.BaseState
+import cz.levinzonr.roxie.BaseAction
+import cz.levinzonr.roxie.BaseChange
+import cz.levinzonr.roxie.BaseState
 import cz.levinzonr.spoton.domain.models.RemotePlayerState
 import cz.levinzonr.spoton.models.RecommendedTracks
 import cz.levinzonr.spoton.models.TrackFeaturesResponse
