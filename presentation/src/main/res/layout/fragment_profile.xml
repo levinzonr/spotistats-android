@@ -14,13 +14,13 @@
 
 
         <ImageView
+            android:src="@drawable/ic_profile_placeholder"
             android:id="@+id/userAvaterIv"
             android:layout_width="80dp"
             android:layout_height="80dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settingsBtn"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toBottomOf="@+id/settingsBtn" />
 
 
         <TextView

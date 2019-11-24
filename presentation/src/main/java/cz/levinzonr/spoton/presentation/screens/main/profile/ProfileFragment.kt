@@ -69,6 +69,8 @@ class ProfileFragment : BaseFragment<State>(), RecentPlaylistsAdapter.RecentPlay
         userPlaylistsCountView.setScore(R.string.profile_playlists, user.playlistCount.toString())
         userAvaterIv.load(user.imageUrl) {
             transformations(CircleCropTransformation())
+            error(R.drawable.ic_profile_placeholder)
+            placeholder(R.drawable.ic_profile_placeholder)
         }
     }
 
