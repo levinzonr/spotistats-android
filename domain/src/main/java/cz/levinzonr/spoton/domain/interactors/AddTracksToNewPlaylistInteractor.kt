@@ -18,7 +18,7 @@ class AddTracksToNewPlaylistInteractor(
 
     override suspend fun invoke(): CompleteResult<PlaylistUpdatedResponse> = safeInteractorCall {
         requireNotNull(input).let { input ->
-            val request = CreatePlaylistRequest(input.name, "Playlist created by SpotOn Application")
+            val request = CreatePlaylistRequest(input.name, "Playlist created by SpotiFaves Application")
             val userId = userRepository.getCurrentUserProfile().id
             val playlist = api.createPlaylist(userId, request)
             api.addTrackToPlaylist(playlist.id, AddTracksToPlaylistRequest(input.tracks.map { it.spotifyTrackUri }))

@@ -83,7 +83,7 @@ class OnRepeatFragment : BaseFragment<State>(), TrackListAdapter.TrackItemListen
 
     private fun showCreatePlaylistDialog(tracks: List<TrackResponse>) {
         val format = SimpleDateFormat("dd MMMM", Locale.getDefault())
-        val defaultName = "Created by SpotOn on " + format.format(Date())
+        val defaultName = "Created by SpotiFaves on " + format.format(Date())
         AppDialog.Builder(context)
                 .setTitle(getString(R.string.playlist_create_title))
                 .setMessage(getString(R.string.playlist_create_message))

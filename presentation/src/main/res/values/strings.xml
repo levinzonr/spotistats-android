@@ -38,13 +38,13 @@
     <string name="track_feature_liveness">Liveness</string>
     <string name="track_feature_key">Key</string>
 
-    <string name="onboarding_title_1">Welcome to SpotOn!</string>
+    <string name="onboarding_title_1">Welcome to SpotiFavess!</string>
     <string name="onboarding_title_2">Re-live Your favorite music</string>
     <string name="onboarding_title_3">One click away</string>
 
-    <string name="onboarding_message_1">SpotOn allows to you view your most listened music on Spotify over the years.</string>
+    <string name="onboarding_message_1">SpotiFaves allows to you view your most listened music on Spotify over the years.</string>
     <string name="onboarding_message_2">Add them to Your playlits once again, learn interesting facts about their audio-features and more</string>
-    <string name="onboarding_message_3">SpotOn requires your permission to access your music library</string>
+    <string name="onboarding_message_3">SpotiFaves requires your permission to access your music library</string>
     <string name="onboarding_login_btn">Login With Spotify</string>
     <string name="profile_recent_playlists">Recent playlists</string>
     <string name="player_error_message">There was an error connecting to your Spotify Player</string>

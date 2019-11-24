@@ -73,7 +73,7 @@ android {
             deploy = "release"
             hockeyAppId = ""
             manifestPlaceholders = [
-                    APP_NAME: "SpotOn"
+                    APP_NAME: "SpotiFaves"
             ]
             buildConfigField "String", "CLIENT_ID", "\"${spotifyProps['client_id']}\""
             buildConfigField "String", "CLIENT_SECRET", "\"${spotifyProps['client_secret']}\""
