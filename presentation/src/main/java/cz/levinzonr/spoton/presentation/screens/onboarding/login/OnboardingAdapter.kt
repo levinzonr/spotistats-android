@@ -30,7 +30,7 @@ class OnboardingAdapter(var onLoginClicked: (() -> Unit)? = null) : RecyclerView
                 0 -> {
                     view.onboardingTitle.setText(R.string.onboarding_title_1)
                     view.onboardingMessage.setText(R.string.onboarding_message_1)
-                    view.imageView.setImageResource(R.drawable.ic_album_black_24dp)
+                    view.imageView.setImageResource(R.drawable.ic_app)
                 }
                 1 -> {
                     view.onboardingTitle.setText(R.string.onboarding_title_2)
