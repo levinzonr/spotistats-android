@@ -49,7 +49,7 @@ android {
     signingConfigs {
         release {
             keyAlias keystoreProps['keyAlias']
-            keyPassword keystoreProps['keyAlias']
+            keyPassword keystoreProps['keyPassword']
             storeFile file('../spoton.keystore')
             storePassword keystoreProps['storePassword']
         }
