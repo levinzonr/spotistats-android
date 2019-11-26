@@ -51,6 +51,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
 
+    implementation 'cz.levinzonr:roxie:1.0.0-test'
+
+
     // Koin for Android
     implementation "org.koin:koin-android:${versions.koin}"
     // Koin Android Scope features
@@ -62,7 +65,6 @@ dependencies {
 
     implementation("io.coil-kt:coil:0.7.0")
 
-    implementation 'cz.levinzonr.roxie:sdk:1.5-LOCAL'
     testImplementation 'junit:junit:4.12'
     implementation "io.reactivex.rxjava2:rxandroid:${versions.rx_android}"
     implementation "io.reactivex.rxjava2:rxjava:${versions.rx_java}"
@@ -76,5 +78,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
     implementation 'me.relex:circleindicator:2.1.4'
+
 
 }
