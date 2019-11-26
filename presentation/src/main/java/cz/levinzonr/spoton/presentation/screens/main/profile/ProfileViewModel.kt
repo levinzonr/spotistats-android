@@ -26,10 +26,7 @@ class ProfileViewModel(
             is Change.ProfileLoading -> state.copy(isLoading = true)
             is Change.ProfileLoaded -> state.copy(isLoading = false, user = change.user)
             is Change.ProfileLoadingError -> state.copy(isLoading = false)
-
             is Change.Navigation -> state.also { navigateTo(change.route) }
-
-
             is Change.RecentPlaylistsError -> state.copy()
             is Change.RecentPlaylistsLoded -> state.copy(recentPlaylists = change.playlists)
         }
@@ -49,10 +46,9 @@ class ProfileViewModel(
     }
 
 
-    private fun bindPlayPlaylistAction(playlist: PlaylistResponse, shuffled: Boolean): Flow<Change> = flow {
+    private fun bindPlayPlaylistAction(playlist: PlaylistResponse, shuffled: Boolean): Flow<Change> = flowOnIO {
         spotifyRemoteManager.shuffle(shuffled)
         spotifyRemoteManager.play("spotify:playlist:${playlist.id}")
-
     }
 
 
