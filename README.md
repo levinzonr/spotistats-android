@@ -1,20 +1,3 @@
-## 📖 Project description
+## Install from PlayStore
 
-
-## 🔧 Installation
-1. `git clone `
-2. Run Gradle Sync
-3. Rebuild to generate Dagger classes
-
-## 🔗 Useful links
-* [Jira board]()
-
-## 🌲 Branches
-* `master` - Latest version on Google Play.
-* `develop` - Updated work. Feature branches are merged in when complete and then deleted. 
-
-## ⚠️ Things to know
-
-
-## 💻 Developers
-- [Name](https://github.com/) (@slackname)
+<a href='https://play.google.com/store/apps/details?id=cz.levinzonr.spoton&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
