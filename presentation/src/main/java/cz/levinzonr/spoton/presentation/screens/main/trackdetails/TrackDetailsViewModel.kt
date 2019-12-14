@@ -152,9 +152,4 @@ class TrackDetailsViewModel(
             is RemotePlayerState.Initilizing -> emit(Change.RemoteStateLoading(remotePlayerState))
         }
     }
-
-    override fun onCleared() {
-        super.onCleared()
-        spotifyRemoteManager.disconnect()
-    }
 }
