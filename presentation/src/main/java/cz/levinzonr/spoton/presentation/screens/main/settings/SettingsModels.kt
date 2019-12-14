@@ -25,4 +25,5 @@ sealed class Change: BaseChange {
 
 data class State(
         val darkMode: DarkMode,
+        val versionName: String,
         val showDarkModeDialog: SingleEvent<DarkMode>? = null) : BaseState

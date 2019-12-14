@@ -1,5 +1,6 @@
 package cz.levinzonr.spoton.presentation.screens.main.settings
 
+import cz.levinzonr.spoton.domain.managers.AppConfig
 import cz.levinzonr.spoton.domain.managers.UserManager
 import cz.levinzonr.spoton.models.DarkMode
 import cz.levinzonr.spoton.presentation.base.BaseViewModel
@@ -11,11 +12,15 @@ import kotlinx.coroutines.flow.flow
 
 class SettingsViewModel(
         private val userManager: UserManager,
-        private val settingsRepository: SettingsRepository
+        private val settingsRepository: SettingsRepository,
+        private val appConfig: AppConfig
 ) : BaseViewModel<Action, Change, State>() {
 
 
-    override val initialState: State = State(settingsRepository.darkModeState)
+    override val initialState: State = State(
+            darkMode = settingsRepository.darkModeState,
+            versionName = "Version ${appConfig.versionName} (${appConfig.versionCode})"
+    )
 
 
     override val reducer: suspend (state: State, change: Change) -> State = { state, change ->
