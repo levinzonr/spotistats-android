@@ -58,5 +58,9 @@
     <string name="darkmode_enabled">Enabled</string>
     <string name="darkmode_disabled">Disabled</string>
     <string name="darkmode_system">Systems default</string>
+    <string name="update_title">Update Available</string>
+    <string name="update_later_button">Remind later</string>
+    <string name="update_now_button">Update</string>
+    <string name="update_message">New version of SpotiFaves is available! Make sure to update as it may contain some important bug fixes and new features for you to try out</string>
 
 </resources>
