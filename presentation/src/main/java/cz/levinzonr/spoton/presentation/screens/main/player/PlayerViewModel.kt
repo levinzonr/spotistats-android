@@ -1,8 +1,10 @@
 package cz.levinzonr.spoton.presentation.screens.main.player
 
 import cz.levinzonr.spoton.domain.interactors.GetTrackDetailsInteractor
+import cz.levinzonr.spoton.domain.interactors.player.PlayNextInteractor
+import cz.levinzonr.spoton.domain.interactors.player.PlayPreviousInteractor
+import cz.levinzonr.spoton.domain.interactors.player.TogglePlayInteractor
 import cz.levinzonr.spoton.domain.managers.SpotifyRemoteManager
-import cz.levinzonr.spoton.domain.models.PlayerActionResult
 import cz.levinzonr.spoton.domain.models.RemotePlayerState
 import cz.levinzonr.spoton.presentation.base.BaseViewModel
 import cz.levinzonr.spoton.presentation.extensions.flowOnIO
@@ -10,17 +12,18 @@ import cz.levinzonr.spoton.presentation.extensions.flowOnMain
 import cz.levinzonr.spoton.presentation.extensions.isError
 import cz.levinzonr.spoton.presentation.extensions.isSuccess
 import cz.levinzonr.spoton.presentation.navigation.Route
-import cz.levinzonr.spoton.presentation.screens.main.profile.ProfileFragment
 import cz.levinzonr.spoton.presentation.screens.main.profile.ProfileFragmentDirections
 import cz.levinzonr.spoton.presentation.util.SingleEvent
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 
 class PlayerViewModel(
         private val spotifyRemoteManager: SpotifyRemoteManager,
-        private val getTrackDetailsInteractor: GetTrackDetailsInteractor
+        private val getTrackDetailsInteractor: GetTrackDetailsInteractor,
+        private val playNextInteractor: PlayNextInteractor,
+        private val togglePlayInteractor: TogglePlayInteractor,
+        private val playPreviousInteractor: PlayPreviousInteractor
 ) : BaseViewModel<Action, Change, State>() {
 
     override val initialState: State = State()
@@ -49,8 +52,8 @@ class PlayerViewModel(
             is Action.PlayerTrackActionPressed -> bindPlayerTrackPressedAction(action.trackId)
             is Action.RemotePlayerStateUpdated -> bindRemoteStateUpdate(action.remotePlayerState)
             is Action.NextTrackPressed -> bindNextTrackPressed()
-            is Action.PreviousTrackPressed -> flowOnIO { spotifyRemoteManager.previous() }
-            is Action.PlayTrackPressed -> flowOnIO { spotifyRemoteManager.toggle()}
+            is Action.PreviousTrackPressed ->  bindPreviousTrackPressed()
+            is Action.PlayTrackPressed -> bindPlayTrackPressed()
             is Action.RetryConnectionPressed -> flowOnMain {
                 spotifyRemoteManager.disconnect()
                 spotifyRemoteManager.connect()
@@ -60,9 +63,18 @@ class PlayerViewModel(
 
 
     private fun bindNextTrackPressed() : Flow<Change> = flowOnIO {
-        when(val result = spotifyRemoteManager.next()) {
-             is PlayerActionResult.Error -> emit(Change.PlayerActionError(result.error))
-        }
+        playNextInteractor()
+                .isError { emit(Change.PlayerActionError(it)) }
+    }
+
+    private fun bindPreviousTrackPressed() : Flow<Change> = flowOnIO {
+        playPreviousInteractor()
+                .isError { emit(Change.PlayerActionError(it)) }
+    }
+
+    private fun bindPlayTrackPressed() : Flow<Change> = flowOnIO {
+        togglePlayInteractor()
+                .isError { emit(Change.PlayerActionError(it)) }
     }
 
     private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState): Flow<Change> = flowOnIO {

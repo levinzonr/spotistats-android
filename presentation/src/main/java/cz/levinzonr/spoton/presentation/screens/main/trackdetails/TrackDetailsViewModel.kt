@@ -4,8 +4,9 @@ import cz.levinzonr.spoton.domain.extensions.spotifyTrackUri
 import cz.levinzonr.spoton.domain.interactors.GetRecommendedTracks
 import cz.levinzonr.spoton.domain.interactors.GetTrackDetailsInteractor
 import cz.levinzonr.spoton.domain.interactors.GetTrackFeatures
+import cz.levinzonr.spoton.domain.interactors.player.AddContentToQueueInteractor
+import cz.levinzonr.spoton.domain.interactors.player.PlayContentInteractor
 import cz.levinzonr.spoton.domain.managers.SpotifyRemoteManager
-import cz.levinzonr.spoton.domain.models.PlayerActionResult
 import cz.levinzonr.spoton.domain.models.RemotePlayerState
 import cz.levinzonr.spoton.models.TrackResponse
 import cz.levinzonr.spoton.presentation.base.BaseViewModel
@@ -25,7 +26,9 @@ class TrackDetailsViewModel(
         private val getRecommendedTracks: GetRecommendedTracks,
         private val spotifyRemoteManager: SpotifyRemoteManager,
         private val getTrackFeatures: GetTrackFeatures,
-        private val getTrackDetailsInteractor: GetTrackDetailsInteractor
+        private val getTrackDetailsInteractor: GetTrackDetailsInteractor,
+        private val addContentToQueueInteractor: AddContentToQueueInteractor,
+        private val playContentInteractor: PlayContentInteractor
 ) : BaseViewModel<Action, Change, State>() {
 
     override val initialState: State = State()
@@ -94,19 +97,20 @@ class TrackDetailsViewModel(
 
     }
 
-    private fun bindPlayTrackAction(id: String) : Flow<Change> = flowOnIO {
-
+    private fun bindPlayTrackAction(id: String): Flow<Change> = flowOnIO {
         val isPlaying = currentState.isPlaying
-        when(val result = if (isPlaying) spotifyRemoteManager.pause() else spotifyRemoteManager.play(id.spotifyTrackUri)) {
-            is PlayerActionResult.Success -> emit(Change.PlayerActionSuccess("Track playback started"))
-            is PlayerActionResult.Error -> emit(Change.PlayerActionError("Error playing track (${result.message}"))
-        }    }
+        playContentInteractor.input = PlayContentInteractor.Input(id.spotifyTrackUri)
+        playContentInteractor()
+                .isSuccess { if (!isPlaying) emit(Change.PlayerActionSuccess("Track playback started")) }
+                .isError { emit(Change.PlayerActionError("Error playing track (${it.message}")) }
 
-    private fun bindQueueTrackAction(id: String) : Flow<Change> = flowOnIO {
-        when(val result = spotifyRemoteManager.addToQueue(id.spotifyTrackUri)) {
-            is PlayerActionResult.Success -> emit(Change.PlayerActionSuccess("Added to queue"))
-            is PlayerActionResult.Error -> emit(Change.PlayerActionError("Error adding to gueue (${result.message}"))
-        }
+    }
+
+    private fun bindQueueTrackAction(id: String): Flow<Change> = flowOnIO {
+        addContentToQueueInteractor.input = AddContentToQueueInteractor.Input(id.spotifyTrackUri)
+        addContentToQueueInteractor()
+                .isSuccess { emit(Change.PlayerActionSuccess("Added to queue")) }
+                .isError { emit(Change.PlayerActionError("Error adding to gueue (${it.message}")) }
     }
 
     private fun bindLoadTrackAction(id: String): Flow<Change> = flowOnIO {
@@ -131,7 +135,7 @@ class TrackDetailsViewModel(
                 .isError { emit(Change.RecommendedLoadingError(it)) }
     }
 
-    private fun bindAddToPlaylistAction(trackId: String) : Flow<Change> = flow {
+    private fun bindAddToPlaylistAction(trackId: String): Flow<Change> = flow {
         val route = Route.Destination(TrackDetailsFragmentDirections.actionTrackDetailsFragmentToPlaylistsDialogFragment(arrayOf(trackId)))
         emit(Change.Navigation(route))
     }
@@ -141,14 +145,15 @@ class TrackDetailsViewModel(
         emit(Change.Navigation(route))
     }
 
-    private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState) : Flow<Change> = flow {
-        when(remotePlayerState) {
+    private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState): Flow<Change> = flow {
+        when (remotePlayerState) {
             is RemotePlayerState.Ready -> {
                 val currentTrack = remotePlayerState.state.track?.uri == trackId.spotifyTrackUri
                 emit(Change.TrackPlaying(currentTrack && !remotePlayerState.state.isPaused))
                 emit(Change.RemoteStateReady(remotePlayerState))
             }
-            is RemotePlayerState.Error -> emit(Change.RemoteStateError(remotePlayerState, remotePlayerState.throwable ?: Exception("Null")))
+            is RemotePlayerState.Error -> emit(Change.RemoteStateError(remotePlayerState, remotePlayerState.throwable
+                    ?: Exception("Null")))
             is RemotePlayerState.Initilizing -> emit(Change.RemoteStateLoading(remotePlayerState))
         }
     }
