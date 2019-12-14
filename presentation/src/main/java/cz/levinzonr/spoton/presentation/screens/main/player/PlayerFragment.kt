@@ -70,6 +70,7 @@ class PlayerFragment : BaseFragment<State>() {
 
     }
 
+
     private fun renderPlayerError(throwable: Throwable) {
         playerContent.isVisible = false
         playerError.isVisible = true

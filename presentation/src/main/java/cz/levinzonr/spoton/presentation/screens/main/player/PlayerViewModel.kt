@@ -2,6 +2,7 @@ package cz.levinzonr.spoton.presentation.screens.main.player
 
 import cz.levinzonr.spoton.domain.interactors.GetTrackDetailsInteractor
 import cz.levinzonr.spoton.domain.managers.SpotifyRemoteManager
+import cz.levinzonr.spoton.domain.models.PlayerActionResult
 import cz.levinzonr.spoton.domain.models.RemotePlayerState
 import cz.levinzonr.spoton.presentation.base.BaseViewModel
 import cz.levinzonr.spoton.presentation.extensions.flowOnIO
@@ -13,6 +14,7 @@ import cz.levinzonr.spoton.presentation.screens.main.profile.ProfileFragment
 import cz.levinzonr.spoton.presentation.screens.main.profile.ProfileFragmentDirections
 import cz.levinzonr.spoton.presentation.util.SingleEvent
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 
@@ -46,9 +48,9 @@ class PlayerViewModel(
         return when (action) {
             is Action.PlayerTrackActionPressed -> bindPlayerTrackPressedAction(action.trackId)
             is Action.RemotePlayerStateUpdated -> bindRemoteStateUpdate(action.remotePlayerState)
-            is Action.NextTrackPressed -> flowOnIO { spotifyRemoteManager.next() }
+            is Action.NextTrackPressed -> bindNextTrackPressed()
             is Action.PreviousTrackPressed -> flowOnIO { spotifyRemoteManager.previous() }
-            is Action.PlayTrackPressed -> flowOnIO { spotifyRemoteManager.toggle() }
+            is Action.PlayTrackPressed -> flowOnIO { spotifyRemoteManager.toggle()}
             is Action.RetryConnectionPressed -> flowOnMain {
                 spotifyRemoteManager.disconnect()
                 spotifyRemoteManager.connect()
@@ -56,6 +58,12 @@ class PlayerViewModel(
         }
     }
 
+
+    private fun bindNextTrackPressed() : Flow<Change> = flowOnIO {
+        when(val result = spotifyRemoteManager.next()) {
+             is PlayerActionResult.Error -> emit(Change.PlayerActionError(result.error))
+        }
+    }
 
     private fun bindRemoteStateUpdate(remotePlayerState: RemotePlayerState): Flow<Change> = flowOnIO {
         when (remotePlayerState) {
@@ -74,6 +82,7 @@ class PlayerViewModel(
             is RemotePlayerState.Initilizing -> emit(Change.RemotePlayerReading)
         }
     }
+
 
     private fun bindPlayerTrackPressedAction(id: String) : Flow<Change> = flow {
         val route = Route.Destination(ProfileFragmentDirections.actionProfileFragmentToTrackDetailsFragment(id))
