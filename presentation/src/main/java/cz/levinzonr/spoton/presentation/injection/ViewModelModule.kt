@@ -1,5 +1,6 @@
 package cz.levinzonr.spoton.presentation.injection
 
+import cz.levinzonr.spoton.presentation.screens.main.MainViewModel
 import cz.levinzonr.spoton.presentation.screens.main.onrepeat.OnRepeatViewModel
 import cz.levinzonr.spoton.presentation.screens.main.player.PlayerViewModel
 import cz.levinzonr.spoton.presentation.screens.main.playlists.PlaylistsViewModel
@@ -14,7 +15,7 @@ import org.koin.dsl.module
 
 val viewModels = module {
 
-    viewModel { SplashViewModel(get()) }
+    viewModel { SplashViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { OnRepeatViewModel(get(), get()) }
     viewModel { ProfileViewModel(get(), get(), get()) }
@@ -22,4 +23,5 @@ val viewModels = module {
     viewModel { SettingsViewModel(get(), get()) }
     viewModel { (id: Array<String>) -> PlaylistsViewModel(id, get(), get()) }
     viewModel { PlayerViewModel(get(), get(), get(), get(), get()) }
+    viewModel { MainViewModel(get()) }
 }

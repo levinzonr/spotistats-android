@@ -164,8 +164,8 @@ dependencies {
 
     implementation project(':spotify-app-remote-release-0.6.3')
     implementation 'cz.levinzonr:roxie:1.0.0-test'
-
-    implementation 'com.google.firebase:firebase-core:17.2.0'
+    implementation 'com.google.firebase:firebase-config:19.0.4'
+    implementation 'com.google.firebase:firebase-core:17.2.1'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
 

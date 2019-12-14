@@ -53,7 +53,6 @@ dependencies {
 
     implementation 'cz.levinzonr:roxie:1.0.0-test'
 
-
     // Koin for Android
     implementation "org.koin:koin-android:${versions.koin}"
     // Koin Android Scope features
@@ -64,6 +63,7 @@ dependencies {
     implementation "org.koin:koin-android-ext:${versions.koin}"
 
     implementation("io.coil-kt:coil:0.7.0")
+    implementation 'com.google.firebase:firebase-config:19.0.4'
 
     testImplementation 'junit:junit:4.12'
     implementation "io.reactivex.rxjava2:rxandroid:${versions.rx_android}"
