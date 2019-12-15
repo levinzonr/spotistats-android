@@ -34,7 +34,7 @@ class SettingsViewModel(
             is Change.ShowDialog -> state.copy(showDarkModeDialog = SingleEvent(change.darkMode))
             is Change.Navigation -> state.copy().also { navigateTo(change.route) }
             is Change.DeviceInfoLoaded -> state.copy(showFeedbackView = SingleEvent(change.deviceInfo))
-
+            is Change.OpenBrowser -> state.copy(openBrowser = SingleEvent(change.url))
         }
     }
 
@@ -47,7 +47,7 @@ class SettingsViewModel(
             is Action.DarkModePrefSelected -> bindSetDarkModeAction(action.darkMode)
             is Action.DarkModePreferencePressed -> bindShowDarkModeDialog()
             is Action.LogoutButtonClicked -> bindLogoutAction()
-            is Action.AboutButtonClicked -> flow {  }
+            is Action.AboutButtonClicked -> flow { emit(Change.OpenBrowser("https://github.com/levinzonr/spotistats-android")) }
             is Action.FeedbackButtonClicked -> bindFeebackButtonAction()
         }
     }

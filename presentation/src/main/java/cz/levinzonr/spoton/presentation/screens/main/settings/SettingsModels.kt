@@ -22,6 +22,7 @@ sealed class Change: BaseChange {
     data class Navigation(val route: Route): Change()
     data class ShowDialog(val darkMode: DarkMode) : Change()
     data class DeviceInfoLoaded(val deviceInfo: DeviceInfo) :Change()
+    data class OpenBrowser(val url: String) : Change()
 
 }
 
@@ -29,4 +30,6 @@ data class State(
         val darkMode: DarkMode,
         val versionName: String,
         val showFeedbackView: SingleEvent<DeviceInfo>? = null,
-        val showDarkModeDialog: SingleEvent<DarkMode>? = null) : BaseState
+        val showDarkModeDialog: SingleEvent<DarkMode>? = null,
+        val openBrowser: SingleEvent<String>? = null
+) : BaseState

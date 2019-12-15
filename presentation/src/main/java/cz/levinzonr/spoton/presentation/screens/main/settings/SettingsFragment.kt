@@ -49,7 +49,14 @@ class SettingsFragment : BaseFragment<State>() {
         settingsAboutBtn.value = state.versionName
         state.showDarkModeDialog?.consume()?.let(this::showSelectDarkModeDialog)
         state.showFeedbackView?.consume()?.let(this::showFeedbackView)
+        state.openBrowser?.consume()?.let(this::openBrowser)
 
+    }
+
+    private fun openBrowser(url: String) {
+        startActivity(Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(url)
+        })
     }
 
     private fun showSelectDarkModeDialog(darkMode: DarkMode) = AlertDialog.Builder(context)
