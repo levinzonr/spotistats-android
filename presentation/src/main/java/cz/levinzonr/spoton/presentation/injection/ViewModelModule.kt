@@ -18,7 +18,7 @@ val viewModels = module {
     viewModel { SplashViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { OnRepeatViewModel(get(), get()) }
-    viewModel { ProfileViewModel(get(), get(), get()) }
+    viewModel { ProfileViewModel(get(), get(), get(), get()) }
     viewModel { (id: String) -> TrackDetailsViewModel(id, get(), get(), get(), get(), get(), get()) }
     viewModel { SettingsViewModel(get(), get(), get()) }
     viewModel { (id: Array<String>) -> PlaylistsViewModel(id, get(), get()) }

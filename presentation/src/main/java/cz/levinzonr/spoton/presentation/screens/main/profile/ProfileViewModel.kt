@@ -2,6 +2,7 @@ package cz.levinzonr.spoton.presentation.screens.main.profile
 
 import cz.levinzonr.spoton.domain.interactors.GetPlaylistsInteractor
 import cz.levinzonr.spoton.domain.interactors.GetUserProfileInteractor
+import cz.levinzonr.spoton.domain.interactors.PlayPlaylistInteractor
 import cz.levinzonr.spoton.domain.managers.SpotifyRemoteManager
 import cz.levinzonr.spoton.models.PlaylistResponse
 import cz.levinzonr.spoton.presentation.base.BaseViewModel
@@ -16,7 +17,8 @@ import kotlinx.coroutines.flow.flow
 class ProfileViewModel(
         private val spotifyRemoteManager: SpotifyRemoteManager,
         private val getPlaylistsInteractor: GetPlaylistsInteractor,
-        private val getUserProfileInteractor: GetUserProfileInteractor)
+        private val getUserProfileInteractor: GetUserProfileInteractor,
+        private val playlistInteractor: PlayPlaylistInteractor)
     : BaseViewModel<Action, Change, State>() {
 
     override val initialState: State = State()
@@ -47,8 +49,10 @@ class ProfileViewModel(
 
 
     private fun bindPlayPlaylistAction(playlist: PlaylistResponse, shuffled: Boolean): Flow<Change> = flowOnIO {
-        spotifyRemoteManager.shuffle(shuffled)
-        spotifyRemoteManager.play("spotify:playlist:${playlist.id}")
+        playlistInteractor.input = PlayPlaylistInteractor.Input(shuffled, "spotify:playlist:${playlist.id}")
+        playlistInteractor()
+                .isSuccess { }
+                .isError {  }
     }
 
 

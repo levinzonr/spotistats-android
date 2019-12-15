@@ -27,4 +27,5 @@ val interactorModule = module {
     factory { TogglePlayInteractor(get()) }
     factory { RefreshAppConfigInteractor(get()) }
     factory { ShouldShowUpdateReminderInteractor(get(), get(), get()) }
+    factory { PlayPlaylistInteractor(get()) }
 }
