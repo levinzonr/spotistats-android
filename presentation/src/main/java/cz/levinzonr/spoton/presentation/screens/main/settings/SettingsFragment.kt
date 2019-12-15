@@ -8,14 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cz.levinzonr.spoton.models.DarkMode
-
+import cz.levinzonr.spoton.models.DeviceInfo
 import cz.levinzonr.spoton.presentation.R
 import cz.levinzonr.spoton.presentation.base.BaseFragment
-import cz.levinzonr.spoton.presentation.base.BaseViewModel
 import cz.levinzonr.spoton.presentation.extensions.setDarkMode
 import cz.levinzonr.spoton.presentation.extensions.toUIMessage
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import android.content.Intent
+import android.net.Uri
+
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -44,6 +48,7 @@ class SettingsFragment : BaseFragment<State>() {
         setDarkMode(state.darkMode)
         settingsAboutBtn.value = state.versionName
         state.showDarkModeDialog?.consume()?.let(this::showSelectDarkModeDialog)
+        state.showFeedbackView?.consume()?.let(this::showFeedbackView)
 
     }
 
@@ -52,4 +57,17 @@ class SettingsFragment : BaseFragment<State>() {
                 viewModel.dispatch(Action.DarkModePrefSelected(DarkMode.values()[i]))
                 d.dismiss()
             }.show()
+
+    private fun showFeedbackView(deviceInfo: DeviceInfo) {
+        val bodyText =  "----------------\nDevice Info: ${deviceInfo.deviceName}\n" +
+                "Android Version: ${deviceInfo.deviceOSVersion}\n" +
+                "App Info: ${deviceInfo.versionName} (${deviceInfo.versionCode})"
+
+        val mailto = "mailto:levinzon.roman@gmail.com" +
+                "?subject=" + Uri.encode(getString(R.string.feedback_subject)) +
+                "&body=" + Uri.encode(bodyText)
+
+        val intent = Intent().apply { setData(Uri.parse(mailto)) }
+        startActivity(Intent.createChooser(intent, "Send Email"))
+    }
 }

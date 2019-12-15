@@ -1,5 +1,6 @@
 package cz.levinzonr.spoton.presentation.screens.main.profile
 
+import cz.levinzonr.spoton.domain.interactors.GetDeviceInfoInteractor
 import cz.levinzonr.spoton.domain.interactors.GetPlaylistsInteractor
 import cz.levinzonr.spoton.domain.interactors.GetUserProfileInteractor
 import cz.levinzonr.spoton.domain.interactors.PlayPlaylistInteractor
@@ -11,6 +12,7 @@ import cz.levinzonr.spoton.presentation.extensions.flowOnIO
 import cz.levinzonr.spoton.presentation.extensions.isError
 import cz.levinzonr.spoton.presentation.extensions.isSuccess
 import cz.levinzonr.spoton.presentation.navigation.Route
+import cz.levinzonr.spoton.presentation.util.SingleEvent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -46,6 +48,8 @@ class ProfileViewModel(
             is Action.PlaylistPlayButtonPressed -> bindPlayPlaylistAction(action.playlist, action.shuffled)
         }
     }
+
+
 
 
     private fun bindPlayPlaylistAction(playlist: PlaylistResponse, shuffled: Boolean): Flow<Change> = flowOnIO {

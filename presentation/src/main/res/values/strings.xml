@@ -62,5 +62,6 @@
     <string name="update_later_button">Remind later</string>
     <string name="update_now_button">Update</string>
     <string name="update_message">New version of SpotiFaves is available! Make sure to update as it may contain some important bug fixes and new features for you to try out</string>
+    <string name="feedback_subject">SpotiFaves Feedback</string>
 
 </resources>
