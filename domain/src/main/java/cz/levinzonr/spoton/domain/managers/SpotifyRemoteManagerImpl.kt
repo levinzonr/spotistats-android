@@ -9,7 +9,6 @@ import com.spotify.android.appremote.api.PlayerApi
 import com.spotify.android.appremote.api.SpotifyAppRemote
 import com.spotify.protocol.client.CallResult
 import cz.levinzonr.spoton.domain.extensions.guard
-import cz.levinzonr.spoton.domain.models.PlayerActionResult
 import cz.levinzonr.spoton.domain.models.RemotePlayerState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -21,6 +20,7 @@ class SpotifyRemoteManagerImpl(
         private val params: ConnectionParams
 ) : SpotifyRemoteManager, Connector.ConnectionListener {
 
+    private var appRemote: SpotifyAppRemote? = null
 
     private fun launchOnIO(block: () -> Unit) = GlobalScope.launch {
         withContext(Dispatchers.IO) {
@@ -28,9 +28,8 @@ class SpotifyRemoteManagerImpl(
         }
     }
 
-    private fun withPlayerApi(block: (playerApi: PlayerApi) -> PlayerActionResult): PlayerActionResult {
-        return this.appRemote?.playerApi?.let(block)
-                ?: PlayerActionResult.Error(Exception(), "Init error")
+    private fun withPlayerApi(block: (playerApi: PlayerApi) -> CallResult<*>) {
+        this.appRemote?.playerApi?.let(block)?.awaitAndValidate()
     }
 
     private val _stateLiveData = MutableLiveData<RemotePlayerState>()
@@ -47,7 +46,7 @@ class SpotifyRemoteManagerImpl(
     override fun disconnect() {
         appRemote?.let(SpotifyAppRemote::disconnect)
     }
-    private var appRemote: SpotifyAppRemote? = null
+
 
 
     override fun onFailure(p0: Throwable?) {
@@ -77,52 +76,52 @@ class SpotifyRemoteManagerImpl(
      }
 
 
-    override suspend fun play(trackId: String): PlayerActionResult {
-        return withPlayerApi { it.play(trackId).mapToResult() }
-    }
-
-    override suspend fun addToQueue(trackId: String) = withPlayerApi { playerApi ->
-        playerApi.queue(trackId).mapToResult()
-    }
-
-
-    override suspend fun next(): PlayerActionResult {
-        return withPlayerApi { it.skipNext().mapToResult() }
-    }
-
-    override suspend fun pause(): PlayerActionResult {
-        return withPlayerApi { it.pause().mapToResult() }
-    }
-
-    override suspend fun toggle(): PlayerActionResult {
-        return withPlayerApi {
-            val currentState = it.playerState.mapToResult()
-            if (currentState is PlayerActionResult.Success) {
-                if (it.playerState.await().data.isPaused) {
-                    it.resume().mapToResult()
-                } else {
-                    it.pause().mapToResult()
-                }
-            } else {
-                return@withPlayerApi currentState
+    override suspend fun play(trackId: String) {
+        withPlayerApi { api ->
+            val state = api.playerState.await().data
+            when {
+                state.isPaused && state.track.uri == trackId -> api.resume()
+                !state.isPaused && state.track.uri == trackId -> api.pause()
+                else -> api.play(trackId)
             }
-
         }
     }
 
-    override suspend fun previous(): PlayerActionResult {
-        return withPlayerApi { it.skipPrevious().mapToResult() }
+    override suspend fun next() {
+        withPlayerApi { api -> api.skipNext() }
     }
 
-    override suspend fun shuffle(shuffle: Boolean): PlayerActionResult {
-        return withPlayerApi { it.setShuffle(shuffle).mapToResult() }
+    override suspend fun pause() {
+        withPlayerApi { playerApi -> playerApi.pause() }
     }
 
-    private fun CallResult<*>.mapToResult(): PlayerActionResult {
+    override suspend fun toggle() {
+        withPlayerApi { playerApi ->
+           if (playerApi.playerState.await().data.isPaused) {
+               playerApi.resume()
+           } else {
+               playerApi.pause()
+           }
+        }
+    }
+
+    override suspend fun previous() {
+        withPlayerApi { playerApi -> playerApi.skipPrevious() }
+    }
+
+    override suspend fun addToQueue(trackId: String) {
+        withPlayerApi { playerApi -> playerApi.queue(trackId) }
+    }
+
+    override suspend fun shuffle(shuffle: Boolean) {
+        withPlayerApi { playerApi -> playerApi.setShuffle(shuffle) }
+    }
+
+    private fun CallResult<*>.awaitAndValidate() : Boolean {
         val result = await()
         return when {
-            result.isSuccessful && result.data != null -> PlayerActionResult.Success
-            else -> PlayerActionResult.Error(result.error, result.errorMessage ?: "Error")
+            result.isSuccessful && result.data != null -> true
+            else -> throw IllegalStateException(result.errorMessage ?: "")
         }
     }
 

@@ -6,9 +6,11 @@ import cz.levinzonr.roxie.BaseChange
 import cz.levinzonr.roxie.BaseState
 import cz.levinzonr.spoton.domain.models.RemotePlayerState
 import cz.levinzonr.spoton.domain.models.UserProfile
+import cz.levinzonr.spoton.models.DeviceInfo
 import cz.levinzonr.spoton.models.PlaylistResponse
 import cz.levinzonr.spoton.models.TrackResponse
 import cz.levinzonr.spoton.presentation.navigation.Route
+import cz.levinzonr.spoton.presentation.util.SingleEvent
 
 
 sealed class Action : BaseAction {
@@ -27,10 +29,6 @@ sealed class Change : BaseChange {
 
     data class RecentPlaylistsLoded(val playlists: List<PlaylistResponse>) : Change()
     data class RecentPlaylistsError(val throwable: Throwable) : Change()
-
-
-
-
 }
 
 
@@ -38,5 +36,6 @@ data class State(
         val isLoading: Boolean = false,
         val currentTrack: TrackResponse? = null,
         val recentPlaylists: List<PlaylistResponse> = listOf(),
+        val showFeedbackView: SingleEvent<DeviceInfo>? = null,
         val user: UserProfile? = null
 ) : BaseState

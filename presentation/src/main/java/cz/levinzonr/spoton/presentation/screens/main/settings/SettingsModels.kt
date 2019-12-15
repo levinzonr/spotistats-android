@@ -4,6 +4,7 @@ import cz.levinzonr.roxie.BaseAction
 import cz.levinzonr.roxie.BaseChange
 import cz.levinzonr.roxie.BaseState
 import cz.levinzonr.spoton.models.DarkMode
+import cz.levinzonr.spoton.models.DeviceInfo
 import cz.levinzonr.spoton.presentation.navigation.Route
 import cz.levinzonr.spoton.presentation.util.SingleEvent
 
@@ -14,15 +15,21 @@ sealed class Action: BaseAction {
     object AboutButtonClicked: Action()
     object FeedbackButtonClicked: Action()
     object LogoutButtonClicked: Action()
-
 }
 
 sealed class Change: BaseChange {
     object SettingsUpdated: Change()
     data class Navigation(val route: Route): Change()
     data class ShowDialog(val darkMode: DarkMode) : Change()
+    data class DeviceInfoLoaded(val deviceInfo: DeviceInfo) :Change()
+    data class OpenBrowser(val url: String) : Change()
+
 }
 
 data class State(
         val darkMode: DarkMode,
-        val showDarkModeDialog: SingleEvent<DarkMode>? = null) : BaseState
+        val versionName: String,
+        val showFeedbackView: SingleEvent<DeviceInfo>? = null,
+        val showDarkModeDialog: SingleEvent<DarkMode>? = null,
+        val openBrowser: SingleEvent<String>? = null
+) : BaseState

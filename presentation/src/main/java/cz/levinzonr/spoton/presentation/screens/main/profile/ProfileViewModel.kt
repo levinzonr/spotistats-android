@@ -1,7 +1,9 @@
 package cz.levinzonr.spoton.presentation.screens.main.profile
 
+import cz.levinzonr.spoton.domain.interactors.GetDeviceInfoInteractor
 import cz.levinzonr.spoton.domain.interactors.GetPlaylistsInteractor
 import cz.levinzonr.spoton.domain.interactors.GetUserProfileInteractor
+import cz.levinzonr.spoton.domain.interactors.PlayPlaylistInteractor
 import cz.levinzonr.spoton.domain.managers.SpotifyRemoteManager
 import cz.levinzonr.spoton.models.PlaylistResponse
 import cz.levinzonr.spoton.presentation.base.BaseViewModel
@@ -10,13 +12,15 @@ import cz.levinzonr.spoton.presentation.extensions.flowOnIO
 import cz.levinzonr.spoton.presentation.extensions.isError
 import cz.levinzonr.spoton.presentation.extensions.isSuccess
 import cz.levinzonr.spoton.presentation.navigation.Route
+import cz.levinzonr.spoton.presentation.util.SingleEvent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class ProfileViewModel(
         private val spotifyRemoteManager: SpotifyRemoteManager,
         private val getPlaylistsInteractor: GetPlaylistsInteractor,
-        private val getUserProfileInteractor: GetUserProfileInteractor)
+        private val getUserProfileInteractor: GetUserProfileInteractor,
+        private val playlistInteractor: PlayPlaylistInteractor)
     : BaseViewModel<Action, Change, State>() {
 
     override val initialState: State = State()
@@ -26,10 +30,7 @@ class ProfileViewModel(
             is Change.ProfileLoading -> state.copy(isLoading = true)
             is Change.ProfileLoaded -> state.copy(isLoading = false, user = change.user)
             is Change.ProfileLoadingError -> state.copy(isLoading = false)
-
             is Change.Navigation -> state.also { navigateTo(change.route) }
-
-
             is Change.RecentPlaylistsError -> state.copy()
             is Change.RecentPlaylistsLoded -> state.copy(recentPlaylists = change.playlists)
         }
@@ -49,10 +50,13 @@ class ProfileViewModel(
     }
 
 
-    private fun bindPlayPlaylistAction(playlist: PlaylistResponse, shuffled: Boolean): Flow<Change> = flow {
-        spotifyRemoteManager.shuffle(shuffled)
-        spotifyRemoteManager.play("spotify:playlist:${playlist.id}")
 
+
+    private fun bindPlayPlaylistAction(playlist: PlaylistResponse, shuffled: Boolean): Flow<Change> = flowOnIO {
+        playlistInteractor.input = PlayPlaylistInteractor.Input(shuffled, "spotify:playlist:${playlist.id}")
+        playlistInteractor()
+                .isSuccess { }
+                .isError {  }
     }
 
 
