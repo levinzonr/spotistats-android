@@ -1,4 +1,4 @@
-include ':app', ':spotify-auth-release', ':spotify-app-remote-release-0.6.3'
+include ':app', ':spotify-auth-release', ':spotify-app-remote-release-0.6.3', ':roxie-1.0.1'
 include ':domain'
 include ':presentation'
 include ':data'
